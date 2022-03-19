@@ -1,0 +1,77 @@
+<app-header></app-header>
+<div class="row row-cols-1 row-cols-md-2 g-4 mb-5 pt-5 pb-2 mb-3">
+    
+    <div class="col"  >
+        <app-sidebar></app-sidebar> 
+        <div class="card  shadow h-100 ">
+           
+            <div class="card-body ">
+                
+                <div class="row-fluid">
+                    <div class="span6 offset3">
+                <form action="" method="post" name="analyse">
+                    <input id="csrf_token" name="csrf_token" type="hidden" value="IjNiYjJjNjQ5N2ExMzZmZTA4MDg4NzBlNWExMGI1ZDFjN2E4YTIzODAi.YiE0tw.s8fq-wgfBqCcIvVyyjdNLo1KmuM">
+                    <h2>Text Summarizer</h2>
+                    <p>Input the page url you want summarize:</p>
+                    <textarea id="url" maxlength="1000" name="url" 
+                    placeholder="URL must start with 'http://' or 'https://', support English page summarization only" 
+                    size="500" style="width:600px;height:30px">
+                </textarea>
+                <p></p>
+                <p>Or Copy and paste your text into the box:</p>
+                <textarea id="text" maxlength="50000" name="text" size="5000" style="width:600px;height:250px"></textarea>
+                <p></p>
+                <p>Type the summarized sentence number you need:</p>
+                <input id="sentnum" maxlength="100" name="sentnum" placeholder="Number Need" required="" size="50" 
+                style="width:100px;height:25px" type="text" value="6"><p></p><table>
+                        <tbody><tr>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        </tr>
+                        <tr>
+                            <td><input class="btn btn-primary btn-large" type="submit" value="Summarize Now"></td>
+                            <td></td>
+                        </tr>
+                    </tbody></table>
+                </form>
+                </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    <div class="col"  >
+        <div class="card  shadow h-100"  >
+            <div class="card-body">
+
+                <div class="span12">
+                    
+                    <h3 align="center">Text Summarization Result</h3>
+                    <div class="span5 offset1">
+                        <h4>Original URL/Text</h4>
+                        <p>
+                        
+                        </p>
+                    </div>
+                    <div class="span5">
+                        <h4>Summarized Text</h4>
+                        <p>
+                        N<br><br>o<br><br>n<br><br>e
+                        </p>
+                    </div>
+
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>

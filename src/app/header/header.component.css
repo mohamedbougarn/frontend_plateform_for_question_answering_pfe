@@ -1,0 +1,16 @@
+
+
+.navbar 
+{
+    position: sticky; 
+    top: 0;
+    z-index: 1020;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+
+}
+
+

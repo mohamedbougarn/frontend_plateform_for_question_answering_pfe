@@ -1,0 +1,185 @@
+
+
+  
+  <!-- <div class="wrapper">
+    <main>
+      <h1>Fixed Side Drawer Hover Navigation </h1>
+    </main>
+  </div> -->
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"> home <img src="https://www.chatbot.tn/wp-content/uploads/2020/04/new-100x100xc.png" class="logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" >
+  
+        <!-- <div class="btn-group">
+          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </div> -->
+       
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item">
+              <a class="nav-link waves-effect waves-light"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-effect waves-light"><i class="fa fa-google-plus"></i></a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> 
+                  </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-unique" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+          </li>
+         
+      </ul>
+          <!-- Notifications -->
+        <div class="dropdown">
+          <a
+            class="text-reset me-3 dropdown-toggle hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+
+          >
+            <i class="fas fa-bell"></i>
+            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item" href="#">Some news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Another news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Avatar -->
+  
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="dropdown">
+          <a
+            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+            
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+
+          >
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              class="rounded-circle"
+              height="25"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+            />
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuAvatar"
+          >
+            <li>
+              <a class="dropdown-item" href="#">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Logout</a>
+            </li>
+            
+          </ul>
+         
+        </div>
+       
+      <!-- Right elements -->
+  
+        </ul> 
+        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="dropdown">
+          <li><p class="dropdown-item" style="color:white"> welocme MR {{nom}} {{prenom}} </p></li>
+        </div>
+         </ul>
+        
+        <form class="d-flex">
+         
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" (click)="LogOut()" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+
+
+
+<!--Navbar -->
+
+<!-- <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-unique">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-3" aria-controls="navbarSupportedContent-3" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-3">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="#">Lifestyle <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Beauty</a>
+          </li>
+          <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tutorials 
+                  </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-unique" aria-labelledby="navbarDropdownMenuLink-3">
+                  <a class="dropdown-item" href="#">Make-up</a>
+                  <a class="dropdown-item" href="#">Nails</a>
+                  <a class="dropdown-item" href="#">DIY</a>
+              </div>
+          </li>
+      </ul>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item">
+              <a class="nav-link waves-effect waves-light"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-effect waves-light"><i class="fa fa-google-plus"></i></a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> 
+                  </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-unique" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+          </li>
+      </ul>
+  </div>
+</nav> -->
+<!--/.Navbar -->

@@ -1,0 +1,286 @@
+<app-header  ></app-header>
+
+<div class="container-fluid h-100">
+  <app-sidebar></app-sidebar>    
+    <main class="col-md-12 ms-sm-auto col-lg-11 px-md-4 h-100">
+
+     <div class="row row-cols-1 row-cols-md-2 g-4 mb-5 pt-5 pb-2 mb-3">
+       <div class="col"  >
+         <div class="card  shadow h-100"  >
+             <div class="card-header">
+                 Context
+             </div>
+            <div class="card-body">
+
+              <div class="container-fluid h-50">
+                <div class="row justify-content-center h-100">
+                  
+                  <div class=" chat">
+                      <div class="card-header msg_head">
+                        <div class="d-flex bd-highlight">
+                          <div class="img_cont">
+                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img">
+                            <span class="online_icon"></span>
+                          </div>
+                          <div class="user_info">
+                            <span>Chat with jassa</span>
+                            <p>1767 Messages</p>
+                          </div>
+                          <div class="video_cam">
+                            <span><i class="fas fa-video"></i></span>
+                            <span><i class="fas fa-phone"></i></span>
+                          </div>
+                        </div>
+                        <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                        <div class="action_menu">
+                          <ul>
+                            <li><i class="fas fa-user-circle"></i> View profile</li>
+                            <li><i class="fas fa-users"></i> Add to close friends</li>
+                            <li><i class="fas fa-plus"></i> Add to group</li>
+                            <li><i class="fas fa-ban"></i> Block</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="card-body msg_card_body"  style=" ">
+                        <!-- <div class="d-flex justify-content-start mb-4">
+                          <div class="img_cont_msg">
+                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                          <div class="msg_cotainer">
+                            Hi, how are you samim?
+                            <span class="msg_time">8:40 AM, Today</span>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-end mb-4">
+                          <div class="msg_cotainer_send">
+                            Hi jassa i am good tnx how about you?
+                            <span class="msg_time_send">8:55 AM, Today</span>
+                          </div>
+                          <div class="img_cont_msg">
+                        <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-start mb-4">
+                          <div class="img_cont_msg">
+                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                          <div class="msg_cotainer">
+                            Hi, how are you samim?
+                            <span class="msg_time">8:40 AM, Today</span>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-end mb-4">
+                          <div class="msg_cotainer_send">
+                            Hi jassa i am good tnx how about you?
+                            <span class="msg_time_send">8:55 AM, Today</span>
+                          </div>
+                          <div class="img_cont_msg">
+                        <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-start mb-4">
+                          <div class="img_cont_msg">
+                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                          <div class="msg_cotainer">
+                            Hi, how are you samim?
+                            <span class="msg_time">8:40 AM, Today</span>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-end mb-4">
+                          <div class="msg_cotainer_send">
+                            Hi jassa i am good tnx how about you?
+                            <span class="msg_time_send">8:55 AM, Today</span>
+                          </div>
+                          <div class="img_cont_msg">
+                        <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-start mb-4">
+                          <div class="img_cont_msg">
+                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                          <div class="msg_cotainer">
+                            I am good too, thank you for your chat template
+                            <span class="msg_time">9:00 AM, Today</span>
+                          </div>
+                        </div> -->
+
+
+                    <!-------------------------------------------------------------------->
+                    <div *ngFor="let msg of contect_convertationlist">
+                        <div class="d-flex justify-content-end mb-4">
+                          <div class="msg_cotainer_send">
+                            {{msg.question}}
+                            <span class="msg_time_send" style="color:rgb(20, 20, 32)">{{msg.entry_date}}</span>
+                          </div>
+                          <div class="img_cont_msg">
+                        <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-start mb-4">
+                          <div class="img_cont_msg">
+                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                          </div>
+                          <div class="msg_cotainer">
+                             {{msg.responce}}
+                            <span class="msg_time_send" style="color:rgb(20, 20, 32)">{{msg.entry_date}}</span>
+                          </div>
+                        </div>
+                      </div>
+       <!-------------------------------------------------------------------->
+
+
+                      </div>
+                      <div class="card-footer">
+                        <div class="input-group">
+                          <div class="input-group-append">
+                            <span class="input-group-text attach_btn"><i class="mdi mdi-paperclip"></i></span>
+                          </div>
+                          <input name="msg" [(ngModel)]="msg" class="form-control type_msg"  (keydown.enter)="sendmsg();Getallcontext_conversation()" placeholder="Type your message...">
+                          <div class="input-group-append">
+                            <span class="input-group-text send_btn"  (click)="sendmsg();Getallcontext_conversation()"><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+         </div>
+        <!-- </div> -->
+
+        <div class="col"  >
+            <div class="card  shadow h-100"  >
+              <div class="card-header">
+                Context charset
+              </div>
+            <div class="card-body">
+                <!-- <p> bonjour tou le monde </p> -->
+                
+
+                <h3>TITLE : {{titleContext}}</h3>
+                <br>
+                <h3>TEXT :</h3>
+                <p>{{contextText}} </p>
+                <!-- <div class="form-group">
+                  <label >Titre</label>
+                  <input class="form-control" id="context" [(ngModel)]="contextTitle"  maxlength="25">
+                </div>
+
+                <div class="form-group">
+                  <label for="con">Context</label>
+                  <textarea class="form-control" id="context" [(ngModel)]="context" rows="3"></textarea>
+                </div>
+                <br>
+                <div class="col-12">
+                  <button class="btn btn-primary" type="submit" (click)="addcentext()">add +</button>
+                </div> -->
+                
+                <!-- <div class="form-group">
+                  <label for="question">Entrez votre Question</label>
+                  <select [(ngModel)]="selectedContext" name="selectedContext" placeholder="select" class="form-select" (change)="onContextSelected($event)">
+                    <option value="">Select context ..</option>
+                    <option *ngFor="let context of contextLst" [value]="context.id_context">{{context.title}}</option>
+                  </select>
+                </div> -->
+
+
+                <!-- <div class="form-group">
+                  <label for="question">Entrez votre Question</label>
+                  <input type="text" class="form-control" id="question" [(ngModel)]="question" placeholder="Entrez votre Question">
+                </div>
+
+                
+                
+                <div class="form-group">
+                  <label for="Réponse">Entrez votre Réponse</label>
+                  <input type="text" class="form-control" id="reponse" [(ngModel)]="reponse" placeholder="Entrez votre Réponse">
+                </div>
+                 -->
+                <!-- <div class="form-group">
+                  <label for="selection">Une liste select</label>
+                  <select id="selection" class="form-control">
+                    <option value="">Liste de choix...</option>
+                    <optgroup label="Groupe d'options 1">
+                      <option value="">Option 1</option>
+                      <option value="">Option 2</option>
+                      <option value="">Option 3</option>
+                    </optgroup>
+                    <optgroup label="Groupe d'options 2">
+                      <option value="">Option 4</option>
+                      <option value="">Option 5</option>
+                    </optgroup>
+                  </select>
+                </div> -->
+                <br>
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">question</th>
+                      <th scope="col">reponse</th>
+                      <th scope="col">true reponce</th>
+                      <th scope="col">date </th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let qr of qrListbyidcontext">
+                      <th scope="row">{{qr.question}}</th>
+                      <td>{{qr.reponce}}</td>
+                      <td>{{qr.true_response}}</td>
+                      <td>{{qr.entry_date}}</td>
+                      <td>
+                          <span *ngIf="qr.status == '1'" class="badge badge-success">Valide</span>
+                          <span *ngIf="qr.status == '0'" class="badge badge-danger">Deleted</span> 
+
+                      </td>
+                    </tr>
+                   
+                  </tbody>
+                </table>
+                
+                <div class="col-12">
+                  <button class="btn btn-primary" type="submit" (click)="ModalAddQrOpen(addqr)">Ajouter </button>
+                </div>
+                
+              </div>
+            </div>
+         </div>
+      </div>
+      </main>
+</div>
+
+<ng-template #addqr >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ajouter nouveau Question & Réponse</h4>
+     <button type="button" class="close" aria-label="Close" (click)="closeDialog()" > <!--(click)="closeDialog()" -->
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form>
+        <div class="form-group">
+          <label for="question">Entrez votre Question</label>
+          <textarea class="form-control" id="question" name="question" [(ngModel)]="question" placeholder="Entrez votre Question"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="Réponse">Entrez votre Réponse</label>
+          <textarea class="form-control" id="reponse" name="reponse" [(ngModel)]="reponse" placeholder="Entrez votre Réponse"></textarea> 
+        </div>
+        
+        
+        <!-- <br>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit" (click)="add_Q_r()">add +</button>
+        </div> -->
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark"  (click)="add_Q_r()" >Save</button>  <!-- (click)="add_Q_r()"-->
+  </div>
+</ng-template>

@@ -1,0 +1,73 @@
+<app-header></app-header>
+
+<div class="container-fluid h-100">
+  <app-sidebar></app-sidebar>
+     <div class="row justify-content-center">
+        <main class="col-md-12  col-lg-11 px-md-4 h-100">
+
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Text</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Entry date</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let context of contexts">
+                        <th scope="row">{{context.text}}</th>
+                        <th scope="row">{{context.title}}</th>
+                        <td>{{context.entry_date}}</td>
+                        <td>{{context.nom}} {{context.prenom}}</td>
+                        <td>
+                            <span *ngIf="context.status == '1'" class="badge badge-success">Valide</span>
+                            <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span> 
+  
+                        </td>
+                        <td> <a type="button" href="Q_R/add/{{context.id_context}}">Ajouter</a></td>
+                        <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+
+                  <button type="button" class="btn btn-outline-primary" (click)="ModalAddContextOpen(addContext)">Add Context</button>
+                  
+            </div>
+       </main>
+    </div>
+</div>
+
+
+<ng-template #addContext >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter nouveau context</h4>
+      <button type="button" class="close" aria-label="Close" (click)="closeDialog()" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="title">Titre</label>
+          <div class="input-group">
+            <input id="title" class="form-control" placeholder="titre ..." [(ngModel)]="contextTitle" name="dp">
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="title">Texte</label>
+            <div class="input-group">
+              <textarea id="title" class="form-control" placeholder="Texte ..." [(ngModel)]="context" name="dp" rows="3"></textarea>
+            </div>
+          </div>
+      </form>
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark"   (click)="addcentext()" >Save</button>
+    </div>
+  </ng-template>

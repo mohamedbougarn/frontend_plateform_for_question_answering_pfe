@@ -1,0 +1,199 @@
+<app-header></app-header>
+
+<div class="container-fluid h-100">
+  <app-sidebar></app-sidebar>
+     <div class="row justify-content-center">
+        <main class="col-md-12  col-lg-11 px-md-4 h-100">
+
+            <div class="row row-cols-1 row-cols-md-4 g-4 mb-5 pt-5 pb-2 mb-3">
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            <h5>Total Confirmed</h5>
+                            <h5 class="text-danger">9552778</h5>
+                    </div>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            <h5>Total Confirmed</h5>
+                            <h5 class="text-danger">9552778</h5>
+                    </div>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            <h5>Total Confirmed</h5>
+                            <h5 class="text-danger">9552778</h5>
+                    </div>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            <h5>Total Confirmed</h5>
+                            <h5 class="text-danger">9552778</h5>
+                    </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4 mb-5 pt-5 pb-2 mb-3">
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            
+                            <p>cart 1 test </p>
+                            <canvas
+                            [chartType]="'line'"
+                            [legend]="false"
+                            [datasets]="chartData1"
+                            [options]="chartOptions1"
+                            [labels]="chartLabels1"
+                            baseChart>
+                        </canvas> 
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            <p>carte 2 test </p>
+                            <!-- test 2 cart -->
+                                <div>
+                                <canvas
+                                [chartType]="'line'"
+                                    [legend]="false"
+                                    [datasets]="chartData2"
+                                    [options]="chartOptions2"
+                                    [labels]="chartLabels2"
+                                    baseChart>
+                                </canvas> 
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-2 g-4 mb-5 pt-5 pb-2 mb-3">
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Text</th>
+                                    <th scope="col">Entry date</th>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let context of contexts">
+                                    <th scope="row">{{context.text}}</th>
+                                    <td>{{context.entry_date}}</td>
+                                    <td>{{context.nom}} {{context.prenom}}</td>
+                                    <td>
+                                        <span *ngIf="context.status == '1'" class="badge badge-success">Valide</span>
+                                        <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span> 
+              
+                                    </td>
+                                    <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
+                                  </tr>
+                                 
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            
+                            <div>
+                                <canvas baseChart 
+                                [datasets]="barChartData"
+                                [labels]="barChartLabels"
+                                [options]="barChartOptions"
+                                [plugins]="barChartPlugins"
+                                [legend]="barChartLegend"
+                                [chartType]="barChartType">
+                            </canvas>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ">
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            <h5>Client List</h5>
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Text</th>
+                                    <th scope="col">Entry date</th>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let context of contexts">
+                                    <th scope="row">{{context.text}}</th>
+                                    <td>{{context.entry_date}}</td>
+                                    <td>{{context.nom}} {{context.prenom}}</td>
+                                    <td>
+                                        <span *ngIf="context.status == '1'" class="badge badge-success">Valide</span>
+                                        <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span> 
+              
+                                    </td>
+                                    <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
+                                  </tr>
+                                 
+                                </tbody>
+                              </table>
+                    </div>
+                        <p></p>
+                    </div>
+                </div>
+               
+            </div>
+
+        </main>
+    </div>
+    
+</div>
+    
+
+
+<!-- <ng-template #modalUpdateContext let-modal>
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Éxito</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close('Cerrado desde la ventana')"> 
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        ¿Quieres confirmar la informacion? (Mira el resultado en consola)
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.close('No')">No</button>
+        <button type="button" class="btn btn-primary" (click)="modal.close('Si')">Si</button>
+      </div>
+    </div>
+  
+  </ng-template> -->

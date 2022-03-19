@@ -1,0 +1,190 @@
+
+<div class="container-fluid h-100">
+    <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4 h-100">
+        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5 pt-5 pb-2 mb-3">
+            <div class="col-md-8"  >
+                <div class="card  shadow h-100"  >
+                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                    <form class="mx-1 mx-md-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="mdi mdi-account fa-2x me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" formControlName="firstname" id="form3Example1c" class="form-control" 
+                          [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"/>
+                          <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstname.errors.required">Firstname is required</div>
+                        </div>
+                          <label class="form-label" for="form3Example1c">Your Firstname</label>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="mdi mdi-account fa-2x me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="text" formControlName="lastname" id="form3Example1c" class="form-control" 
+                          [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"/>
+                          <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastname.errors.required">Lastname is required</div>
+                        </div>
+                          <label class="form-label" for="form3Example1c">Your Lastname</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="mdi mdi-email fa-2x me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="email" formControlName="email" id="form3Example3c" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+                          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                        </div>
+                          <label class="form-label" for="form3Example3c">Your Email</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="mdi mdi-cellphone fa-2x me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="mobile" formControlName="mobile" id="form3Example3c" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }"/>
+                          <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                            <div *ngIf="f.mobile.errors.required">mobile number is required</div>
+                        </div>
+                          <label class="form-label" for="form3Example3c">Your Mobile</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="mdi mdi-textbox-password fa-2x me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="password" formControlName="password" id="form3Example4c"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">password is required</div>
+                            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                        </div>
+                          <label class="form-label" for="form3Example4c">Password</label>
+                        </div>
+                      </div>
+    
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="mdi mdi-shield-lock fa-2x me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input type="password" formControlName="password_confirm" id="form3Example4cd" class="form-control" 
+                          [ngClass]="{ 'is-invalid': submitted && f.password_confirm.errors }"/>
+                          <div *ngIf="submitted && f.password_confirm.errors" class="invalid-feedback">
+                            <div *ngIf="f.password_confirm.errors.required">password confirm is required</div>
+                            <div *ngIf="f.password_confirm.errors.mustMatch">Passwords must match</div>
+                        </div>
+                          <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                        </div>
+                      </div>
+    
+                      <div class="form-check d-flex justify-content-center mb-5">
+                        <input
+                          class="form-check-input me-2"
+                          type="checkbox"
+                          value=""
+                          id="form2Example3c"
+                        />
+                        <label class="form-check-label" for="form2Example3">
+                          I agree all statements in <a href="#!">Terms of service</a>
+                        </label>
+                      </div>
+    
+                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                      </div>
+    
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 col-6"  >
+                <div class="mt-5"  >
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+
+<!-- 
+
+
+
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+  
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+  
+                  <form class="mx-1 mx-md-4">
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" class="form-control" />
+                        <label class="form-label" for="form3Example1c">Your Name</label>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="email" id="form3Example3c" class="form-control" />
+                        <label class="form-label" for="form3Example3c">Your Email</label>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="password" id="form3Example4c" class="form-control" />
+                        <label class="form-label" for="form3Example4c">Password</label>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="password" id="form3Example4cd" class="form-control" />
+                        <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                      </div>
+                    </div>
+  
+                    <div class="form-check d-flex justify-content-center mb-5">
+                      <input
+                        class="form-check-input me-2"
+                        type="checkbox"
+                        value=""
+                        id="form2Example3c"
+                      />
+                      <label class="form-check-label" for="form2Example3">
+                        I agree all statements in <a href="#!">Terms of service</a>
+                      </label>
+                    </div>
+  
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button type="button" class="btn btn-primary btn-lg">Register</button>
+                    </div>
+  
+                  </form>
+  
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+  
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  -->
