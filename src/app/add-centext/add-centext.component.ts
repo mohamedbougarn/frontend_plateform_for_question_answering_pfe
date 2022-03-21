@@ -172,7 +172,7 @@ export class AddCentextComponent implements OnInit {
     //get all de table context_conversation et affiche dans la conversation html
     Getallcontext_conversation()
     {
-      this.contextconversationService.GetContext_conversation().subscribe(restlt_conversation =>
+      this.contextconversationService.GetContext_conversation(this.contextId).subscribe(restlt_conversation =>
         {
           console.log("Get allcontext conversation",restlt_conversation);
           this.contect_convertationlist = restlt_conversation;

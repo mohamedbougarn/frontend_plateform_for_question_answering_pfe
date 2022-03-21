@@ -29,10 +29,10 @@ export class ContextConversationService
 
 
 
-GetContext_conversation(){
+GetContext_conversation(id_context:any){
   this.headers.append('Content-Type', 'application/json');
       return this.http
-        .put<any>(this.url+'Context_conversation/get',{})
+        .put<any>(this.url+'Context_conversation/get',{id_context})
         .pipe(map(res => {  
         return res ;                    
   })); 
