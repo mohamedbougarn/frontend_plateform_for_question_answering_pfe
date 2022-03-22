@@ -27,6 +27,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { Sidebar2Component } from './sidebar2/sidebar2.component';
 //import { NgApexchartsModule } from "ng-apexcharts";
 
+import {FileUploadModule} from 'ng2-file-upload';//for uplaoding file 
+
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { Sidebar2Component } from './sidebar2/sidebar2.component';
     //NgApexchartsModule
     //ModalModule.forRoot() ,
     NgbModule, NgbButtonsModule, NgbTooltipModule, NgbTypeaheadModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FileUploadModule
   ],
   providers: [ContextService,ClientService],
   bootstrap: [AppComponent]

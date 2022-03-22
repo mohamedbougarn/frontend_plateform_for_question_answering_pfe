@@ -21,17 +21,18 @@
     "@angular/router": "~11.2.12",
     "@mdi/font": "^5.9.55",
     "@mdi/light-font": "^0.2.63",
+    "@ng-bootstrap/ng-bootstrap": "^9.1.1",
     "bootstrap": "^5.1.3",
+    "bootstrap-select": "^1.13.12",
     "chart.js": "^2.9.3",
     "mdi": "^2.2.43",
     "ng2-charts": "^2.2.3",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.0.0",
-    "zone.js": "~0.11.3",
-    "bootstrap-select": "^1.13.12",
     "ngx-bootstrap-datetime-popup": "^6.0.0",
     "react-bootstrap-daterangepicker-sf": "^4.3.0",
-    "@ng-bootstrap/ng-bootstrap": "^9.1.1"
+    "ng2-file-upload": "^1.4.0",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.11",
