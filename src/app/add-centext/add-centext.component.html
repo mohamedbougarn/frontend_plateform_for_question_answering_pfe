@@ -41,7 +41,7 @@
                           </ul>
                         </div>
                       </div>
-                      <div class="card-body msg_card_body"  style=" ">
+                      <div class="card-body msg_card_body"  style="">
                         <!-- <div class="d-flex justify-content-start mb-4">
                           <div class="img_cont_msg">
                             <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
@@ -106,6 +106,9 @@
                           </div>
                         </div> -->
 
+<!-- 
+                        <input type="file" ng2FileSelect [uploader]="uploader">
+                        <button (click)="uploader.uploadAll()">Upload </button> -->
 
                     <!-------------------------------------------------------------------->
                     <div *ngFor="let msg of contect_convertationlist">
@@ -131,12 +134,43 @@
        <!-------------------------------------------------------------------->
 
 
+
+      
+
+
                       </div>
                       <div class="card-footer">
                         <div class="input-group">
                           <div class="input-group-append">
-                            <span class="input-group-text attach_btn"><i class="mdi mdi-paperclip"></i></span>
-                          </div>
+                            <span class="input-group-text attach_btn"><i class="mdi mdi-microphone"></i></span>
+                            
+
+                            <!--test upload-->
+                            
+                            
+                              <label class="input-group-text image_btn" for="upload_file">
+                                <!-- <form method="POST"  action="/api/upload" enctype="multipart/form-data">  -->
+                                 <i  class="mdi mdi-camera" for="upload_file" (click)="uploader.uploadAll()" style="cursor: pointer;"></i> 
+                                
+                              <input type="file" name="image" id="upload_file" ng2FileSelect [uploader]="uploader"  style="display :none;visibility:none;" accept="image/x-png,image/gif,image/jpeg">            
+                            <!-- </form>   -->
+                          </label>  
+                              
+                            <!--end test upload-->
+                            
+
+
+                            <!-- <span class="input-group-text image_btn">
+                              
+                                <label for="file-input">
+                                  <i class="mdi mdi-camera"  (click)="uploader.uploadAll()"></i>
+                                </label>
+                            
+                                <input type="file" id="file-input" ng2FileSelect [uploader]="uploader" style="display :none;visibility:none;" >
+                              </span>
+                             -->
+                             
+                            </div>
                           <input name="msg" [(ngModel)]="msg" class="form-control type_msg"  (keydown.enter)="sendmsg();Getallcontext_conversation()" placeholder="Type your message...">
                           <div class="input-group-append">
                             <span class="input-group-text send_btn"  (click)="sendmsg();Getallcontext_conversation()"><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"-->
@@ -246,6 +280,58 @@
                   <button class="btn btn-primary" type="submit" (click)="ModalAddQrOpen(addqr)">Ajouter </button>
                 </div>
                 
+                <br>
+
+                 <!--test uploade-->
+
+
+                 <div class="text-center">
+                  <input class="form-control" type="file" 
+                          (change)="onChange($event)">
+                
+                  <button (click)="onUpload()" 
+                      class="btn btn-success">
+                      Upload
+                  </button>
+              </div>
+                
+
+           
+              <!-- Shareable short link of  uoloaded file -->
+              <div class="container text-center jumbotron"
+                  *ngIf="shortLink">
+                  <h2> Visit Here</h2>
+                  <a href="{{shortLink}}">{{shortLink}}</a>
+              </div>
+                
+              <!--Flag variable is used here-->
+              <div class="container" *ngIf="loading">
+                  <h3>Loading ...</h3>
+              </div>
+
+                 <!-- fin test apload-->
+
+        
+                 <!-- <form [formGroup]="fileUploadForm" (ngSubmit)="OnFileSubmit()"  >
+                  <div class="group-gap">
+                      <div class="avatar-upload  " (click)="fileInput.click()">
+                          <div class="avatar-edit " [hidden]="false" >
+                              <input type="file" id="imageUpload" #fileInput ng2FileSelect [uploader]="uploader" accept="image/x-png,image/gif,image/jpeg" (change)="uploader.uploadAll()" /> 
+                          </div>
+                          <div class="avatar-preview btn btn-inverse-secondary btn-fw " >
+                              <div id="imagePreview" class="imagePreview"   [style.backgroundImage]="'url('+ picture +')'" >
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </form> -->
+              <!-- Form ends -->
+  
+
+
+       <!-- end test upluad-->
+
+
               </div>
             </div>
          </div>
