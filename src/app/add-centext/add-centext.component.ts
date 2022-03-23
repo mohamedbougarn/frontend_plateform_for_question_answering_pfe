@@ -34,10 +34,11 @@ file: any = null; // Variable to store file
 
   // url = 'http://localhost:3000/api/upload';
 
-  // // uploader = new FileUploader({
-  // //   url: this.url,
-  // //   maxFileSize: 1024 * 1024 * 1
-  // //   });
+  // uploader = new FileUploader({
+  //   url: this.url,
+  //   maxFileSize: 1024 * 1024 * 1
+  //   });
+
   // coreUpload = 'http://localhost:3000/api/upload'
 
 
@@ -75,7 +76,7 @@ file: any = null; // Variable to store file
   picture : any ='';
   submitted : any = false;
   public obj : any = '{}'
-  public uploader!: FileUploader;
+  //public uploader!: FileUploader;
   fileUploadForm = this.fb.group({
     file: [null]
   })
@@ -98,7 +99,8 @@ file: any = null; // Variable to store file
 
 
      /*##################### Registration Form #####################*/
-  //  registrationForm = this.fb.group({
+  
+     //  registrationForm = this.fb.group({
   //   file: [null]
   // })  
 
@@ -122,6 +124,7 @@ file: any = null; // Variable to store file
     //   console.log('***** onWhenAddingFileFailed ********')
     // }
 
+
     /*########################## File Upload ########################*/
     /*###################*/
 
@@ -134,18 +137,39 @@ file: any = null; // Variable to store file
   }
 
   
+  onChargeimage(event:any) 
+  {
+    this.file = event.target.files[0];
+    console.log("the file is" , this.file)
+    const formdata = new FormData();
+     formdata.append('image', this.file);
+    this.http.post('http://localhost:3000/api/upload', formdata).subscribe(
+      (d) => {
+        console.log(d);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  
+   // this.onUpload()
+  }
 
     // On file Select
-    onChange(event:any) {
+    onChange(event:any) 
+    {
       this.file = event.target.files[0];
+      console.log("the file is" , this.file)
+      
      // this.onUpload()
-  }
+    }
  
 
       // OnClick of button Upload
-      onUpload() {
+      onUpload() 
+      {
         this.loading = !this.loading;
-        console.log(this.file);
+        console.log("file" ,this.file);
         this.fileUploadService.upload(this.file).subscribe(
             (event: any) => {
                 if (typeof (event) === 'object') {
@@ -157,7 +181,7 @@ file: any = null; // Variable to store file
                 }
             }
         );
-    }
+      }
   
   
 

@@ -16,16 +16,19 @@ export class FileUploadService {
   constructor(private http:HttpClient) { }
 
   // Returns an observable
-  upload(file:any):Observable<any> {//file 
+  upload(file:File):Observable<any> {//file 
   
     // Create form data
     const formData = new FormData(); 
       
     // Store form name as "file" with file data
-    formData.append("file", file, file.name);
-      
+    formData.append("image", file);// , file.name
+      console.log("form data =",formData)
+      console.log("file name =", file.name)
     // Make http post request over api
     // with formData as req
-    return this.http.post(this.url+'api/upload', formData)
+    console.log("last etap of service upload image ",this.http.post(this.url+'api/upload',formData))
+    return this.http.post(this.url+'api/upload',formData)
+    
 }
 }
