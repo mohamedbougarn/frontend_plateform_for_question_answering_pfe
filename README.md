@@ -1,5 +1,5 @@
 # Intelligence
-
+<img src="https://img2.freepng.fr/20180701/rht/kisspng-angularjs-logo-javascript-security-token-5b38e22b8a3f38.7851363415304545715663.jpg" width=200 height=200 align="right">
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
 
 ## Development server
