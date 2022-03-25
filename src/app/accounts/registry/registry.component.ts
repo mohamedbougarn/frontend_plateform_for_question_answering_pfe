@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MustMatch } from './must-match.validators';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
-import { ClientService } from '../services/client.service';
+import { ClientService } from 'src/app/services/client.service';
+//import { ClientService } from '../services/client.service';
 
 @Component({
   selector: 'app-registry',

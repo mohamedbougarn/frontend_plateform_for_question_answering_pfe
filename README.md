@@ -1,4 +1,4 @@
-<img src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg" width=200 height=200 align="right">
+<img src="angular.png" width=200 height=200 align="right">
 # Intelligence
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
