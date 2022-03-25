@@ -4,9 +4,8 @@ import { BaseChartDirective } from 'ng2-charts';
 // import * as chartData from './data.json';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { ContextService } from '../services/context.service';
-import { ClientService } from '../services/client.service';
-
+import { ContextService } from 'src/app/services/context.service';
+import { ClientService } from 'src/app/services/client.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

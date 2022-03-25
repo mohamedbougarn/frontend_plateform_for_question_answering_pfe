@@ -3,14 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable, Subject } from 'rxjs';
 import { mergeMap, scan } from 'rxjs/operators';
-import { ContextService } from '../services/context.service';
-import { QRService } from '../services/q-r.service';
-import { ContextConversationService } from '../services/context-conversation.service';
-import { FileUploadService } from '../services/file-upload.service' //uploade service 
+
 //import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import { FileUploader } from 'ng2-file-upload';
+import { QRService } from 'src/app/services/q-r.service';
+import { ContextService } from 'src/app/services/context.service';
+import { ContextConversationService } from 'src/app/services/context-conversation.service';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 //import {ICustomFile} from "file-input-accessor";
 
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ContextService } from '../services/context.service';
+//import { ContextService } from '../services/context.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { ContextService } from 'src/app/services/context.service';
 
 @Component({
   selector: 'app-context',
