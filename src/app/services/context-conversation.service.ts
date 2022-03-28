@@ -27,6 +27,15 @@ export class ContextConversationService
 }
 
 
+AddphotoContext_conversation(id_context:any,photo:any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .put<any>(this.url+'context_conversation/upload',{id_context,photo})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+
 
 
 GetContext_conversation(id_context:any){

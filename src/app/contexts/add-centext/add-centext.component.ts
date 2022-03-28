@@ -12,6 +12,7 @@ import { QRService } from 'src/app/services/q-r.service';
 import { ContextService } from 'src/app/services/context.service';
 import { ContextConversationService } from 'src/app/services/context-conversation.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
+import { environment } from 'src/environments/environment';
 //import {ICustomFile} from "file-input-accessor";
 
 
@@ -43,7 +44,7 @@ file: any = null; // Variable to store file
   // coreUpload = 'http://localhost:3000/api/upload'
 
 
-
+  url = environment.URL_CORE;
 
 
   id : any = 1;
@@ -81,6 +82,7 @@ file: any = null; // Variable to store file
   fileUploadForm = this.fb.group({
     file: [null]
   })
+  filename:any;
 
   @ViewChild('fileInput') el!: ElementRef;
   constructor(public route : ActivatedRoute,public router : Router,
@@ -140,13 +142,28 @@ file: any = null; // Variable to store file
   
   onChargeimage(event:any) 
   {
+    let path;
     this.file = event.target.files[0];
+    this.filename = event.target.files[0].name;
     console.log("the file is" , this.file)
+    console.log("file name is ", this.filename)
     const formdata = new FormData();
      formdata.append('image', this.file);
-    this.http.post('http://localhost:3000/api/upload', formdata).subscribe(
-      (d) => {
-        console.log(d);
+    this.http.post('http://localhost:3000/api/upload/', formdata).subscribe(
+      result=> {
+       
+        console.log('result');
+
+        console.log(result);
+        console.log('result');
+        console.log('resultat json =', JSON.stringify(result))
+        let obj = JSON.parse(JSON.stringify(result));
+
+        path= this.url + obj.path;
+        console.log(path)
+        //console.log(result.path)
+        this.sendphoto(path);
+
       },
       (error) => {
         console.error(error);
@@ -185,6 +202,38 @@ file: any = null; // Variable to store file
       }
   
   
+      /*#########################add poto to database ###########################*/
+
+  sendphoto(path:any)//depuit database 
+  {
+   
+    // if (this.msg.length>0)
+    // {
+    
+    this.contextconversationService.AddphotoContext_conversation(this.contextId,path).subscribe(resultphoto =>
+      {
+        let photo:any;
+        
+        photo = resultphoto;
+
+        console.log("add  resultat conversation photo test ", photo);
+        this.Getallcontext_conversation
+
+       
+      })
+     
+
+    
+  // this.msg = '';
+  //  } for if 
+  }
+
+
+  /*#########################################################################*/
+
+
+
+
 
 
   /*######################################################*/
@@ -279,7 +328,7 @@ file: any = null; // Variable to store file
     
     sendmsg()//depuit database 
     {
-      this.Getallcontext_conversation
+     
       if (this.msg.length>0)
       {
       
@@ -291,6 +340,7 @@ file: any = null; // Variable to store file
           this.contect_convertation = resultconversation;
 
           console.log("add  resultat conversation test ", resultconversation);
+          this.Getallcontext_conversation
 
          
         })
@@ -426,5 +476,7 @@ file: any = null; // Variable to store file
   //   });
   // }
 
+  /*###########################################################*/
 
+  
 }  
