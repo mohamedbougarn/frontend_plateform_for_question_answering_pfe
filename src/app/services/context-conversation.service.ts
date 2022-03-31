@@ -17,13 +17,40 @@ export class ContextConversationService
 
 
 
-  AddContext_conversation(id_context:any,question:any){
-    this.headers.append('Content-Type', 'application/json');
-        return this.http
-          .put<any>(this.url+'Context_conversation/add',{id_context,question})
-          .pipe(map(res => {  
-          return res ;                    
-    })); 
+//   //sera modifier et ajouter la reponse apres le vas et vien de python 
+//   AddContext_conversation(id_context:any,question:any){
+//     this.headers.append('Content-Type', 'application/json');
+//         return this.http
+//           .put<any>(this.url+'Context_conversation/add',{id_context,question})
+//           .pipe(map(res => {  
+//           return res ;                    
+//     })); 
+// }
+
+
+
+//sera modifier et ajouter la reponse apres le vas et vien de python 
+AddContext_conversation(id_context:any,question:any,response:any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .put<any>(this.url+'Context_conversation/add',{id_context,question,response})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+
+
+
+/**
+ * for send request to core node then send to api flask
+*/
+GetResponseApi(context:any,question:any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .post<any>(this.url+'treatment/text',{context,question})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
 }
 
 
