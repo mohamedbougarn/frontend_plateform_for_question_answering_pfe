@@ -1,10 +1,13 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit,NgZone  } from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SpeechRecognizerService } from 'src/app/services/web-apis/speech-recognizer.service';
 declare const annyang: any;
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ['./test.component.css'],
+  providers:[DatePipe ]
 })
 export class TestComponent implements OnInit {
   voiceActiveSectionDisabled: boolean = true;
@@ -12,9 +15,20 @@ export class TestComponent implements OnInit {
 	voiceActiveSectionSuccess: boolean = false;
 	voiceActiveSectionListening: boolean = false;
 	voiceText: any;
-  constructor(private ngZone: NgZone) { }
+	// Keep active api calls subscription.
+	public searchForm!: FormGroup;
+	public isUserSpeaking: boolean = false;
+  	constructor(private ngZone: NgZone,
+	private fb: FormBuilder,
+    private datePipe: DatePipe,
+    private voiceRecognition: SpeechRecognizerService ) { 
+		// Initialize form group.
+		this.searchForm = this.fb.group({
+		  searchText: ['', Validators.required],
+		});}
 
-  ngOnInit(): void {
+  
+  ngOnInit(): void {this.initVoiceInput();
   }
 
   initializeVoiceRecognitionCallback(): void {
@@ -84,4 +98,52 @@ export class TestComponent implements OnInit {
       annyang.abort();
     }
 	}
+
+	/*##################### test component speech ###################################*/
+
+	/**
+   *  Function to @stop @recording .
+   */
+	 stopRecording() 
+	 {
+		this.voiceRecognition.stop();
+		this.isUserSpeaking = false;
+	 }
+
+ 	
+   /**
+   * Function for @initializing @voice @input so user can chat with machine.
+   */
+	  
+   initVoiceInput() 
+	  {
+		// Subscription for initializing and this will call when user stopped speaking.
+		this.voiceRecognition.init().subscribe(() => {
+			// User has stopped recording
+			// Do whatever when mic finished listening
+  		});
+
+  // Subscription to detect user input from voice to text.
+  this.voiceRecognition.speechInput().subscribe((input) => {
+	// Set voice text output to
+	this.searchForm.controls.searchText.setValue(input);
+ 	 });
+	  }
+
+
+
+	/**
+   *  Function to @enable @voice @input .
+   */
+  startRecording() 
+  {
+	this.isUserSpeaking = true;
+    this.voiceRecognition.start();
+    this.searchForm.controls.searchText.reset();
+  }
+
+
+
+
+	/**############################ end ############################################ */
 }

@@ -1,4 +1,4 @@
-<div *ngIf="voiceActiveSectionDisabled; else voicesection;">
+<!-- <div *ngIf="voiceActiveSectionDisabled; else voicesection;">
     <button type="button" (click)="startVoiceRecognition()">Record</button>
   </div>
   <ng-template #voicesection>
@@ -23,7 +23,21 @@
       <button (click)="closeVoiceRecognition()">Close</button>
       <button (click)="startVoiceRecognition()">Restart</button>
     </div>
-  </ng-template>
+  </ng-template> -->
+    
+    <!-- <div class="input-group-prpend" (click)="startRecording()" *ngif="!isUserSpeaking">
+      <span class="active-group-text"> record 
+      <i class="mdi mdi-microphone" (click)="startRecording()" *ngif="!isUserSpeaking" ></i></span>
+    </div> -->
+    <button class="active-mic me-l" (click)="startRecording()"  >
+      <div class="pulse-ring">start</div><!--*ngif="!isUserSpeaking"-->
+      </button>
+    <button class="active-mic me-l"  (click)="stopRecording()"><!--*ngif="isUserSpeaking"-->
+      <div class="pulse-ring">stop</div>
+    </button>
+    <!---->
+    <input type="text" class="form-control" placeholder="start typing or click the mic and speak" formControlName="searchtext">
+  
 
   <!-- <section>
     <mat-card *ngIf="errorMessage$| async as errorMessage" class="notification">{{errorMessage}}</mat-card>
@@ -56,3 +70,4 @@
       <textarea matInput [value]="totalTranscript || ''" placeholder="Speech Input Result" rows="15" disabled="false"></textarea>
     </mat-form-field>
   </section> -->
+ 
