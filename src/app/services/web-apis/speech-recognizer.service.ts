@@ -25,11 +25,20 @@ export class SpeechRecognizerService {
   constructor(private ngZone: NgZone) {}
 
 
-  initialize(language: string): void {
-    this.recognition = new webkitSpeechRecognition();
-    this.recognition.continuous = true;
-    this.recognition.interimResults = true;
-    this.setLanguage(language);
+
+  /*############### start party for speechto text ###################*/
+
+
+  initialize(language: string): boolean {
+    if ('webkitSpeechRecognition' in window) {
+      this.recognition = new webkitSpeechRecognition();
+      this.recognition.continuous = true;
+      this.recognition.interimResults = true;
+      this.setLanguage(language);
+      return true;
+    }
+
+    return false;
   }
 
   setLanguage(language: string): void {
@@ -37,10 +46,14 @@ export class SpeechRecognizerService {
     this.recognition.lang = language;
   }
 
-  // start(): void {
-  //   this.recognition.start();
-  //   this.isListening = true;
-  // }
+  start(): void {
+    if (!this.recognition) {
+      return;
+    }
+
+    this.recognition.start();
+    this.isListening = true;
+  }
 
   onStart(): Observable<SpeechNotification<never>> {
     if (!this.recognition) {
@@ -58,91 +71,82 @@ export class SpeechRecognizerService {
     });
   }
 
-
-  /*############### start party for speechto text ###################*/
-/**
-   *  Function to return @observable so voice sample text can be send to input.
-   */
-    speechInput()
-    {
-      return this.voiceToTextSubject.asObservable();
-    }
-
-    /**
-   * Function to @initialize voice recognition.
-   */
-  init()
-  {
-    this.recognition = new webkitSpeechRecognition();
-    this.recognition.interimResults = true;
-    this.recognition.lang = 'en-US';
-
-    this.recognition.addEventListener('result', (e: any) => {
-      const transcript = Array.from(e.results)
-        .map((result: any) => result[0])
-        .map((result) => result.transcript)
-        .join('');
-      this.tempWords = transcript;
-      this.voiceToTextSubject.next(this.text || transcript);
+  onEnd(): Observable<SpeechNotification<never>> {
+    return new Observable(observer => {
+      this.recognition.onend = () => {
+        this.ngZone.run(() => {
+          observer.next({
+            event: SpeechEvent.End
+          });
+          this.isListening = false;
+        });
+      };
     });
-    return this.initListeners();
   }
-  /**
-   *  @description Add event listeners to get the updated input and when stoped
-   */
-   initListeners() 
-   {
-      this.recognition.addEventListener('end',(condition:any)=>{//when say 'end' the rocognation was stopp it 
-        this.recognition.stop();
-      });
-      return this.speakingPaused.asObservable();
-   }
-/**
-   * Function to @mic on to @listen .
-   */
-  start() 
-  {
-    this.text = '';
-    this.isStoppedSpeechRecog = false;
-    this.recognition.start();
-    this.recognition.addEventListener('end', (condition: any) => {
-      if (this.isStoppedSpeechRecog) {
-        this.recognition.isActive = true;
-        this.recognition.stop();
-      } else {
-        this.isStoppedSpeechRecog = false;
-        this.wordConcat();
-        // Checked time with last api call made time so we can't have multiple start action within 200ms for countinious listening
-        // Fixed : ERROR DOMException: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
-        if (!this.recognition.lastActiveTime || (Date.now() - this.recognition.lastActive) > 200) {
-          this.recognition.start();
-          this.recognition.lastActive = Date.now();
+
+  onResult(): Observable<SpeechNotification<string>> {
+    return new Observable(observer => {
+      this.recognition.onresult = (event: any) => {
+        let interimContent = '';
+        let finalContent = '';
+
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            finalContent += event.results[i][0].transcript;
+            this.ngZone.run(() => {
+              observer.next({
+                event: SpeechEvent.FinalContent,
+                content: finalContent
+              });
+            });
+          } else {
+            interimContent += event.results[i][0].transcript;
+            // console.log('interim transcript', event, interimContent);
+            this.ngZone.run(() => {
+              observer.next({
+                event: SpeechEvent.InterimContent,
+                content: interimContent
+              });
+            });
+          }
         }
-      }
-      this.voiceToTextSubject.next(this.text);
+      };
     });
   }
-    
-/**
-   * Function to @stop recognition.
-   */
-  stop() 
-  {
-      this.text='';
-      this.isStoppedSpeechRecog = true;
-      this.wordConcat();
-      this.recognition.stop();
-      this.recognition.isActive = false;
-      this.speakingPaused.next('stopped speaking');
+
+  onError(): Observable<SpeechNotification<never>> {
+    return new Observable(observer => {
+      this.recognition.onerror = (event:any) => {
+        // tslint:disable-next-line:no-any
+        const eventError: string = (event as any).error;
+        console.log('error', eventError);
+        let error: SpeechError;
+        switch (eventError) {
+          case 'no-speech':
+            error = SpeechError.NoSpeech;
+            break;
+          case 'audio-capture':
+            error = SpeechError.AudioCapture;
+            break;
+          case 'not-allowed':
+            error = SpeechError.NotAllowed;
+            break;
+          default:
+            error = SpeechError.Unknown;
+            break;
+        }
+
+        this.ngZone.run(() => {
+          observer.next({
+            error
+          });
+        });
+      };
+    });
   }
-/**
-   * @description Merge previous input with latest input.
-   */
-  wordConcat() 
-  {
-    this.text = this.text.trim()+ ' '+this.tempWords;
-    this.text= this.text.trim();
-    this.tempWords ='';
+
+  stop(): void {
+    this.recognition.stop();
   }
 
   /*############### end party for speechto text ###################*/

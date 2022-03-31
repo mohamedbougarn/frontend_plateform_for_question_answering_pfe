@@ -223,7 +223,7 @@ file: any = null; // Variable to store file
        
       })
      
-
+      this.Getallcontext_conversation();
     
   // this.msg = '';
   //  } for if 
@@ -340,19 +340,22 @@ file: any = null; // Variable to store file
              this.reponseApi=result['response'];
           })
       
-      this.contextconversationService.AddContext_conversation(this.contextId,this.msg,this.reponseApi).subscribe(resultconversation =>
-        {
-          // this.contextId = 0;
-          // this.question = '';
-          // this.reponse ='';
-          this.contect_convertation = resultconversation;
-
-          console.log("add  resultat conversation test ", resultconversation);
-          this.Getallcontext_conversation();
-
-         
-        })
-       
+          if (this.reponseApi.length>0){
+            this.contextconversationService.AddContext_conversation(this.contextId,this.msg,this.reponseApi).subscribe(resultconversation =>
+              {
+                // this.contextId = 0;
+                // this.question = '';
+                // this.reponse ='';
+                this.contect_convertation = resultconversation;
+      
+                console.log("add  resultat conversation test ", resultconversation);
+                this.Getallcontext_conversation();
+      
+               
+              })
+             
+          }
+        
         
       // console.log(this.msg) 
       //   this.isMsg = true;
@@ -360,8 +363,10 @@ file: any = null; // Variable to store file
       //   this.messageReceived = 'you sent '+this.messageSent+'.'
       //   console.log(this.messageSent);
       //   console.log(this.messageReceived)
-      this.msg = '';
+      this.msg = '' ;
+      this.reponseApi = '' ;
       }
+      
       this.Getallcontext_conversation();
     }
 

@@ -1,149 +1,141 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit,NgZone  } from '@angular/core';
+import { Component, OnInit,NgZone, ChangeDetectionStrategy  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { merge, Observable, of, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { SpeechRecognizerService } from 'src/app/services/web-apis/speech-recognizer.service';
+//import { defaultLanguage} from './model/languages';
+import { SpeechError } from './model/speech-error';
+import { SpeechEvent } from './model/speech-event';
+import { SpeechNotification } from './model/speech-notification';
 declare const annyang: any;
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
-  providers:[DatePipe ]
+  providers:[DatePipe ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestComponent implements OnInit {
-  voiceActiveSectionDisabled: boolean = true;
-	voiceActiveSectionError: boolean = false;
-	voiceActiveSectionSuccess: boolean = false;
-	voiceActiveSectionListening: boolean = false;
-	voiceText: any;
-	// Keep active api calls subscription.
-	public searchForm!: FormGroup;
-	public isUserSpeaking: boolean = false;
-  	constructor(private ngZone: NgZone,
-	private fb: FormBuilder,
-    private datePipe: DatePipe,
-    private voiceRecognition: SpeechRecognizerService ) { 
-		// Initialize form group.
-		this.searchForm = this.fb.group({
-		  searchText: ['', Validators.required],
-		});}
+	 languages : any = [
+	 {id : 1,label : "fr-FR"},
+	 {id : 2,label : "ar-AR"},
+	 {id : 3,label : "en-US"}]
+
+	 speechLanguage : any;
+	//languages: string[] = languages;
+  //currentLanguage: string = defaultLanguage;
+  totalTranscript?: string;
+
+  transcript$?: Observable<string>;
+  listening$?: Observable<boolean>;
+  errorMessage$?: Observable<string>;
+  defaultError$ = new Subject<string | undefined>();
+
+  	constructor(
+	private speechRecognizer: SpeechRecognizerService ) { }
 
   
-  ngOnInit(): void {this.initVoiceInput();
-  }
-
-  initializeVoiceRecognitionCallback(): void {
-		annyang.addCallback('error', (err:any) => {
-      if(err.error === 'network'){
-        this.voiceText = "Internet is require";
-        annyang.abort();
-        this.ngZone.run(() => this.voiceActiveSectionSuccess = true);
-      } else if (this.voiceText === undefined) {
-				this.ngZone.run(() => this.voiceActiveSectionError = true);
-				annyang.abort();
-			}
-		});
-
-		annyang.addCallback('soundstart', (res:any) => {
-      this.ngZone.run(() => this.voiceActiveSectionListening = true);
-		});
-
-		annyang.addCallback('end', () => {
-      if (this.voiceText === undefined) {
-        this.ngZone.run(() => this.voiceActiveSectionError = true);
-				annyang.abort();
-			}
-		});
-
-		annyang.addCallback('result', (userSaid :any) => {
-			this.ngZone.run(() => this.voiceActiveSectionError = false);
-
-			let queryText: any = userSaid[0];
-
-			annyang.abort();
-
-      this.voiceText = queryText;
-
-			this.ngZone.run(() => this.voiceActiveSectionListening = false);
-      this.ngZone.run(() => this.voiceActiveSectionSuccess = true);
-		});
-	}
-
-	startVoiceRecognition(): void {
-    this.voiceActiveSectionDisabled = false;
-		this.voiceActiveSectionError = false;
-		this.voiceActiveSectionSuccess = false;
-    this.voiceText = undefined;
-
-		if (annyang) {
-			let commands = {
-				'demo-annyang': () => { }
-			};
-
-			annyang.addCommands(commands);
-
-      this.initializeVoiceRecognitionCallback();
-
-			annyang.start({ autoRestart: false });
-		}
-	}
-
-	closeVoiceRecognition(): void {
-    this.voiceActiveSectionDisabled = true;
-		this.voiceActiveSectionError = false;
-		this.voiceActiveSectionSuccess = false;
-		this.voiceActiveSectionListening = false;
-		this.voiceText = undefined;
-
-		if(annyang){
-      annyang.abort();
-    }
-	}
-
-	/*##################### test component speech ###################################*/
-
-	/**
-   *  Function to @stop @recording .
-   */
-	 stopRecording() 
-	 {
-		this.voiceRecognition.stop();
-		this.isUserSpeaking = false;
-	 }
-
- 	
-   /**
-   * Function for @initializing @voice @input so user can chat with machine.
-   */
+  ngOnInit(): void {
 	  
-   initVoiceInput() 
-	  {
-		// Subscription for initializing and this will call when user stopped speaking.
-		this.voiceRecognition.init().subscribe(() => {
-			// User has stopped recording
-			// Do whatever when mic finished listening
-  		});
+	// const webSpeechReady = this.speechRecognizer.initialize(this.currentLanguage);
+    // if (webSpeechReady) {
+    //   this.initRecognition();
+    // }else {
+    //   this.errorMessage$ = of('Your Browser is not supported. Please try Google Chrome.');
+    // }
 
-  // Subscription to detect user input from voice to text.
-  this.voiceRecognition.speechInput().subscribe((input) => {
-	// Set voice text output to
-	this.searchForm.controls.searchText.setValue(input);
- 	 });
-	  }
+	
 
-
-
-	/**
-   *  Function to @enable @voice @input .
-   */
-  startRecording() 
-  {
-	this.isUserSpeaking = true;
-    this.voiceRecognition.start();
-    this.searchForm.controls.searchText.reset();
   }
 
 
 
 
-	/**############################ end ############################################ */
+  /*********************start speech************************ */
+  start(): void {
+    if (this.speechRecognizer.isListening) {
+      this.stop();
+      return;
+    }
+
+    this.defaultError$.next(undefined);
+    this.speechRecognizer.start();
+  }
+
+  stop(): void {
+    this.speechRecognizer.stop();
+  }
+
+  selectLanguage(event: any) {
+    // if (this.speechRecognizer.isListening) {
+    //   this.stop();
+    // }
+    // this.currentLanguage = language;
+    // this.speechRecognizer.setLanguage(this.currentLanguage);
+
+	console.log(event.target.value)
+
+	this.speechLanguage = event.target.value;
+  }
+
+  private initRecognition(): void {
+    this.transcript$ = this.speechRecognizer.onResult().pipe(
+      tap((notification) => {
+        this.processNotification(notification);
+      }),
+      map((notification) => notification.content || '')
+    );
+
+    this.listening$ = merge(
+      this.speechRecognizer.onStart(),
+      this.speechRecognizer.onEnd()
+    ).pipe(map((notification) => notification.event === SpeechEvent.Start));
+
+    this.errorMessage$ = merge(
+      this.speechRecognizer.onError(),
+      this.defaultError$
+    ).pipe(
+      map((data) => {
+        if (data === undefined) {
+          return '';
+        }
+        if (typeof data === 'string') {
+          return data;
+        }
+        let message;
+        switch (data.error) {
+          case SpeechError.NotAllowed:
+            message = `Cannot run the demo.
+            Your browser is not authorized to access your microphone.
+            Verify that your browser has access to your microphone and try again.`;
+            break;
+          case SpeechError.NoSpeech:
+            message = `No speech has been detected. Please try again.`;
+            break;
+          case SpeechError.AudioCapture:
+            message = `Microphone is not available. Plese verify the connection of your microphone and try again.`;
+            break;
+          default:
+            message = '';
+            break;
+        }
+        return message;
+      })
+    );
+  }
+
+  private processNotification(notification: SpeechNotification<string>): void {
+    if (notification.event === SpeechEvent.FinalContent) {
+      const message = notification.content?.trim() || '';
+      //this.actionContext.processMessage(message, this.currentLanguage);
+      // this.actionContext.runAction(message, this.currentLanguage);
+      this.totalTranscript = this.totalTranscript
+        ? `${this.totalTranscript}\n${message}`
+        : notification.content;
+    }
+  }
+  /*********************end speech ************************* */
+
+
 }
