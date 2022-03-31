@@ -55,6 +55,7 @@ file: any = null; // Variable to store file
   question : any = '';
 
   reponse : any = '';
+  reponseApi : any = '';
   id_client : any = '';
   contect_convertation : any = '';
   contect_convertationlist : any = '';
@@ -306,7 +307,7 @@ file: any = null; // Variable to store file
   }
 
 
-  //liste des qusetion reponce dapronse par id context
+  //liste des qusetion reponse  par id context
     getQr_by_ID_context()
     {
      
@@ -331,8 +332,15 @@ file: any = null; // Variable to store file
      
       if (this.msg.length>0)
       {
+        //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
+        this.contextconversationService.GetResponseApi(this.contextText,this.msg).subscribe(result =>
+          {
+             console.log('resultat de lappele api flask est =',result['response'])
+
+             this.reponseApi=result['response'];
+          })
       
-      this.contextconversationService.AddContext_conversation(this.contextId,this.msg).subscribe(resultconversation =>
+      this.contextconversationService.AddContext_conversation(this.contextId,this.msg,this.reponseApi).subscribe(resultconversation =>
         {
           // this.contextId = 0;
           // this.question = '';
@@ -340,12 +348,12 @@ file: any = null; // Variable to store file
           this.contect_convertation = resultconversation;
 
           console.log("add  resultat conversation test ", resultconversation);
-          this.Getallcontext_conversation
+          this.Getallcontext_conversation();
 
          
         })
        
-
+        
       // console.log(this.msg) 
       //   this.isMsg = true;
       //   this.messageSent = this.msg ;
@@ -354,6 +362,7 @@ file: any = null; // Variable to store file
       //   console.log(this.messageReceived)
       this.msg = '';
       }
+      this.Getallcontext_conversation();
     }
 
 
