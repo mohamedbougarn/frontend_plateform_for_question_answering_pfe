@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpeechSynthesizerService {
   speechSynthesizer!: SpeechSynthesisUtterance;
-
+// Keep active api calls subscription.
+public searchForm!: FormGroup;
+public isUserSpeaking: boolean = false;
  
   constructor() { this.initSynthesis();}
 
@@ -22,5 +25,9 @@ export class SpeechSynthesizerService {
     this.speechSynthesizer.text = message;
     speechSynthesis.speak(this.speechSynthesizer);
   }
+
+
+
+
 }
 
