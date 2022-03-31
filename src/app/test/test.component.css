@@ -1,0 +1,20 @@
+.results {
+    padding: 3px;
+    display: inline-block;
+    height: 10vh;
+    min-width: 40vw;
+    border-style: solid;
+    border-width: 1px;
+    border-radius : 3px;
+    border-color: grey;
+    font-weight: bold;
+  }
+  
+  .final {
+    color: black;
+    font-weight: normal;
+  }
+  
+  .interim {
+    color: darkgrey;
+  }
