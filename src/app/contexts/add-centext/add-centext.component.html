@@ -41,7 +41,7 @@
                           </ul>
                         </div>
                       </div>
-                      <div class="card-body msg_card_body"  style="">
+                      <div class="card-body msg_card_body" >
                         <!-- <div class="d-flex justify-content-start mb-4">
                           <div class="img_cont_msg">
                             <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
@@ -116,7 +116,7 @@
                           <div class="msg_cotainer_send">
                             {{msg.question}}
                             
-                            <img src="{{msg.photo}}" alt="{{msg.photo}}" width="200"/> 
+                            <img ng-if="msg.photo!=null" src="{{msg.photo}}" alt="{{msg.photo}}" width="200"/> 
                             <span class="msg_time_send" style="color:rgb(20, 20, 32)">{{msg.entry_date}}</span>
                           </div>
                           <div class="img_cont_msg">
