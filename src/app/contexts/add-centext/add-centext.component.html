@@ -161,16 +161,18 @@
        <!-------------------------------------------------------------------->
 
 
-
-      
+  
 
 
                       </div>
                       <div class="card-footer">
                         <div class="input-group">
                           <div class="input-group-append">
-                            <span class="input-group-text attach_btn"><i class="mdi mdi-microphone"></i></span>
+                            <span class="input-group-text attach_btn" *ngIf="listening$ | async; else mic" (click)="stop()" ><i class="mdi mdi-microphone" style="color:rgb(243, 42, 59)"></i></span>
                             
+                            <ng-template #mic>
+                              <span class="input-group-text attach_btn" (click)="start()"  ><i class="mdi mdi-microphone" style="color:rgb(72, 90, 255)" ></i></span>
+                            </ng-template>
 
                             <!--test upload-->
                             
@@ -202,7 +204,12 @@
                              -->
                              
                             </div>
-                          <input name="msg" [(ngModel)]="msg" class="form-control type_msg"  (keydown.enter)="sendmsg();Getallcontext_conversation()" placeholder="Type your message...">
+
+
+                            
+
+
+                          <input  name="msg" [(ngModel)]="msg" class="form-control type_msg"  (keydown.enter)="sendmsg();Getallcontext_conversation()" placeholder="Type your message..."  value="{{transcript$ | async}}" >
                           <div class="input-group-append">
                             <span class="input-group-text send_btn"  (click)="sendmsg();Getallcontext_conversation()"><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"-->
                           </div>

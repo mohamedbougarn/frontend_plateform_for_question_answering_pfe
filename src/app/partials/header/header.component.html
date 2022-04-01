@@ -127,9 +127,16 @@
          </ul>
         
         <form class="d-flex">
-         
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" (click)="LogOut()" type="submit">Search</button>
+          <select class="form-select" [(ngModel)]="currentLanguage" name="currentLanguage" (change)="selectLanguage($event)">
+            <option  *ngFor="let language of Mylanguages" [value]="language.lib_langue">
+              {{language.lib_langue}}
+            </option>
+          </select>
+          <img src="{{clientPicture}}" height=40 width=40   >  
+          <p class="dropdown-item" style="color:white"> welocme MR {{clientName}}  </p>
+              
+          <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" (click)="LogOut()" type="submit">Search</button> -->
         </form>
       </div>
     </div>
