@@ -1,21 +1,21 @@
-<!-- <div  class="card">
+<div  class="card">
   <div class="card-body" *ngIf="errorMessage$| async as errorMessage" class="notification">{{errorMessage}}</div>
-</div> -->
+</div>
 <div> 
     <label>Select your language</label>
-    <select class="form-select"  (change)="selectLanguage($event)">
-      <option *ngFor="let language of languages" [value]="language.label" >
-        {{language.label}}
+    <select class="form-select" (value)="currentLanguage">
+      <option *ngFor="let language of languages" [value]="language" (click)="selectLanguage(language)">
+        {{language}}
       </option>
     </select>
 </div>
 <div>
   <button class="rounded-circle" *ngIf="listening$ | async; else mic" (click)="stop()">
-    <i class="mdi mdi-microphone">Stop</i>
+    <i class="mdi mdi-microphone">stop</i>
   </button>
   <ng-template #mic>
     <button mat-fab (click)="start()">
-      <i class="mdi mdi-microphone">Start</i>
+      <i class="mdi mdi-microphone">start</i>
     </button>
   </ng-template>
 </div>
