@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { SpeechRecognizerService } from 'src/app/services/web-apis/speech-recognizer.service';
-//import { defaultLanguage} from './model/languages';
+import { LangueService } from '../services/langue.service';
+import { defaultLanguage } from './model/languages';
 import { SpeechError } from './model/speech-error';
 import { SpeechEvent } from './model/speech-event';
 import { SpeechNotification } from './model/speech-notification';
@@ -14,17 +15,13 @@ declare const annyang: any;
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
   providers:[DatePipe ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+   //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestComponent implements OnInit {
-	 languages : any = [
-	 {id : 1,label : "fr-FR"},
-	 {id : 2,label : "ar-AR"},
-	 {id : 3,label : "en-US"}]
-
-	 speechLanguage : any;
-	//languages: string[] = languages;
-  //currentLanguage: string = defaultLanguage;
+  
+  //languages: string[] = languages;
+  Mylanguages : any ;
+  currentLanguage: any ;//string = defaultLanguage;
   totalTranscript?: string;
 
   transcript$?: Observable<string>;
@@ -32,27 +29,53 @@ export class TestComponent implements OnInit {
   errorMessage$?: Observable<string>;
   defaultError$ = new Subject<string | undefined>();
 
+  id_langue :any ='';
+
   	constructor(
-	private speechRecognizer: SpeechRecognizerService ) { }
+	private speechRecognizer: SpeechRecognizerService,
+  private langueservice:LangueService  ) { }
 
   
   ngOnInit(): void {
 	  
-	// const webSpeechReady = this.speechRecognizer.initialize(this.currentLanguage);
-    // if (webSpeechReady) {
-    //   this.initRecognition();
-    // }else {
-    //   this.errorMessage$ = of('Your Browser is not supported. Please try Google Chrome.');
-    // }
 
-	
 
+    this.Getlangue();
+
+
+    const webSpeechReady = this.speechRecognizer.initialize(this.currentLanguage);
+    if (webSpeechReady) {
+      this.initRecognition();
+    }else {
+      this.errorMessage$ = of('Your Browser is not supported. Please try Google Chrome.');
+    }
   }
+
+
+  /********* @select @language from database  *************** */
+
+  Getlangue()
+  {
+    this.langueservice.GetLanguage(this.id_langue).subscribe(result =>
+      {
+      this.Mylanguages = result;
+        // console.log("Get language ===  ", result);
+
+         console.log(this.Mylanguages);
+         this.currentLanguage = this.Mylanguages[1].lib_langue;
+         this.speechRecognizer.setLanguage(this.currentLanguage);
+
+      })
+  }
+
+
+  /**********  end @select @language        ****************** */
 
 
 
 
   /*********************start speech************************ */
+
   start(): void {
     if (this.speechRecognizer.isListening) {
       this.stop();
@@ -67,16 +90,16 @@ export class TestComponent implements OnInit {
     this.speechRecognizer.stop();
   }
 
-  selectLanguage(event: any) {
-    // if (this.speechRecognizer.isListening) {
-    //   this.stop();
-    // }
-    // this.currentLanguage = language;
-    // this.speechRecognizer.setLanguage(this.currentLanguage);
+  selectLanguage(event: any): void {
 
-	console.log(event.target.value)
+    if (this.speechRecognizer.isListening) {
+      this.stop();
+    }
+    this.currentLanguage = event.target.value;
+    
+    this.speechRecognizer.setLanguage(this.currentLanguage);
 
-	this.speechLanguage = event.target.value;
+	console.log('language =',this.currentLanguage)
   }
 
   private initRecognition(): void {
@@ -136,6 +159,9 @@ export class TestComponent implements OnInit {
     }
   }
   /*********************end speech ************************* */
+
+
+
 
 
 }

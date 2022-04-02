@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LangueService } from 'src/app/services/langue.service';
+import { SuperComponent } from 'src/app/services/super';
+import { SpeechRecognizerService } from 'src/app/services/web-apis/speech-recognizer.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent extends SuperComponent {
 
       id :any ;
       nom : any ;
       prenom : any ;
-
-  constructor(public router : Router) { }
+      Mylanguages : any ;
+      currentLanguage: any ;//string = defaultLanguage;
+      id_langue : any = '';
+  constructor(public router : Router, private langueservice:LangueService,
+    private speechRecognizer: SpeechRecognizerService) {
+    super();
+   }
 
   ngOnInit(): void
   {
     // Read item:
     //let item = JSON.parse(localStorage.getItem(dataSource));
+    
+    this.Getlangue();
+
     this.nom = localStorage.getItem('nomuser');
     this.prenom = localStorage.getItem('prenomuser')
     this.id= localStorage.getItem('id');
@@ -42,7 +53,32 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  selectLanguage(event: any): void {
 
+
+    
+    this.currentLanguage = event.target.value;
+    sessionStorage.setItem('language',this.currentLanguage);
+    
+    this.speechRecognizer.setLanguage(this.currentLanguage);
+
+    
+
+
+  }
+  
+  Getlangue()
+  {
+    this.langueservice.GetLanguage(this.id_langue).subscribe(result =>
+      {
+      this.Mylanguages = result;
+        // console.log("Get language ===  ", result);
+
+         console.log(this.Mylanguages);
+         this.currentLanguage = this.Mylanguages[1].lib_langue;
+         sessionStorage.setItem('language',this.currentLanguage);
+      })
+    }
 
   LogOut()
   {
