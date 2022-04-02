@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Observable, Subject } from 'rxjs';
-import { mergeMap, scan } from 'rxjs/operators';
+import { merge, Observable, of, Subject } from 'rxjs';
+import { map, mergeMap, scan, tap } from 'rxjs/operators';
 
 //import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
@@ -13,6 +13,12 @@ import { ContextService } from 'src/app/services/context.service';
 import { ContextConversationService } from 'src/app/services/context-conversation.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { environment } from 'src/environments/environment';
+import { defaultLanguage, languages } from 'src/app/test/model/languages';
+import { SpeechRecognizerService } from 'src/app/services/web-apis/speech-recognizer.service';
+import { SpeechEvent } from 'src/app/test/model/speech-event';
+import { SpeechError } from 'src/app/test/model/speech-error';
+import { SpeechNotification } from 'src/app/test/model/speech-notification';
+import { SuperComponent } from 'src/app/services/super';
 //import {ICustomFile} from "file-input-accessor";
 
 
@@ -22,9 +28,10 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-add-centext',
   templateUrl: './add-centext.component.html',
-  styleUrls: ['./add-centext.component.css']
+  styleUrls: ['./add-centext.component.css'],
+  //changeDetection: ChangeDetectionStrategy.OnPush //
 })
-export class AddCentextComponent implements OnInit {
+export class AddCentextComponent extends SuperComponent {
 
 
 
@@ -85,6 +92,22 @@ file: any = null; // Variable to store file
   })
   filename:any;
 
+
+/**for speech  */
+
+
+  //languages: string[] = languages;
+  currentLanguage: any ;//string = defaultLanguage;
+  totalTranscript?: string;
+
+  transcript$?: Observable<string>;
+  listening$?: Observable<boolean>;
+  errorMessage$?: Observable<string>;
+  defaultError$ = new Subject<string | undefined>();
+
+
+  /** ***************  */
+
   @ViewChild('fileInput') el!: ElementRef;
   constructor(public route : ActivatedRoute,public router : Router,
     public contextService : ContextService,
@@ -93,40 +116,21 @@ file: any = null; // Variable to store file
     private bsModalService : BsModalService,
     private http: HttpClient,
     private fileUploadService: FileUploadService,
-    public fb : FormBuilder) { }//private modalService: BsModalService
+    public fb : FormBuilder,
+    private speechRecognizer: SpeechRecognizerService) 
+    { 
+      super();
+    }//private modalService: BsModalService
 
   ngOnInit(): void {
     
 
-
+console.log('currentLanuage' + this.currentLanuage)
    
 
 
      /*##################### Registration Form #####################*/
   
-     //  registrationForm = this.fb.group({
-  //   file: [null]
-  // })  
-
-  
-  
-
-    // this.uploader.onAfterAddingFile = (file) => {
-    //   console.log('***** onAfterAddingFile ******')
-    //   console.log('file ', file)
-    // }
-
-    // this.uploader.onCompleteItem =  (item:any, response:any, status:any, headers:any) => {
-    //   console.log('ImageUpload:uploaded:', item, status, response);
-    // };
-
-    // this.uploader.onCompleteAll = () => {
-    //   console.log('******* onCompleteAll *********')
-    // }
-
-    // this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any) => {
-    //   console.log('***** onWhenAddingFileFailed ********')
-    // }
 
 
     /*########################## File Upload ########################*/
@@ -137,8 +141,107 @@ file: any = null; // Variable to store file
     this.Getbyidcontext();
     this.getQr_by_ID_context();
     this.Getallcontext_conversation()
+
+
+    /*** speech add ngoninit */
+
+    const webSpeechReady = this.speechRecognizer.initialize(this.currentLanguage);
+    if (webSpeechReady) {
+      this.initRecognition();
+    }else {
+      this.errorMessage$ = of('Your Browser is not supported. Please try Google Chrome.');
+    }
+
+    /************************ */
     
   }
+
+
+  
+  
+    /*********************@start @speech ************************ */
+
+    start(): void {
+      if (this.speechRecognizer.isListening) {
+        this.stop();
+        return;
+      }
+  
+      this.defaultError$.next(undefined);
+      this.speechRecognizer.start();
+    }
+  
+    stop(): void {
+      this.speechRecognizer.stop();
+    }
+  
+    selectLanguage(): void {
+      if (this.speechRecognizer.isListening) {
+        this.stop();
+      }
+     // this.currentLanguage = language;
+      this.speechRecognizer.setLanguage(this.currentLanguage);
+  
+      console.log('language =',this.currentLanguage)
+    }
+  
+    private initRecognition(): void {
+      this.transcript$ = this.speechRecognizer.onResult().pipe(
+        tap((notification) => {
+          this.processNotification(notification);
+        }),
+        map((notification) => notification.content || '')
+      );
+  
+      this.listening$ = merge(
+        this.speechRecognizer.onStart(),
+        this.speechRecognizer.onEnd()
+      ).pipe(map((notification) => notification.event === SpeechEvent.Start));
+  
+      this.errorMessage$ = merge(
+        this.speechRecognizer.onError(),
+        this.defaultError$
+      ).pipe(
+        map((data) => {
+          if (data === undefined) {
+            return '';
+          }
+          if (typeof data === 'string') {
+            return data;
+          }
+          let message;
+          switch (data.error) {
+            case SpeechError.NotAllowed:
+              message = `Cannot run the demo.
+              Your browser is not authorized to access your microphone.
+              Verify that your browser has access to your microphone and try again.`;
+              break;
+            case SpeechError.NoSpeech:
+              message = `No speech has been detected. Please try again.`;
+              break;
+            case SpeechError.AudioCapture:
+              message = `Microphone is not available. Plese verify the connection of your microphone and try again.`;
+              break;
+            default:
+              message = '';
+              break;
+          }
+          return message;
+        })
+      );
+    }
+  
+    private processNotification(notification: SpeechNotification<string>): void {
+      if (notification.event === SpeechEvent.FinalContent) {
+        const message = notification.content?.trim() || '';
+        //this.actionContext.processMessage(message, this.currentLanguage);
+        // this.actionContext.runAction(message, this.currentLanguage);
+        this.totalTranscript = this.totalTranscript
+          ? `${this.totalTranscript}\n${message}`
+          : notification.content;
+      }
+    }
+    /*********************end @speech ************************* */
 
   
   onChargeimage(event:any) 
