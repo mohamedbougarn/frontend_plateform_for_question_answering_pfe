@@ -125,7 +125,7 @@ file: any = null; // Variable to store file
   ngOnInit(): void {
     
 
-console.log('currentLanuage' + this.currentLanuage)
+    console.log('currentLanuage' + this.currentLanuage)
    
 
 
@@ -140,7 +140,7 @@ console.log('currentLanuage' + this.currentLanuage)
     this.id_client=localStorage.getItem('id');
     this.Getbyidcontext();
     this.getQr_by_ID_context();
-    this.Getallcontext_conversation()
+    this.Getallcontext_conversation();
 
 
     /*** speech add ngoninit */
@@ -153,6 +153,7 @@ console.log('currentLanuage' + this.currentLanuage)
     }
 
     /************************ */
+    //this.selectLanguage();
     
   }
 
@@ -452,7 +453,6 @@ console.log('currentLanuage' + this.currentLanuage)
                 this.contect_convertation = resultconversation;
       
                 console.log("add  resultat conversation test ", resultconversation);
-                this.Getallcontext_conversation();
       
                
               })
@@ -468,6 +468,7 @@ console.log('currentLanuage' + this.currentLanuage)
       //   console.log(this.messageReceived)
       this.msg = '' ;
       this.reponseApi = '' ;
+      
       }
       
       this.Getallcontext_conversation();
