@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color } from 'ng2-charts';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 
 @Component({
@@ -41,12 +43,22 @@ export class CentextComponent implements OnInit {
   lineChartType : ChartType =  'line';
 /**********************  Line End  ********************* */
 message : any;
-  constructor() {
+id_client! : String;
+countcontext :any;
+countcontextconvertation:any;
+countclient :any ;
+
+  constructor(public router : Router,
+    private dashboardservice:DashboardService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
    }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    this.getcountcontext();
+    this.getcountcontextconvertation();
+    this.getcountclient();
   }
 
 
@@ -59,4 +71,43 @@ message : any;
                     {id:1,message:''},
                     {id:1,message:''}]
   }
+
+
+
+  getcountcontext()
+  {
+    this.id_client ="3";
+    this.dashboardservice.GetCountContext(this.id_client).subscribe(result =>
+      {
+        console.log("resultat count context  = "+result)
+        this.countcontext = result
+
+      })
+
+  }
+
+  getcountcontextconvertation()
+  {
+    this.id_client="3";
+    this.dashboardservice.GetCountContextConvertation(this.id_client).subscribe(result =>
+      {
+          console.log("resultat count context conversation = "+result)
+          this.countcontextconvertation = result
+      })
+
+  }
+
+
+  getcountclient()
+  {
+    this.dashboardservice.GetCountClient().subscribe(result =>{
+      console.log("resultat de count de client = ")
+      console.log(result[0].ctl_count_client)
+      this.countclient = result[0].ctl_count_client
+
+    })
+  }
+  
+
+
 }

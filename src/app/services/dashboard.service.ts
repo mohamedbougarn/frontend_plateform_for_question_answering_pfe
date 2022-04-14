@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 
 export class DashboardService {
 
-  url = environment.URL_CORE;
+  url = environment.URL_CORE; 
   headers = new HttpHeaders();
 
   constructor(public http: HttpClient) { }
@@ -23,7 +23,7 @@ export class DashboardService {
 GetCountContext(client:any){
   this.headers.append('Content-Type', 'application/json');
       return this.http
-        .post<any>(this.url+'context/count',{client})
+        .put<any>(this.url+'context/count',{client})
         .pipe(map(res => {  
         return res ;                    
   })); 
@@ -32,17 +32,31 @@ GetCountContext(client:any){
 
 
  /**
- * for get count of context
+ * for get count of context convertaion
 */
 GetCountContextConvertation(client:any){
   this.headers.append('Content-Type', 'application/json');
       return this.http
-        .post<any>(this.url+'context_conversation/count',{client})
+        .put<any>(this.url+'context_conversation/count',{client})
         .pipe(map(res => {  
         return res ;                    
   })); 
 }
 
+
+
+
+ /**
+ * for get count of context convertaion
+*/
+GetCountClient(){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .put<any>(this.url+'client/count',{})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
 
 
 }
