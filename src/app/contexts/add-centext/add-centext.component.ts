@@ -518,7 +518,7 @@ GetMsgResponseApi()
       }
       else
        {
-         console.log
+         console.log("eurreur de ")
         }
       
     }
