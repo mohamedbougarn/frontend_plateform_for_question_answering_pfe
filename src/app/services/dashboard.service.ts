@@ -17,6 +17,31 @@ export class DashboardService {
 
 
 
+  /**
+ * for get count of context
+*/
+GetCountContext(client:any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .post<any>(this.url+'context/count',{client})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+
+
+
+ /**
+ * for get count of context
+*/
+GetCountContextConvertation(client:any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .post<any>(this.url+'context_conversation/count',{client})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
 
 
 
