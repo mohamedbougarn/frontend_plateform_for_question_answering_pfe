@@ -209,9 +209,9 @@
                             
 
 
-                          <input  name="msg" [(ngModel)]="msg" class="form-control type_msg"  (keydown.enter)="sendmsg();Getallcontext_conversation()" placeholder="Type your message..."  value="{{transcript$ | async}}" >
+                          <input  name="msg" [(ngModel)]="msg" class="form-control type_msg"  (keydown.enter)="GetMsgResponseApi()" placeholder="Type your message..."  value="{{transcript$ | async}}" >
                           <div class="input-group-append">
-                            <span class="input-group-text send_btn"  (click)="sendmsg();Getallcontext_conversation()"><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"-->
+                            <span class="input-group-text send_btn"  (click)="GetMsgResponseApi()"><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"-->
                           </div>
                         </div>
                       </div>

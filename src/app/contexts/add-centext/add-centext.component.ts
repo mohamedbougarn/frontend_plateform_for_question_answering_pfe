@@ -322,12 +322,11 @@ file: any = null; // Variable to store file
         photo = resultphoto;
 
         console.log("add  resultat conversation photo test ", photo);
-        this.Getallcontext_conversation
+        this.Getallcontext_conversation()
 
        
       })
      
-      this.Getallcontext_conversation();
     
   // this.msg = '';
   //  } for if 
@@ -429,22 +428,28 @@ file: any = null; // Variable to store file
       
     }
 
+GetMsgResponseApi()
+{
+  if (this.msg.length>0)
+  {
+    //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
+    this.contextconversationService.GetResponseApi(this.contextText,this.msg).subscribe(result =>
+      {
+         console.log('resultat de lappele api flask est =',result['response'])
 
+         this.reponseApi=result['response'];
+
+         if(this.reponseApi.length > 0)
+         {
+           this.sendmsg();
+         }
+      })
+    }
+}
     
     sendmsg()//depuit database 
     {
      
-      if (this.msg.length>0)
-      {
-        //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
-        this.contextconversationService.GetResponseApi(this.contextText,this.msg).subscribe(result =>
-          {
-             console.log('resultat de lappele api flask est =',result['response'])
-
-             this.reponseApi=result['response'];
-          })
-      
-          if (this.reponseApi.length>0){
             this.contextconversationService.AddContext_conversation(this.contextId,this.msg,this.reponseApi).subscribe(resultconversation =>
               {
                 // this.contextId = 0;
@@ -453,26 +458,18 @@ file: any = null; // Variable to store file
                 this.contect_convertation = resultconversation;
       
                 console.log("add  resultat conversation test ", resultconversation);
+                this.Getallcontext_conversation();
+
       
                
               })
              
-          }
-        
-        
-      // console.log(this.msg) 
-      //   this.isMsg = true;
-      //   this.messageSent = this.msg ;
-      //   this.messageReceived = 'you sent '+this.messageSent+'.'
-      //   console.log(this.messageSent);
-      //   console.log(this.messageReceived)
-      this.msg = '' ;
-      this.reponseApi = '' ;
+            this.msg = '' ;
+            this.reponseApi = '' ;
       
       }
       
-      this.Getallcontext_conversation();
-    }
+    
 
 
 
