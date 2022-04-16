@@ -43,7 +43,7 @@ export class CentextComponent implements OnInit {
   lineChartType : ChartType =  'line';
 /**********************  Line End  ********************* */
 message : any;
-id_client! : String;
+id_client : any = '';
 countcontext :any;
 countcontextconvertation:any;
 countclient :any ;
@@ -76,11 +76,12 @@ countclient :any ;
 
   getcountcontext()
   {
-    this.id_client ="3";
+    
     this.dashboardservice.GetCountContext(this.id_client).subscribe(result =>
       {
-        console.log("resultat count context  = "+result)
-        this.countcontext = result
+        console.log("resultat count context  = ")
+        console.log(result[0].ctl_count_context_select)
+        this.countcontext = result[0].ctl_count_context_select
 
       })
 
@@ -88,14 +89,18 @@ countclient :any ;
 
   getcountcontextconvertation()
   {
-    this.id_client="3";
+  
     this.dashboardservice.GetCountContextConvertation(this.id_client).subscribe(result =>
       {
-          console.log("resultat count context conversation = "+result)
-          this.countcontextconvertation = result
+        
+          console.log("resultat count context conversation = ")
+          console.log(result[0].ctl_count_context_convertation_select)
+          this.countcontextconvertation = result[0].ctl_count_context_convertation_select
       })
 
   }
+
+
 
 
   getcountclient()
