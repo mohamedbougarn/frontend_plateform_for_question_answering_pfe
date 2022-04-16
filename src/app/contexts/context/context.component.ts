@@ -10,13 +10,15 @@ import { ContextService } from 'src/app/services/context.service';
   styleUrls: ['./context.component.css']
 })
 export class ContextComponent implements OnInit {
-
+contextIdToUpdate : any = 0;
+  type : any = 1 ;
   id_context : any = '';  
   context : any = '';
   id_client : any = '';
   contextTitle : any = '';
   contexts : any;
   modalAddContext!: BsModalRef;
+
   constructor(public router : Router,public contextService :ContextService,private bsModalService: BsModalService) { }
 
   ngOnInit(): void {
@@ -53,10 +55,41 @@ export class ContextComponent implements OnInit {
     this.id_client=localStorage.getItem('id');
     console.log('le id  client ===== ' , this.id_client)
 
-    this.contextService.SetContext(this.context,this.id_client,this.contextTitle).subscribe(result =>
+
+    this.contextService.SetContext(this.contextIdToUpdate,this.context,this.id_client,this.contextTitle,this.type).subscribe(result =>
       {
         this.closeDialog();
         this.GetContext();
+      })
+    // console.log("context = ",this.context, "\n question = ",this.question , "\n réponce = ",this.reponse)
+    //  this.reponse==="";
+    //  this.question==="";
+    //  this.contextTitle = '';
+    //  this.context = '';
+  }
+
+  SelectType(event:any,contextId:any)
+  {
+    console.log(event.target.value);
+    console.log(contextId);
+    this.type = event.target.value;
+    this.contextIdToUpdate = contextId;
+    this.Updatecentexttype();
+    }
+
+  
+    
+  Updatecentexttype()
+  {
+    // this.id_client=localStorage.getItem('id');
+    // console.log('le id  client ===== ' , this.id_client)
+
+
+    this.contextService.UpdateContext(this.contextIdToUpdate,this.context,this.id_client,this.contextTitle,this.type).subscribe(result =>
+      {
+
+        // this.closeDialog();
+         this.GetContext();
       })
     // console.log("context = ",this.context, "\n question = ",this.question , "\n réponce = ",this.reponse)
     //  this.reponse==="";
