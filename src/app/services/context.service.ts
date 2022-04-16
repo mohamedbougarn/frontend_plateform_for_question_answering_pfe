@@ -25,14 +25,23 @@ export class ContextService {
   //   }
 
 
-    SetContext(text:any,id_client:any,title:any){
+    SetContext(id_context : any,text:any,id_client:any,title:any, type : any){
       this.headers.append('Content-Type', 'application/json');
           return this.http
-            .put<any>(this.url+'context/add',{text,id_client,title})
+            .put<any>(this.url+'context/add',{id_context,text,id_client,title,type})
             .pipe(map(res => {  
             return res ;                    
       })); 
   }
+
+  UpdateContext(id_context : any,text:any,id_client:any,title:any, type : any){
+    this.headers.append('Content-Type', 'application/json');
+        return this.http
+          .put<any>(this.url+'context/type/update',{id_context,text,id_client,title,type})
+          .pipe(map(res => {  
+          return res ;                    
+    })); 
+}
 
   GetByIdContext(id_context:any,id_client : any){
     this.headers.append('Content-Type', 'application/json');

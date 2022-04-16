@@ -14,6 +14,7 @@
                         <th scope="col">Entry date</th>
                         <th scope="col">Client</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Type</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -27,7 +28,28 @@
                             <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span> 
   
                         </td>
-                        <td> <a type="button" href="Q_R/add/{{context.id_context}}">Ajouter</a></td>
+                        <td>
+                          <span *ngIf="context.type == '1'"  class="badge badge-success"><i class="mdi mdi-earth"  ></i></span>
+                          <span *ngIf="context.type == '0'"  class="badge badge-danger"><i class="mdi mdi-earth-off"></i></span> 
+                        </td>
+
+                        <td>
+                          <select *ngIf="context.type == '1'" class="form-select" (change)="SelectType($event,context.id_context)" >
+                              <option value="1" selected >  <i class="mdi mdi-earth" aria-hidden='true'></i> Public  </option>
+                              <option value="0">  <i class="mdi mdi-earth-off"></i>  Private</option>
+                          </select>
+                          <select *ngIf="context.type == '0'" class="form-select" (change)="SelectType($event,context.id_context)" >
+                            <option value="1" > <i class="mdi mdi-earth"></i> Public  </option>
+                            <option value="0" selected>  <i class="mdi mdi-earth-off"></i> Private</option>
+                        </select>
+
+                          
+
+                        </td>
+                        <td>
+                          <span ><a type="button"  href="Q_R/add/{{context.id_context}}"><i class="mdi mdi-plus-thick" ></i> </a></span> 
+                          
+                        </td>
                         <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
                       </tr>
                      
