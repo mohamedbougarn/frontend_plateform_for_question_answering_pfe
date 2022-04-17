@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  idclient :any ;
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    this.idclient = localStorage.getItem('id');
+    console.log("id de client = "+this.idclient)
   }
 
 }
