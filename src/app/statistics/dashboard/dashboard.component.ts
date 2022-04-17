@@ -6,6 +6,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { ContextService } from 'src/app/services/context.service';
 import { ClientService } from 'src/app/services/client.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -114,13 +115,22 @@ chartOptions1 = {
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
+  countcontext : any;
+  id_client :any;
+  countcontextconvertation : any;
+  countclient : any;
   contexts : any;
   clients : any;
   idclient : any;
-  constructor(public contextService : ContextService,public clientService : ClientService){}
+  constructor(public contextService : ContextService,
+    public clientService : ClientService,
+    public dashboardservice : DashboardService){}
 
   ngOnInit() {
-    
+    this.id_client= localStorage.getItem('id');
+    this.getcountclient()
+    this.getcountcontext()
+    this.getcountcontextconvertation()
     //this.GetContext();
   }
 
@@ -146,5 +156,45 @@ chartOptions1 = {
   
 // // // Added BaseChartDirective 
 // // Had to make sure each obj had 'hidden' explicitly in it for some reason
- 
+
+getcountcontext()
+  {
+    
+    this.dashboardservice.GetCountContext(this.id_client).subscribe(result =>
+      {
+        console.log("resultat count context  = ")
+        console.log(result[0].ctl_count_context_select)
+        this.countcontext = result[0].ctl_count_context_select
+
+      })
+
+  }
+
+  getcountcontextconvertation()
+  {
+  
+    this.dashboardservice.GetCountContextConvertation(this.id_client).subscribe(result =>
+      {
+        
+          console.log("resultat count context conversation = ")
+          console.log(result[0].ctl_count_context_convertation_select)
+          this.countcontextconvertation = result[0].ctl_count_context_convertation_select
+      })
+
+  }
+
+
+
+
+  getcountclient()
+  {
+    this.dashboardservice.GetCountClient().subscribe(result =>{
+      console.log("resultat de count de client = ")
+      console.log(result[0].ctl_count_client)
+      this.countclient = result[0].ctl_count_client
+
+    })
+  }
+
+
 }
