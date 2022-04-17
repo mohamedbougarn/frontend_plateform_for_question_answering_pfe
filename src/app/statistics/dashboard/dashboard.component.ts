@@ -116,9 +116,11 @@ chartOptions1 = {
 
   contexts : any;
   clients : any;
+  idclient : any;
   constructor(public contextService : ContextService,public clientService : ClientService){}
 
   ngOnInit() {
+    
     //this.GetContext();
   }
 

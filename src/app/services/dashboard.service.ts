@@ -59,5 +59,17 @@ GetCountClient(){
   })); 
 }
 
+/**
+ * for get all context where type = 1  and status = 1
+*/
+GetContextForAllAser()
+{
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .put<any>(this.url+'context/alluser',{})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
 
 }
