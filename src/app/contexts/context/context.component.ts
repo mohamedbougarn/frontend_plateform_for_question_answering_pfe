@@ -98,6 +98,9 @@ contextIdToUpdate : any = 0;
     //  this.context = '';
   }
 
+
+
+  //for closing dialog
   closeDialog()
   {
     this.modalAddContext.hide();

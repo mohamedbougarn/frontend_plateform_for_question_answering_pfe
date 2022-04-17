@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color } from 'ng2-charts';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { ContextConversationService } from 'src/app/services/context-conversation.service';
 
 
 @Component({
@@ -47,9 +49,15 @@ id_client : any = '';
 countcontext :any;
 countcontextconvertation:any;
 countclient :any ;
+contextforalluserlist : any ;
+context_QRlist :any;
+modalShowQeuestAnse!: BsModalRef;
+
 
   constructor(public router : Router,
-    private dashboardservice:DashboardService) {
+    private dashboardservice:DashboardService,
+    private bsModalService: BsModalService,
+    public contextconversationService : ContextConversationService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
    }
@@ -59,6 +67,7 @@ countclient :any ;
     this.getcountcontext();
     this.getcountcontextconvertation();
     this.getcountclient();
+    this.getcontextforalluser();
   }
 
 
@@ -112,7 +121,46 @@ countclient :any ;
 
     })
   }
+
+
+  getcontextforalluser()
+  {
+    this.dashboardservice.GetContextForAllAser().subscribe(result =>{
+      console.log("resultat pour context all users")
+      console.log(result);
+      this.contextforalluserlist = result;
+    })
+  }
   
 
+//for opening dialog 
+  ModalShowQuestionAnserwerOpen(modal : any)
+  {
+    this.modalShowQeuestAnse = this.bsModalService.show(modal, {
+      animated: true,
+      backdrop: 'static'
+    });
+  }
+
+
+ //for closing dialog
+  closeDialog()
+  {
+    this.modalShowQeuestAnse.hide();
+  }
+
+
+
+  
+  getQR(idcontext:any)
+  {
+     //let id = idcontext.tostring()
+    this.contextconversationService.GetContext_conversation(idcontext.toString()).subscribe(restlt_conversation =>
+      {
+        console.log("Get allcontext conversation",restlt_conversation);
+        this.context_QRlist = restlt_conversation;
+
+      })
+  }
 
 }
