@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <h5>Total Confirmed</h5>
                     <h5 class="text-danger">9552778</h5>
-            </div>
+                </div>
                 <p></p>
             </div>
         </div>
@@ -207,5 +207,100 @@
 
          </div>
       </div>
+
+
+      <div class="row ">
+        <div class="col"  >
+            <div class="card  shadow h-100"  >
+                <div class="card-body">
+                    <h5 >Context List</h5>
+                      <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">Text</th>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Entry date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Type</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let collumn of contextforalluserlist">
+                                <th scope="row">{{collumn.text}}</th>
+                                <th scope="row">{{collumn.title}}</th>
+                                <td>{{collumn.entry_date}}</td>
+                                
+                                <td>
+                                    <span  class="badge badge-success">Valide</span>
+                                    <!-- <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span>  -->
+
+                                </td>
+                                <td>
+                                  <span  class="badge badge-success"><i class="mdi mdi-earth"></i></span>
+                                  <!-- <span   class="badge badge-danger"><i class="mdi mdi-earth-off"></i></span>  -->
+                                </td>
+
+                                
+                                <td>
+                                  <span ><a type="button"  (click)="ModalShowQuestionAnserwerOpen(showQA);getQR(collumn.id_context)"><i class="mdi mdi-telescope" ></i> </a></span> 
+                                  
+                                </td>
+                                <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
+                              </tr>
+                            
+                            </tbody>
+                          </table>
+                    </div>
+                  </div>
+                  <p></p>
+              </div>
+          </div>
+         
+      </div>
+    
+
+
+    
+
+
        </main> 
 </div>
+
+
+
+<ng-template #showQA >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">List des Questoin et Reponse</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeDialog()" >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+      <h5 >Context List</h5>
+       
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col"> Question </th>
+                  <th scope="col"> Answer </th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let collumn of context_QRlist">
+                  <th scope="row">{{collumn.question}}</th>
+                  <th scope="row">{{collumn.responce}}</th>
+                  <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
+                </tr>
+              
+              </tbody>
+            </table>
+      
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn btn-danger"   (click)="closeDialog()" >Close</button>
+  </div>
+</ng-template>
