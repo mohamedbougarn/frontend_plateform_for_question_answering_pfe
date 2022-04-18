@@ -269,7 +269,43 @@
 
 
 
+<!-- <ng-template #showQA >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ajouter nouveau Question & Réponse</h4>
+     <button type="button" class="close" aria-label="Close" (click)="closeDialog()" >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+      <div class="card-body table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"> Question </th>
+            <th scope="col"> Answer </th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let collumn of context_QRlist">
+            <td style="overflow-wrap: break-word;" scope="row">{{collumn.question}}</td>
+            <td style="overflow-wrap: break-word;" scope="row">{{collumn.responce}}</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark"  >Save</button>  
+  </div>
+</ng-template> -->
+
+
 <ng-template #showQA >
+  
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">List des Questoin et Reponse</h4>
     <button type="button" class="close" aria-label="Close" (click)="closeDialog()" >
@@ -277,9 +313,10 @@
     </button>
   </div>
 
-  <div class="modal-body">
-      <h5 >Context List</h5>
-       
+  <div class="modal-body modal-lg">
+<div>
+    <h5 >Context List</h5>
+        <div class="card-body table-responsive">
           <table class="table table-striped">
               <thead>
                 <tr>
@@ -289,15 +326,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let collumn of context_QRlist">
-                  <th scope="row">{{collumn.question}}</th>
-                  <th scope="row">{{collumn.responce}}</th>
-                  <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
+                <tr  *ngFor="let collumn of context_QRlist">
+                  <td style="overflow-wrap: break-word;" scope="row">{{collumn.question}}</td>
+                  <td style="overflow-wrap: break-word;" scope="row">{{collumn.responce}}</td>
                 </tr>
               
               </tbody>
             </table>
-      
+          </div>
+          </div> 
   </div>
 
   <div class="modal-footer">

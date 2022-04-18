@@ -11,3 +11,19 @@ background: #5454b6;
     background: #7F7FD5; 
     border-radius: 10px;
     }
+
+
+    /* .modal{
+        display: block !important;
+        width: 40%;
+    }
+    .modal-dialog{
+          overflow-y: initial !important
+    }
+    .modal-body{
+      overflow-x: auto;
+    }
+
+    .modal-content{
+        width: 130%;
+      } */
