@@ -124,7 +124,7 @@ file: any = null; // Variable to store file
 
   ngOnInit(): void {
     
-
+    this.currentLanuage=sessionStorage.getItem('language');
     console.log('currentLanuage' + this.currentLanuage)
    
 
