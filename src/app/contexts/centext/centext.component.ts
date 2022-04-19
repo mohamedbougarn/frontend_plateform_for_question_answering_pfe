@@ -51,6 +51,8 @@ countcontextconvertation:any;
 countclient :any ;
 contextforalluserlist : any ;
 context_QRlist :any;
+p : any = 1;
+p1: any = 1;
 modalShowQeuestAnse!: BsModalRef;
 
 
@@ -138,8 +140,10 @@ modalShowQeuestAnse!: BsModalRef;
   {
     this.modalShowQeuestAnse = this.bsModalService.show(modal, {
       animated: true,
-      backdrop: 'static'
+      backdrop: 'static',
+      class: 'modal-lg' // for taille de modal
     });
+
   }
 
 

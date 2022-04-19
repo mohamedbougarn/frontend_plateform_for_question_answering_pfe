@@ -31,6 +31,7 @@ import { HeaderComponent } from './partials/header/header.component';
 import { AddCentextComponent } from './contexts/add-centext/add-centext.component';
 import { CentextComponent } from './contexts/centext/centext.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { CentextComponent } from './contexts/centext/centext.component';
     //ModalModule.forRoot() ,
     NgbModule, NgbButtonsModule, NgbTooltipModule, NgbTypeaheadModule,
     ModalModule.forRoot(),
-    FileUploadModule
+    FileUploadModule,
+    NgxPaginationModule
   ],
   providers: [ContextService,ClientService],
   bootstrap: [AppComponent]

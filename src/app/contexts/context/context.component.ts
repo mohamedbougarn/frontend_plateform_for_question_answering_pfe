@@ -17,6 +17,7 @@ contextIdToUpdate : any = 0;
   id_client : any = '';
   contextTitle : any = '';
   contexts : any;
+  p : any = 1;
   modalAddContext!: BsModalRef;
 
   constructor(public router : Router,public contextService :ContextService,private bsModalService: BsModalService) { }

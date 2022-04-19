@@ -215,7 +215,7 @@
                 <div class="card-body">
                     <h5 >Context List</h5>
                       <div class="card-body">
-                        <table class="table table-striped">
+                        <table id="example" class="table table-striped" >
                             <thead>
                               <tr>
                                 <th scope="col">Text</th>
@@ -223,12 +223,13 @@
                                 <th scope="col">Entry date</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Type</th>
+                               
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let collumn of contextforalluserlist">
-                                <th scope="row">{{collumn.text}}</th>
-                                <th scope="row">{{collumn.title}}</th>
+                              <tr *ngFor="let collumn of contextforalluserlist | paginate: { itemsPerPage: 10, currentPage: p }">
+                                <td scope="row">{{collumn.text}}</td>
+                                <td scope="row">{{collumn.title}}</td>
                                 <td>{{collumn.entry_date}}</td>
                                 
                                 <td>
@@ -251,6 +252,9 @@
                             
                             </tbody>
                           </table>
+                          <div class="pagination">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                          </div>
                     </div>
                   </div>
                   <p></p>
@@ -304,7 +308,7 @@
 </ng-template> -->
 
 
-<ng-template #showQA >
+<ng-template #showQA>
   
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">List des Questoin et Reponse</h4>
@@ -317,7 +321,7 @@
 <div>
     <h5 >Context List</h5>
         <div class="card-body table-responsive">
-          <table class="table table-striped">
+          <table  class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col"> Question </th>
@@ -326,13 +330,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr  *ngFor="let collumn of context_QRlist">
+                <tr  *ngFor="let collumn of context_QRlist | paginate: { itemsPerPage: 10, currentPage: p1 }">
                   <td style="overflow-wrap: break-word;" scope="row">{{collumn.question}}</td>
                   <td style="overflow-wrap: break-word;" scope="row">{{collumn.responce}}</td>
                 </tr>
               
               </tbody>
             </table>
+            
+            <div class="pagination">
+              <pagination-controls (pageChange)="p1 = $event"></pagination-controls>
+            </div>
+          
           </div>
           </div> 
   </div>

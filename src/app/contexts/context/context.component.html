@@ -6,7 +6,7 @@
         <main class="col-md-12  col-lg-11 px-md-4 h-100">
 
             <div class="card-body">
-                <table class="table table-striped">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                       <tr>
                         <th scope="col">Text</th>
@@ -15,13 +15,15 @@
                         <th scope="col">Client</th>
                         <th scope="col">Status</th>
                         <th scope="col">Type</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let context of contexts">
-                        <th scope="row">{{context.text}}</th>
-                        <th scope="row">{{context.title}}</th>
-                        <td>{{context.entry_date}}</td>
+                      <tr *ngFor="let context of contexts | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <td scope="row">{{context.text}}</td>
+                        <td scope="row">{{context.title}}</td>
+                        <td scope="row">{{context.entry_date}}</td>
                         <td>{{context.nom}} {{context.prenom}}</td>
                         <td>
                             <span *ngIf="context.status == '1'" class="badge badge-success">Valide</span>
@@ -55,7 +57,9 @@
                      
                     </tbody>
                   </table>
-
+                  <div class="pagination">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  </div>
                   <button type="button" class="btn btn-outline-primary" (click)="ModalAddContextOpen(addContext)">Add Context</button>
                   
             </div>
@@ -93,3 +97,7 @@
       <button type="button" class="btn btn-outline-dark"   (click)="addcentext()" >Save</button>
     </div>
   </ng-template>
+
+
+
+  
