@@ -27,9 +27,10 @@
     "chart.js": "^2.9.3",
     "mdi": "^2.2.43",
     "ng2-charts": "^2.2.3",
-    "ngx-bootstrap-datetime-popup": "^6.0.0",
-    "react-bootstrap-daterangepicker-sf": "^4.3.0",
     "ng2-file-upload": "^1.4.0",
+    "ngx-bootstrap-datetime-popup": "^6.0.0",
+    "ngx-pagination": "^5.1.1",
+    "react-bootstrap-daterangepicker-sf": "^4.3.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
