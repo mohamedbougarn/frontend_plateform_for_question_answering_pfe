@@ -69,6 +69,7 @@
                           <div class="img_cont">
                             <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img">
                             <span class="online_icon"></span>
+                            <!-- <span cless="offline_icon"></span> -->
                           </div>
                           <div class="user_info">
                             <span>Chat with jassa</span>
@@ -90,78 +91,62 @@
                         </div>
                       </div>
                       <div class="card-body msg_card_body">
+                        <!-- <div *ngfor="let message of visiteur_convertationlist">
+
                         <div class="d-flex justify-content-start mb-4">
                           <div class="img_cont_msg">
                             <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
                           </div>
                           <div class="msg_cotainer">
-                            Hi, how are you samim?
+                            {{message.question}}
                             <span class="msg_time">8:40 AM, Today</span>
                           </div>
                         </div>
                         <div class="d-flex justify-content-end mb-4">
                           <div class="msg_cotainer_send">
-                            Hi jassa i am good tnx how about you?
+                            {{message.response}}
                             <span class="msg_time_send">8:55 AM, Today</span>
                           </div>
                           <div class="img_cont_msg">
                         <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
                           </div>
                         </div>
-                        <div class="d-flex justify-content-start mb-4">
-                          <div class="img_cont_msg">
-                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                      </div> -->
+                      <div *ngFor="let msg of visiteur_convertationlist">
+                        <div ng-If="msg.photo==null"><!--debut ng if photo is valid-->
+                          <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_cotainer_send">
+                              {{msg.question}}
+                              
+                              <img ng-if="msg.photo!=null" src="{{msg.photo}}" alt="{{msg.photo}}" width="200"/> 
+                              <span class="msg_time_send" style="color:rgb(20, 20, 32)">{{msg.entry_date}}</span>
+                            </div>
+                            <div class="img_cont_msg">
+                          <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                            </div>
                           </div>
-                          <div class="msg_cotainer">
-                            I am good too, thank you for your chat template
-                            <span class="msg_time">9:00 AM, Today</span>
+                          <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                              <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_cotainer">
+                               {{msg.response}}
+                              <span class="msg_time_send" style="color:rgb(20, 20, 32)">{{msg.entry_date}}</span>
+                            </div>
                           </div>
+                          </div><!--fin ng if-->
+  
+                         
                         </div>
-                        <div class="d-flex justify-content-end mb-4">
-                          <div class="msg_cotainer_send">
-                            You are welcome
-                            <span class="msg_time_send">9:05 AM, Today</span>
-                          </div>
-                          <div class="img_cont_msg">
-                        <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
-                          </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                          <div class="img_cont_msg">
-                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
-                          </div>
-                          <div class="msg_cotainer">
-                            I am looking for your next templates
-                            <span class="msg_time">9:07 AM, Today</span>
-                          </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                          <div class="msg_cotainer_send">
-                            Ok, thank you have a good day
-                            <span class="msg_time_send">9:10 AM, Today</span>
-                          </div>
-                          <div class="img_cont_msg">
-                      <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
-                          </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                          <div class="img_cont_msg">
-                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
-                          </div>
-                          <div class="msg_cotainer">
-                            Bye, see you
-                            <span class="msg_time">9:12 AM, Today</span>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
                       <div class="card-footer">
                         <div class="input-group">
                           <div class="input-group-append">
                             <span class="input-group-text attach_btn"><i class="mdi mdi-paperclip"></i></span>
                           </div>
-                          <input name="" class="form-control type_msg" placeholder="Type your message...">
+                          <input name="question"  [(ngModel)]="question" class="form-control type_msg" placeholder="Type your message..." (keydown.enter)="sendmsg()">
                           <div class="input-group-append">
-                            <span class="input-group-text send_btn"><i class="mdi mdi-send"></i></span>
+                            <span class="input-group-text send_btn" (click)="sendmsg()"><i class="mdi mdi-send"></i></span>
                           </div>
                         </div>
                       </div>
