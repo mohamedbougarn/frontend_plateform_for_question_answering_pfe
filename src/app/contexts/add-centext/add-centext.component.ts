@@ -447,7 +447,7 @@ GetMsgResponseApi()
     }
 }
     
-    sendmsg()//depuit database 
+    sendmsg()//depuis database 
     {
      
             this.contextconversationService.AddContext_conversation(this.contextId,this.msg,this.reponseApi).subscribe(resultconversation =>
