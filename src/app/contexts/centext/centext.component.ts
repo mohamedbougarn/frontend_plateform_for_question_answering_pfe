@@ -52,6 +52,7 @@ question : any ;
 response : any;
 visiteur_convertation : any ;
 visiteur_convertationlist : any ;
+data_staticts : any ;
 countcontext :any;
 countcontextconvertation:any;
 countclient :any ;
@@ -78,6 +79,7 @@ modalShowQeuestAnse!: BsModalRef;
     this.getcountclient();
     this.getcontextforalluser();
     this.Getvisteur_conversation();
+    this.getstat()
   }
 
 
@@ -209,6 +211,13 @@ modalShowQeuestAnse!: BsModalRef;
 
   getstat()
   {
-    
+    this.dashboardservice.GetStat_Msg_Date().subscribe(data => 
+      {
+        console.log("data of statistic result ");
+        console.log(data);
+        this.data_staticts = data;
+
+      })
+
   }
 }
