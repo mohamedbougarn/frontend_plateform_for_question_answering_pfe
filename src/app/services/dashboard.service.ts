@@ -78,7 +78,7 @@ GetContextForAllAser()
 GetStat_Msg_Date(){
   this.headers.append('Content-Type', 'application/json');
       return this.http
-        .put<any>(this.url+'stat/msg_date',{})
+        .post<any>(this.url+'stat/msg_date',{})
         .pipe(map(res => {  
         return res ;                    
   })); 
