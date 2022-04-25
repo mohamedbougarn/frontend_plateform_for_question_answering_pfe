@@ -51,7 +51,7 @@ chartOptions1 = {
   scales: {
     xAxes: [{
       ticks: {
-        display: false
+        display: true
       }
     }],
     yAxes: [{
@@ -85,7 +85,7 @@ chartOptions1 = {
     scales: {
       xAxes: [{
         ticks: {
-          display: false
+          display: true 
         }
       }],
       yAxes: [{
@@ -122,6 +122,8 @@ chartOptions1 = {
   contexts : any;
   clients : any;
   idclient : any;
+  datatopmsgpertitle: any;
+
   constructor(public contextService : ContextService,
     public clientService : ClientService,
     public dashboardservice : DashboardService){}
@@ -131,6 +133,7 @@ chartOptions1 = {
     this.getcountclient()
     this.getcountcontext()
     this.getcountcontextconvertation()
+    this.gettopmsgperdate();
     //this.GetContext();
   }
 
@@ -192,6 +195,16 @@ getcountcontext()
       console.log("resultat de count de client = ")
       console.log(result[0].ctl_count_client)
       this.countclient = result[0].ctl_count_client
+
+    })
+  }
+
+
+  gettopmsgperdate()
+  { let top = 3 ;
+    this.dashboardservice.GetTop_Msg_Title(this.id_client,top).subscribe(result =>{
+      console.log("resultat de top message par rapport title context");
+      console.log(result)
 
     })
   }
