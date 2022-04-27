@@ -20,11 +20,15 @@ export class CentextComponent implements OnInit {
     responsive: true,
   };
 
-  public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-  public pieChartData: SingleDataSet = [300, 500, 100];
+  public pieChartLabels: Label[] = [];
+  public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
+  public pieChartColors :Array < any > = [{
+    backgroundColor: ['#fb9db1','#86c7f3','#ffd56c','#9BFAA9','#FACF9B','#c5d6cf' ,'#57c785', '#fc8c1d', '#fdf57d','#511849'],
+    borderColor: ['#fb9db1','#86c7f3','#ffd56c','#9BFAA9', '#FACF9B', '#c5d6cf','#57c785','#fc8c1d', '#fdf57d','#511849']
+  }];
 
   /**********************  Pie End********************** */
   /*************************Line Begin***************************** */
@@ -47,6 +51,7 @@ export class CentextComponent implements OnInit {
 /**********************  Line End  ********************* */
 message : any;
 id_client : any = '';
+top :any = 3; 
 id_context : any ;
 question : any ;
 response : any;
@@ -80,6 +85,8 @@ modalShowQeuestAnse!: BsModalRef;
     this.getcontextforalluser();
     this.Getvisteur_conversation();
     this.getstat()
+    this.gettopmsgperdate();
+
   }
 
 
@@ -220,4 +227,48 @@ modalShowQeuestAnse!: BsModalRef;
       })
 
   }
+
+
+  selectLimit(event: any): void {
+
+
+    
+    this.top = event.target.value;
+    //sessionStorage.setItem('language',this.currentLanguage);
+    console.log('change change')
+
+    console.log(this.top)
+    //this.speechRecognizer.setLanguage(this.currentLanguage);
+    this.gettopmsgperdate();
+
+  }
+
+
+
+
+  gettopmsgperdate()
+  { 
+
+    console.log('gettopmsgperdate')
+
+    console.log(this.top,this.id_client);
+
+    this.dashboardservice.GetTop_Msg_Title(this.id_client,this.top).subscribe(result =>{
+      console.log("resultat de top message par rapport title context");
+      console.log(result)
+      this.pieChartLabels = [];
+      this.pieChartData = [];
+      //fetching data from data base onto pichart
+      for(var i in result)
+      {
+        this.pieChartLabels.push(result[i].title);
+        this.pieChartData.push(result[i].count_message); 
+      }
+
+    })
+  }
+
+
+
+
 }
