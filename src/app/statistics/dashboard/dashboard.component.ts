@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import { SingleDataSet,BaseChartDirective } from 'ng2-charts';
 // import * as chartData from './data.json';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -115,8 +115,36 @@ chartOptions1 = {
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
+  /****************************************************star piechart**/
+
+
+    //Pie
+    public pieChartOptions: ChartOptions = {
+      responsive: true,
+      responsiveAnimationDuration: 100
+      
+    };
+  
+    public pieChartLabels: Label[] = [];
+    public pieChartData: SingleDataSet = [];
+    public pieChartType: ChartType = 'pie';
+    public pieChartLegend = true;
+    public pieChartPlugins = [];
+    public pieChartColors :Array < any > = [{
+   backgroundColor: ['#fb9db1','#86c7f3','#ffd56c','#9BFAA9','#FACF9B','#c5d6cf' ,'#57c785', '#fc8c1d', '#fdf57d','#511849'],
+   borderColor: ['#fb9db1','#86c7f3','#ffd56c','#9BFAA9', '#FACF9B', '#c5d6cf','#57c785','#fc8c1d', '#fdf57d','#511849']
+ }];
+
+   
+
+  
+    /************************************************************** */
+
+
+
   countcontext : any;
   id_client :any;
+  top : any = 3;
   countcontextconvertation : any;
   countclient : any;
   contexts : any;
@@ -200,11 +228,41 @@ getcountcontext()
   }
 
 
+  selectLimit(event: any): void {
+
+
+    
+    this.top = event.target.value;
+    //sessionStorage.setItem('language',this.currentLanguage);
+    console.log('change change')
+
+    console.log(this.top)
+    //this.speechRecognizer.setLanguage(this.currentLanguage);
+    this.gettopmsgperdate();
+
+  }
+
+
+
+
   gettopmsgperdate()
-  { let top = 3 ;
-    this.dashboardservice.GetTop_Msg_Title(this.id_client,top).subscribe(result =>{
+  { 
+
+    console.log('gettopmsgperdate')
+
+    console.log(this.top);
+
+    this.dashboardservice.GetTop_Msg_Title(this.id_client,this.top).subscribe(result =>{
       console.log("resultat de top message par rapport title context");
       console.log(result)
+      this.pieChartLabels = [];
+      this.pieChartData = [];
+      //fetching data from data base onto pichart
+      for(var i in result)
+      {
+        this.pieChartLabels.push(result[i].title);
+        this.pieChartData.push(result[i].count_message); 
+      }
 
     })
   }
