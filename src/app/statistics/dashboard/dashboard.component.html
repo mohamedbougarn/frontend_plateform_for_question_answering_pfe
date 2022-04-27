@@ -86,7 +86,7 @@
                 <div class="col"  >
                     <div class="card  shadow h-100"  >
                         <div class="card-body">
-                            <table class="table table-striped">
+                            <!-- <table class="table table-striped">
                                 <thead>
                                   <tr>
                                     <th scope="col">Text</th>
@@ -105,11 +105,43 @@
                                         <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span> 
               
                                     </td>
-                                    <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
-                                  </tr>
+                                    <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
+                                  
+                               <!-- </tr>
                                  
                                 </tbody>
-                              </table>
+                              </table> -->
+
+                              <div class="card-body">
+                                <div class="col-md-3">
+                                    <select width="30px" class="form-select" [(ngModel)]="top" name="top" (change)="selectLimit($event)">
+                                        <option  [value]= 3  >
+                                            3
+                                        </option>
+                                        <option  [value]= 5 >
+                                            5
+                                        </option>
+                                        <option [value]= 10  >
+                                            10
+                                        </option>
+                                        
+                                    </select>
+                                </div>
+                                <div>
+                                    
+                                <canvas baseChart 
+                                [data]="pieChartData" 
+                                [labels]="pieChartLabels" 
+                                [chartType]="pieChartType"
+                                [options]="pieChartOptions"
+                                [colors]="pieChartColors" 
+                
+                              >
+                              </canvas>
+                                </div>
+                              </div>
+
+
                         </div>
                     </div>
                 </div>
