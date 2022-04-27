@@ -160,19 +160,7 @@
 
         <div class="col"  >
             <div class="card  shadow h-100"  >
-              <div class="card-header">
-                Context charset
-              </div>
-            <div class="card-body ">
-              <canvas baseChart 
-                [data]="pieChartData" 
-                [labels]="pieChartLabels" 
-                [chartType]="pieChartType"
-                [options]="pieChartOptions"
 
-              >
-              </canvas>
-            </div>
               <div class="card-header">
                 Context charset
               </div>
@@ -189,21 +177,38 @@
               </canvas>
 
 
-
-              <div class="card-body ">
-                <canvas baseChart 
-                  [data]="pieChartData" 
-                  [labels]="pieChartLabels" 
-                  [chartType]="pieChartType"
-                  [options]="pieChartOptions"
-  
-                >
-                </canvas>
-              </div>
-
               </div>
 
 
+              <div class="card-header">
+                Context charset
+              </div>
+            <div class="card-body ">
+              <div class="col-md-3">
+                <select width="30px" class="form-select" [(ngModel)]="top" name="top" (change)="selectLimit($event)">
+                    <option  [value]= 3  >
+                        3
+                    </option>
+                    <option  [value]= 5 >
+                        5
+                    </option>
+                    <option [value]= 10  >
+                        10
+                    </option>
+                    
+                </select>
+            </div>
+
+              <canvas baseChart 
+                [data]="pieChartData" 
+                [labels]="pieChartLabels" 
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [colors]="pieChartColors"
+
+              >
+              </canvas>
+            </div>
               
 
             </div>
