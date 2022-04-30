@@ -338,16 +338,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr  *ngFor="let collumn of context_QRlist | paginate: { itemsPerPage: 10, currentPage: p1 }">
-                  <td style="overflow-wrap: break-word;" scope="row">{{collumn.question}}</td>
-                  <td style="overflow-wrap: break-word;" scope="row">{{collumn.responce}}</td>
+                <tr  *ngFor="let collumn1 of context_QRlist | paginate: {id: 'versionPagination1' , itemsPerPage: 10, currentPage: p1 }">
+                  <td style="overflow-wrap: break-word;" scope="row">{{collumn1.question}}</td>
+                  <td style="overflow-wrap: break-word;" scope="row">{{collumn1.responce}}</td>
                 </tr>
               
               </tbody>
             </table>
             
             <div class="pagination">
-              <pagination-controls (pageChange)="p1 = $event"></pagination-controls>
+              <pagination-controls id="versionPagination1" (pageChange)="p1 = $event"></pagination-controls>
             </div>
           
           </div>
