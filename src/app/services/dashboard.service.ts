@@ -87,12 +87,25 @@ GetStat_Msg_Date(){
 
 
 /**
- * for get stat of top count(messag) /  context
+ * for get stat of top count(messag) /  context 
 */
 GetTop_Msg_Title(id_client :any , top : any){
   this.headers.append('Content-Type', 'application/json');
       return this.http
         .post<any>(this.url+'stat/top_msg_title',{id_client,top})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+
+
+/**
+ * for get stat of top count(messag) /  context per YEAR
+*/
+GetTop_Msg_Annee(id_client :any , top : any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .post<any>(this.url+'stat/top_msg_annee',{id_client,top})
         .pipe(map(res => {  
         return res ;                    
   })); 

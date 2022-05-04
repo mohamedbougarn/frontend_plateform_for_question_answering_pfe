@@ -26,7 +26,7 @@ export class SpeechRecognizerService {
 
 
 
-  /*############### start party for speechto text ###################*/
+  /*############### start party for speech to text ###################*/
 
 
   initialize(language: string): boolean {
