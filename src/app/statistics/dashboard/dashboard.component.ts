@@ -105,15 +105,47 @@ chartOptions1 = {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  // public barChartLabels: Label[] = ['2022'];//['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
-
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  public dataCount : any = [];
+  public labelContext : any =''  ;
+  public dataContext1 : any = [];
+  public labelContext1 : any =''  ;
+  public barChartData: ChartDataSets[] = [ 
+    { data:[] , label:'' },
   ];
+
+
+  /****************************** */
+  // public barChartData:  any[] = [
+    
+  // ];
+  // public barChartOptions: any = {
+  //   scaleShowVerticalLines: false,
+  //   responsive: true,
+  //   scales: {
+  //           xAxes: [{
+  //               stacked: true
+  //           }],
+  //           yAxes: [{
+  //               stacked: true
+  //           }]
+  //       }
+  // };
+
+  
+  public barChartLabels: Label[]=[];
+  // public barChartType: ChartType = 'bar';
+  // public barChartLegend: boolean = true;
+
+  /******************************** */
+  public barChartColors :Array < any > = [{
+    backgroundColor: ['#fb9db1','#86c7f3','#ffd56c','#9BFAA9','#FACF9B','#c5d6cf' ,'#57c785', '#fc8c1d', '#fdf57d','#511849'],
+    borderColor: ['#fb9db1','#86c7f3','#ffd56c','#9BFAA9', '#FACF9B', '#c5d6cf','#57c785','#fc8c1d', '#fdf57d','#511849']
+  }];
+
 
   /****************************************************star piechart**/
 
@@ -152,6 +184,9 @@ chartOptions1 = {
   idclient : any;
   datatopmsgpertitle: any;
 
+
+  Data : any[] = [];
+  res : never[]=[];
   constructor(public contextService : ContextService,
     public clientService : ClientService,
     public dashboardservice : DashboardService){}
@@ -162,8 +197,55 @@ chartOptions1 = {
     this.getcountcontext()
     this.getcountcontextconvertation()
     this.gettopmsgperdate();
+    this.gettopmsgperannee();
     //this.GetContext();
-  }
+
+    // this.dashboardservice.GetTop_Msg_Annee(this.id_client,2).subscribe(result =>{
+
+    //  // this.barChartLabels.push
+    //  console.log(result)
+
+
+    //   for(var i in result)
+    //    {
+    //     this.barChartLabels = Object.keys(result[i].annee);
+    //    }
+    //    console.log(this.barChartLabels)
+    //   //this.barChartLabels = Object.keys(result);
+    //   console.log('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
+    //   console.log(result)
+    //   //this.barChartLabels.push(result[0].annee)
+    //   result.forEach((element :any) => {
+        
+    //     console.log(element)
+  
+    //       // this.barChartData[0].label.push(element.title);
+    //       // this.barChartData[0].data.push(element.count_message);
+    //       this.dataContext = element.count_message;
+    //       var Data="{data:"+this.dataContext+",label:'"+element.title+"'},";
+
+    //       console.log(Data)
+    //       // for(var i in result)
+    //       // {
+
+    //         this.barChartData.push(JSON.parse(Data));
+    //         //console.log(this.barChartData);
+            
+    //       //   //this.barChartData[i].data.push(element.count_message);
+    //       //   // this.pieChartLabels.push(result[i].title);
+    //       //   // this.pieChartData.push(result[i].count_message); 
+    //       // }
+        
+    //     // this.barChartData[0].data.push(result[label]['volumeSales']);
+    //     // this.barChartData[1].data.push(data[label]['valueSales']);
+    //   });
+    // });;
+ 
+  /*********************************************** */
+
+
+
+   }
 
 
   // GetContext()
@@ -263,6 +345,68 @@ getcountcontext()
         this.pieChartLabels.push(result[i].title);
         this.pieChartData.push(result[i].count_message); 
       }
+
+    })
+  }
+
+
+  
+
+
+
+  gettopmsgperannee()
+  { 
+
+    let top = 2;
+    console.log('gettopmsgperannee')
+
+    
+
+    this.dashboardservice.GetTop_Msg_Annee(this.id_client,top).subscribe(result =>{
+      console.log("resultat de top message par rapport title context in year");
+      console.log(result)
+      this.barChartLabels = [];
+      let lab1='',lab2='';
+      var count1: any[]=[];
+      var count2: any[]=[];
+
+      this.barChartData = [ { data: count1, label:result[0].title},
+      { data: count2, label:result[1].title}, ];
+      //this.barChartData=[];
+      //fetching data from data base onto pichart
+      count1.push(result[0].count_message);
+      count2.push(result[1].count_message);
+      lab1 =result[0].title;
+      lab2 =result[1].title;
+      console.log(lab2);
+      // for(var i in result)
+      // {
+
+         this.barChartLabels.push(result[1].annee);
+        
+      //   this.dataCount.push(result[i].count_message); 
+
+        //let Data = [];
+        //this.res={data: result[i].count_message ,label:result[i].title};
+        //this.res="{data: "+result[i].count_message+",label:"+result[i].title+"},";
+
+       
+        this.Data.push(this.res);
+        console.log(JSON.parse(JSON.stringify(this.Data)))
+        //var  ChartDataSets; 
+        //let res=Data+",";
+        //console.log(Data);
+        //this.barChartData.push(JSON.parse(JSON.stringify(Data)));
+        //this.barChartData.push(Data); 
+        
+        console.log(this.barChartData)
+        // 
+        // this.labelContext = result[i].title; 
+
+        //this.barChartData.push(JSON.parse(JSON.stringify(this.Data)));
+        //console.log('index =',i,' title label ='  , result[i].title)
+      
+      //this.barChartData.push(JSON.parse(JSON.stringify(this.Data)));
 
     })
   }

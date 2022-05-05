@@ -113,6 +113,7 @@
                               </table> -->
 
                               <div class="card-body">
+                                <p>Top {{top}}  Context messages / mois </p>
                                 <div class="col-md-3">
                                     <select width="30px" class="form-select" [(ngModel)]="top" name="top" (change)="selectLimit($event)">
                                         <option  [value]= 3  >
@@ -125,6 +126,46 @@
                                             10
                                         </option>
                                         
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select width="30px" class="form-select">
+                                        <option value="January">
+                                            January
+                                        </option>
+                                        <option value="February">
+                                            February
+                                        </option>
+                                        <option  value='MARCH'  >
+                                            MARCH
+                                        </option>
+                                        <option  value='APRIL' >
+                                            APRIL
+                                        </option>
+                                        <option  value='May' >
+                                            May
+                                        </option>
+                                        <option  value='June' >
+                                            June
+                                        </option>
+                                        <option  value='July' >
+                                            July
+                                        </option>
+                                        <option  value='August' >
+                                            August
+                                        </option>
+                                        <option  value='September' >
+                                            September
+                                        </option>
+                                        <option  value='October' >
+                                            October
+                                        </option>
+                                        <option  value='November' >
+                                            November
+                                        </option>
+                                        <option  value='December' >
+                                            December
+                                        </option>
                                     </select>
                                 </div>
                                 <div>
@@ -156,7 +197,8 @@
                                 [options]="barChartOptions"
                                 [plugins]="barChartPlugins"
                                 [legend]="barChartLegend"
-                                [chartType]="barChartType">
+                                [chartType]="barChartType"
+                                >
                             </canvas>
                             </div>
 
