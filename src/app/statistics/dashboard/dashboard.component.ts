@@ -177,6 +177,7 @@ chartOptions1 = {
   countcontext : any;
   id_client :any;
   top : any = 3;
+  month : any = '';
   countcontextconvertation : any;
   countclient : any;
   contexts : any;
@@ -320,7 +321,48 @@ getcountcontext()
 
     console.log(this.top)
     //this.speechRecognizer.setLanguage(this.currentLanguage);
-    this.gettopmsgperdate();
+    //this.gettopmsgperdate();
+    this.gettopmsgpermonth();
+
+  }
+
+
+  selecmonth(event: any): void {
+
+
+    
+    this.month = event.target.value;
+    //sessionStorage.setItem('language',this.currentLanguage);
+    console.log('month month')
+
+    console.log(this.month)
+    //this.speechRecognizer.setLanguage(this.currentLanguage);
+    this.gettopmsgpermonth();
+
+  }
+
+
+
+  gettopmsgpermonth()
+  {
+
+    console.log('gettopmsgperdate')
+
+    console.log(this.top);
+
+    this.dashboardservice.GetTop_CountMsg_month(this.id_client,this.month,this.top).subscribe(result =>{
+      console.log("resultat de top message context par rapport mois");
+      console.log(result)
+      this.pieChartLabels = [];
+      this.pieChartData = [];
+      //fetching data from data base onto pichart
+      for(var i in result)
+      {
+        this.pieChartLabels.push(result[i].title);
+        this.pieChartData.push(result[i].count_message); 
+      }
+
+    })
 
   }
 
