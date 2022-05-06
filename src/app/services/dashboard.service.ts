@@ -111,4 +111,19 @@ GetTop_Msg_Annee(id_client :any , top : any){
   })); 
 }
 
+
+
+/**
+ * for get stat of top count(messag) /  context per month
+*/
+GetTop_CountMsg_month(id_client :any ,month : any, top : any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .post<any>(this.url+'stat/top_msg_month',{id_client,month,top})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+
+
 }
