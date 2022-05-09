@@ -10,6 +10,7 @@ import { Sidebar2Component } from './partials/sidebar2/sidebar2.component';
 import { DashboardComponent } from './statistics/dashboard/dashboard.component';
 
 import { TestComponent } from './test/test.component';
+import { ApiComponent } from './api/api.component';
 
 const routes: Routes = [
   {path :'' , redirectTo: '/login', pathMatch : 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path :'summaration/text' ,component : SummarationTextComponent },
   {path :'context' ,component : ContextComponent},
   {path :'sidebar2',component : Sidebar2Component},
-  {path :'test',component : TestComponent}
+  {path :'test',component : TestComponent},
+  {path :'api',component : ApiComponent}
 
 
 
