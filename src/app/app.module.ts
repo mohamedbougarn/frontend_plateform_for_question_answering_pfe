@@ -32,6 +32,7 @@ import { AddCentextComponent } from './contexts/add-centext/add-centext.componen
 import { CentextComponent } from './contexts/centext/centext.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ApiComponent } from './api/api.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SummarationTextComponent,
     ContextComponent,
     Sidebar2Component,
-    TestComponent
+    TestComponent,
+    ApiComponent
   ],
   imports: [
     BrowserModule,
