@@ -14,6 +14,16 @@ vertical-align: middle;
 font-size:20px;
 }
 
+.mdi {
+  position: relative;
+  display: table-cell;
+  width: 60px;
+  height: 36px;
+  text-align: center;
+  vertical-align: middle;
+  font-size:20px;
+  }
+
 
 .main-menu:hover,nav.main-menu.expanded {
 width:230px; /**/ 
