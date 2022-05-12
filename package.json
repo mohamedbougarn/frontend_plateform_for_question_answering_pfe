@@ -32,6 +32,8 @@
     "ngx-pagination": "^5.1.1",
     "react-bootstrap-daterangepicker-sf": "^4.3.0",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.4.13",
+    "ts-md5": "^1.2.11",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
