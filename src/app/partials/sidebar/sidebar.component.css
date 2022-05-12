@@ -33,7 +33,7 @@ overflow:visible;
 .main-menu {
 background:#212121;
 border-right:1px solid #e5e5e5;
-position:absolute;
+position:fixed;
 top:0;
 bottom:0;
 height:100%;
@@ -48,6 +48,7 @@ z-index:1000;
 
 .main-menu>ul {
   margin:55px 0;
+ 
 /* margin:7px 0; */
 }
 
@@ -86,7 +87,7 @@ font-size:18px;
 position:relative;
 display:table-cell;
 vertical-align:middle;
-width:190px;
+width:170px;
   font-family: 'Titillium Web', sans-serif;
 }
 

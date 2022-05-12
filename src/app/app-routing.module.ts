@@ -13,9 +13,9 @@ import { TestComponent } from './test/test.component';
 import { ApiComponent } from './api/api.component';
 
 const routes: Routes = [
-  {path :'' , redirectTo: '/login', pathMatch : 'full' },
+  {path :'' , redirectTo: '/visiteur', pathMatch : 'full' },
   {path :'login' ,component : LoginComponent },
-  {path :'context1' ,component : CentextComponent },
+  {path :'visiteur' ,component : CentextComponent },
   {path :'Q_R/add/:id_context' ,component : AddCentextComponent },
   {path :'register' ,component : RegistryComponent },
   {path :'dashboard/:id_client' ,component : DashboardComponent },
@@ -23,7 +23,7 @@ const routes: Routes = [
   {path :'context' ,component : ContextComponent},
   {path :'sidebar2',component : Sidebar2Component},
   {path :'test',component : TestComponent},
-  {path :'api',component : ApiComponent}
+  {path :'api/:id_client',component : ApiComponent}
 
 
 

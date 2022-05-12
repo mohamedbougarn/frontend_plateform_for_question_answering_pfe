@@ -23,8 +23,8 @@ body {
 }
 
 .image {
-    width: 360px;
-    height: 280px
+    width: 500px;/* 360px;*/
+    height: 430px; /*280px*/
 }
 
 .border-line {
