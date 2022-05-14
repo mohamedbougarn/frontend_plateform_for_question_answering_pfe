@@ -33,6 +33,7 @@ import { CentextComponent } from './contexts/centext/centext.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ApiComponent } from './api/api.component';
+import { ProfileComponent } from './accounts/profile/profile.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ApiComponent } from './api/api.component';
     ContextComponent,
     Sidebar2Component,
     TestComponent,
-    ApiComponent
+    ApiComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
