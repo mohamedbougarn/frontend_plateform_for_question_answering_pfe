@@ -9,6 +9,7 @@
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                       <tr>
+                        <th scope="col">id_context</th>
                         <th scope="col">Text</th>
                         <th scope="col">Titre</th>
                         <th scope="col">Entry date</th>
@@ -21,18 +22,19 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let context of contexts | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <td scope="row">{{context.id_context}}</td>
                         <td scope="row">{{context.text}}</td>
                         <td scope="row">{{context.title}}</td>
                         <td scope="row">{{context.entry_date}}</td>
                         <td>{{context.nom}} {{context.prenom}}</td>
                         <td>
-                            <span *ngIf="context.status == '1'" class="badge badge-success">Valide</span>
-                            <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span> 
+                            <span *ngIf="context.status == '1'" class="badge bg-success">Valide</span>
+                            <span *ngIf="context.status == '0'" class="badge bg-danger">Deleted</span> 
   
                         </td>
                         <td>
-                          <span *ngIf="context.type == '1'"  class="badge badge-success"><i class="mdi mdi-earth"  ></i></span>
-                          <span *ngIf="context.type == '0'"  class="badge badge-danger"><i class="mdi mdi-earth-off"></i></span> 
+                          <span *ngIf="context.type == '1'"  class="badge bg-success"><i class="mdi mdi-earth"  ></i></span>
+                          <span *ngIf="context.type == '0'"  class="badge bg-danger"><i class="mdi mdi-earth-off"></i></span> 
                         </td>
 
                         <td>
@@ -60,7 +62,7 @@
                   <div class="pagination">
                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
                   </div>
-                  <button type="button" class="btn btn-outline-primary" (click)="ModalAddContextOpen(addContext)">Add Context</button>
+                  <button type="button" class="btn btn-outline-primary  float-right" (click)="ModalAddContextOpen(addContext)">Add Context</button>
                   
             </div>
        </main>
