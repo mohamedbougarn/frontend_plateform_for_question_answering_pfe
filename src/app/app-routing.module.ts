@@ -11,6 +11,7 @@ import { DashboardComponent } from './statistics/dashboard/dashboard.component';
 
 import { TestComponent } from './test/test.component';
 import { ApiComponent } from './api/api.component';
+import { ProfileComponent } from './accounts/profile/profile.component';
 
 const routes: Routes = [
   {path :'' , redirectTo: '/visiteur', pathMatch : 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path :'context' ,component : ContextComponent},
   {path :'sidebar2',component : Sidebar2Component},
   {path :'test',component : TestComponent},
-  {path :'api/:id_client',component : ApiComponent}
+  {path :'api/:id_client',component : ApiComponent},
+  {path :'profile/:id_client',component : ProfileComponent}
 
 
 
