@@ -14,10 +14,35 @@ export class ApiComponent implements OnInit {
   UserKey : any ='';
   id_client : any ='';
   nom_client : any ='';
-  textmodel1 : any = 'http://127.0.0.1:3000/api/getresponse/context';
-  textmodel2 : any = 'http://localhost:3000/textmodel2';
-  textmodel3 : any = 'http://localhost:3000/textmodel3';
-  
+  URL1 : any = 'http://127.0.0.1:3000/api/getresponse/context';
+  URL2 : any = 'http://localhost:3000/textmodel2';
+  URL3 : any = 'http://localhost:3000/textmodel3';
+
+  messageinput1 ={
+    "key":"ton API KEY",
+    "id_context" : "Id_context",
+    "question": " ton question "
+};
+
+  messageoutput1 ={"message_text":"ton question ","response":"la réponse"}
+
+
+  messageinput3 ={
+    "key":"ton API KEY",
+    "question": " ton question "
+};
+
+  messageoutput3 ={
+    "message" : "ton question",
+    "response" : "response du GPT3"
+  }
+
+  input1: any;
+  output1: any;
+  input2: any;
+  output2: any;
+  input3: any;
+  output3: any;
   
   constructor(public apiService : ApiService) { }
 
@@ -43,6 +68,13 @@ export class ApiComponent implements OnInit {
     this.nom_client=localStorage.getItem('nomuser');
     console.log(this.nom_client)
     this.Get_key_database()
+    //console.log(JSON.stringify(this.messageurl1));
+    this.input1 = (JSON.stringify(this.messageinput1));
+    this.output1 = (JSON.stringify(this.messageoutput1));
+    this.input3 = (JSON.stringify(this.messageinput3));
+    this.output3 = (JSON.stringify(this.messageoutput3));
+
+
   }
 
   Get_key_database()
