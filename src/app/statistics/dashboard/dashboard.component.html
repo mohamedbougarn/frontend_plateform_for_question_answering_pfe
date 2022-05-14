@@ -9,8 +9,33 @@
                 <div class="col"  >
                     <div class="card  shadow h-100"  >
                         <div class="card-body">
-                            <h5>Total Context</h5>
-                            <h5 class="text-danger">{{countcontext}}</h5>
+                            
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col text-center"  ><i class="mdi mdi-table-of-contents text-primary  fa-3x"></i> </div>
+
+                                <div class="col "  >
+                                  <h5 >Total Context </h5>
+                                  <h5 class="text-danger text-center">{{countcontext}}</h5>
+                                </div>
+
+                            </div>
+                           
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="col"  >
+                    <div class="card  shadow h-100"  >
+                        <div class="card-body">
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col text-center"  ><i class="mdi mdi-message-text-outline text-primary  fa-3x"></i> </div>
+
+                                <div class="col "  >
+                                  <h5 >Total message </h5>
+                                  <h5 class="text-danger text-center">{{countcontextconvertation}}</h5>
+                                </div>
+
+                            </div>
                     </div>
                         <p></p>
                     </div>
@@ -18,8 +43,15 @@
                 <div class="col"  >
                     <div class="card  shadow h-100"  >
                         <div class="card-body">
-                            <h5>Total message</h5>
-                            <h5 class="text-danger">{{countcontextconvertation}}</h5>
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col text-center"  ><i class="mdi mdi-table-of-contents text-primary  fa-3x"></i> </div>
+
+                                <div class="col "  >
+                                  <h5 >Total Confirmed </h5>
+                                  <h5 class="text-danger text-center">123456</h5>
+                                </div>
+
+                            </div>
                     </div>
                         <p></p>
                     </div>
@@ -27,17 +59,15 @@
                 <div class="col"  >
                     <div class="card  shadow h-100"  >
                         <div class="card-body">
-                            <h5>Total Confirmed</h5>
-                            <h5 class="text-danger">9552778</h5>
-                    </div>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="col"  >
-                    <div class="card  shadow h-100"  >
-                        <div class="card-body">
-                            <h5>Total Confirmed</h5>
-                            <h5 class="text-danger">9552778</h5>
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col text-center"  ><i class="mdi mdi-table-of-contents text-primary  fa-3x"></i> </div>
+
+                                <div class="col "  >
+                                  <h5 >Total Confirmed </h5>
+                                  <h5 class="text-danger text-center">12346</h5>
+                                </div>
+
+                            </div>
                     </div>
                         <p></p>
                     </div>
@@ -86,31 +116,7 @@
                 <div class="col"  >
                     <div class="card  shadow h-100"  >
                         <div class="card-body">
-                            <!-- <table class="table table-striped">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Text</th>
-                                    <th scope="col">Entry date</th>
-                                    <th scope="col">Client</th>
-                                    <th scope="col">Status</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor="let context of contexts">
-                                    <th scope="row">{{context.text}}</th>
-                                    <td>{{context.entry_date}}</td>
-                                    <td>{{context.nom}} {{context.prenom}}</td>
-                                    <td>
-                                        <span *ngIf="context.status == '1'" class="badge badge-success">Valide</span>
-                                        <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span> 
-              
-                                    </td>
-                                    <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
-                                  
-                               <!-- </tr>
-                                 
-                                </tbody>
-                              </table> -->
+                           
 
                               <div class="card-body">
                                 <p>Top {{top}}  Context messages / mois </p>
