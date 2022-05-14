@@ -45,31 +45,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class="fa fa-font fa-2x"></i>
-                <span class="nav-text">
-                   Quotes
-                </span>
-            </a>
-        </li>
-        <li>
-           <a href="#">
-               <i class="fa fa-table fa-2x"></i>
-                <span class="nav-text">
-                    Tables
-                </span>
-            </a>
-        </li>
-        <li>
-           <a href="#">
-                <i class="fa fa-map-marker fa-2x"></i>
-                <span class="nav-text">
-                    Maps
-                </span>
-            </a>
-        </li>
-        <li>
-            <a href="api">
+            <a href="api/{{idclient}}">
                  <i class="mdi mdi-code-braces fa-2x"></i>
                  <span class="nav-text">
                      Api
@@ -88,11 +64,12 @@
   
     <ul class="logout">
         <li>
-           <a href="/login">
+           <a href="/login" (click)="LogOut()">
                  <i class="fa fa-power-off fa-2x"></i>
                 <span class="nav-text">
                     Logout
                 </span>
+                
             </a>
         </li>  
     </ul>
