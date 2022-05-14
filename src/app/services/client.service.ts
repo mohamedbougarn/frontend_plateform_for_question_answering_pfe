@@ -23,4 +23,14 @@ export class ClientService {
         })); 
     }
 
+
+
+    GetClient(id_client :any){
+      this.headers.append('Content-Type', 'application/json');
+          return this.http
+            .put<any>(this.url+'client/get',{id_client})
+            .pipe(map(res => {  
+            return res ;                    
+      })); 
+  }
 }
