@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +8,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  id_client :any='';
+  nom_client:any;
+  prenom_client:any;
+  email_client:any;
 
-  constructor() { }
 
-  ngOnInit(): void {
+
+
+  constructor(public clientservice : ClientService,
+    public route : ActivatedRoute) { }
+
+  ngOnInit(): void 
+  {
+    //this.getprofile();
+    this.id_client = this.route.snapshot.paramMap.get('id_client');
+    console.log(this.id_client);
+  }
+
+
+  getprofile()
+  {
+    this.clientservice.GetClient(this.id_client.toString).subscribe(data =>{
+      console.log(data);
+     // this.nom_client=data.
+
+    })
   }
 
 }
