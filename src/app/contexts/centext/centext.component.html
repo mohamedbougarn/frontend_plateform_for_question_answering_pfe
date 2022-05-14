@@ -1,7 +1,7 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 
 <div class="container-fluid h-100">
-  <app-sidebar></app-sidebar>
+  <app-sidebar2></app-sidebar2>
     <main class="col-md-12 ms-sm-auto col-lg-11 px-md-4 h-100"> 
 
 
@@ -9,37 +9,61 @@
         <div class="col"  >
             <div class="card  shadow h-100"  >
                 <div class="card-body">
-                    <h5>Total Context</h5>
-                    <h5 class="text-danger">{{countcontext}}</h5>
-            </div>
-                <p></p>
-            </div>
-        </div>
-        <div class="col"  >
-            <div class="card  shadow h-100"  >
-                <div class="card-body">
-                    <h5>Total Question/Réponses</h5>
-                    <h5 class="text-danger">{{countcontextconvertation}}</h5>
-            </div>
-                <p></p>
-            </div>
-        </div>
-        <div class="col"  >
-            <div class="card  shadow h-100"  >
-                <div class="card-body">
-                    <h5>Total User</h5>
-                    <h5 class="text-danger">{{countclient}}</h5>
-            </div>
-                <p></p>
-            </div>
-        </div>
-        <div class="col"  >
-            <div class="card  shadow h-100"  >
-                <div class="card-body">
-                    <h5>Total Confirmed</h5>
-                    <h5 class="text-danger">9552778</h5>
+                  <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="col text-center"  ><i class="mdi mdi-table-of-contents text-primary  fa-3x"></i> </div>
+
+                    <div class="col "  >
+                      <h5 >Total Context </h5>
+                      <h5 class="text-danger text-center">{{countcontext}}</h5>
+                    </div>
+
                 </div>
-                <p></p>
+            </div>
+            </div>
+        </div>
+        <div class="col"  >
+            <div class="card  shadow h-100"  >
+                <div class="card-body">
+                  <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="col text-center"  ><i class="mdi mdi-message-text-outline text-primary  fa-3x"></i> </div>
+
+                    <div class="col "  >
+                      <h5 >Total Question/Réponses</h5>
+                      <h5 class="text-danger text-center">{{countcontextconvertation}}</h5>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col"  >
+            <div class="card  shadow h-100"  >
+                <div class="card-body">
+                  <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="col text-center"  ><i class="mdi mdi-account-outline text-primary  fa-3x"></i> </div>
+
+                    <div class="col "  >
+                      <h5 >Total User</h5>
+                      <h5 class="text-danger text-center">{{countclient}}</h5>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col"  >
+            <div class="card  shadow h-100"  >
+                <div class="card-body">
+                  <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="col text-center"  ><i class="mdi mdi-table-of-contents text-primary  fa-3x"></i> </div>
+
+                    <div class="col "  >
+                      <h5 >Total User</h5>
+                      <h5 class="text-danger text-center">{{countclient}}</h5>
+                    </div>
+
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -241,18 +265,18 @@
                                 <td>{{collumn.entry_date}}</td>
                                 
                                 <td>
-                                    <span  class="badge badge-success">Valide</span>
+                                    <span class="badge bg-success">Valide</span>
                                     <!-- <span *ngIf="context.status == '0'" class="badge badge-danger">Deleted</span>  -->
 
                                 </td>
                                 <td>
-                                  <span  class="badge badge-success"><i class="mdi mdi-earth"></i></span>
+                                  <span class="badge bg-success"><i class="mdi mdi-earth"></i></span>
                                   <!-- <span   class="badge badge-danger"><i class="mdi mdi-earth-off"></i></span>  -->
                                 </td>
 
                                 
                                 <td>
-                                  <span  type="button"  (click)="ModalShowQuestionAnserwerOpen(showQA);getQR(collumn.id_context)" class="badge badge-info" ><a type="button"  ><i class="mdi mdi-telescope" ></i> </a></span> 
+                                  <span  type="button"  (click)="ModalShowQuestionAnserwerOpen(showQA);getQR(collumn.id_context)" class="badge rounded-pill bg-info" ><a type="button"  ><i class="mdi mdi-telescope" ></i> </a></span> 
                                   
                                 </td>
                                 <!-- <td><button type="button" class="btn btn-primary" (click)="modalUpdateOpen(modalUpdateContext,context.id_context,context.text)">Update</button></td> -->
