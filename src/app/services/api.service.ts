@@ -25,4 +25,15 @@ export class ApiService {
     })); 
 }
 
+
+GetApi(id_client:any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .put<any>(this.url+'api/get',{id_client})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+
+
 }
