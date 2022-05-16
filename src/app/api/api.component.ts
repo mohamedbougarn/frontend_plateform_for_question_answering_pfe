@@ -52,7 +52,7 @@ export class ApiComponent implements OnInit {
     inputElement.setSelectionRange(0, 0);
    // Swal.fire('Hi', 'We have been copied!', 'success')
     Swal.fire({
-      position: 'top-end',
+      position: 'top',
       icon: 'success',
       title: 'Your content is copied  ',
       showConfirmButton: false,
@@ -63,7 +63,8 @@ export class ApiComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     this.id_client=localStorage.getItem('id');
     this.nom_client=localStorage.getItem('nomuser');
     console.log(this.nom_client)
@@ -73,8 +74,6 @@ export class ApiComponent implements OnInit {
     this.output1 = (JSON.stringify(this.messageoutput1));
     this.input3 = (JSON.stringify(this.messageinput3));
     this.output3 = (JSON.stringify(this.messageoutput3));
-
-
   }
 
   Get_key_database()
@@ -104,9 +103,13 @@ export class ApiComponent implements OnInit {
       })
     }
 
-    // successNotification(){
-    //   Swal.fire('Hi', 'We have been informed!', 'success')
-    // }
+    warningNotification(){
+      Swal.fire({
+        position: 'top',
+        title:'Hi',
+        titleText: 'generate your key first !!',
+        icon: 'warning'})
+    }
     // GenerateKey1()
     // {
     //  this.UserKey =  Md5.hashStr(new Date() +this.id_client+ this.nom_client );
