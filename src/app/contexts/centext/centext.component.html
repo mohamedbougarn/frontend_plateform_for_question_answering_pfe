@@ -25,10 +25,10 @@
             <div class="card  shadow h-100"  >
                 <div class="card-body">
                   <div class="row row-cols-1 row-cols-md-2 g-4">
-                    <div class="col text-center"  ><i class="mdi mdi-message-text-outline text-primary  fa-3x"></i> </div>
+                    <div class="col text-center"  ><i class="mdi mdi-message-text-outline text-info  fa-3x"></i> </div>
 
                     <div class="col "  >
-                      <h5 >Total Question/Réponses</h5>
+                      <h5 >Total Q/R</h5>
                       <h5 class="text-danger text-center">{{countcontextconvertation}}</h5>
                     </div>
 
@@ -40,7 +40,7 @@
             <div class="card  shadow h-100"  >
                 <div class="card-body">
                   <div class="row row-cols-1 row-cols-md-2 g-4">
-                    <div class="col text-center"  ><i class="mdi mdi-account-outline text-primary  fa-3x"></i> </div>
+                    <div class="col text-center"  ><i class="mdi mdi-account-outline text-warning  fa-3x"></i> </div>
 
                     <div class="col "  >
                       <h5 >Total User</h5>
@@ -55,7 +55,7 @@
             <div class="card  shadow h-100"  >
                 <div class="card-body">
                   <div class="row row-cols-1 row-cols-md-2 g-4">
-                    <div class="col text-center"  ><i class="mdi mdi-table-of-contents text-primary  fa-3x"></i> </div>
+                    <div class="col text-center"  ><i class="mdi mdi-table-of-contents text-success  fa-3x"></i> </div>
 
                     <div class="col "  >
                       <h5 >Total User</h5>
@@ -364,7 +364,7 @@
               <tbody>
                 <tr  *ngFor="let collumn1 of context_QRlist | paginate: {id: 'versionPagination1' , itemsPerPage: 10, currentPage: p1 }">
                   <td style="overflow-wrap: break-word;" scope="row">{{collumn1.question}}</td>
-                  <td style="overflow-wrap: break-word;" scope="row">{{collumn1.responce}}</td>
+                  <td style="overflow-wrap: break-word;" scope="row">{{collumn1.response}}</td>
                 </tr>
               
               </tbody>
