@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MustMatch } from './must-match.validators';
+
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { ClientService } from 'src/app/services/client.service';
+import Swal from 'sweetalert2';
+
+import { MustMatch } from './must-match.validators';
 //import { ClientService } from '../services/client.service';
 
 @Component({
@@ -24,12 +27,12 @@ export class RegistryComponent implements OnInit
       {
         firstname: ['', Validators.required],
         lastname:['',Validators.required],
-        email:['',Validators.required],
+        email:['',[Validators.required,Validators.email]],
         mobile:['',Validators.required],
         password:['',[Validators.required,Validators.minLength(6)]],
         password_confirm:['',Validators.required]
       },{
-        Validator :MustMatch('password','password_confirm')
+        validator : MustMatch('password','password_confirm')
       });
 
   }
@@ -68,7 +71,19 @@ export class RegistryComponent implements OnInit
     }
 
     // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+   // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+   Swal.fire({
+    toast: true,
+    position : 'top', 
+    icon: 'success',
+    title: 'Your '+this.registerForm.value.firstname+'\n'
+    +this.registerForm.value.lastname+'\n'
+    +this.registerForm.value.firstname+'\n'
+    +this.registerForm.value.email+'\n'
+    +this.registerForm.value.mobile+'\n is saved  ',
+    showConfirmButton: false,
+    timer: 4000
+  })
   }
 // convenience getter for easy access to form fields
 
