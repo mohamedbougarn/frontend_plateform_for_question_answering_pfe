@@ -11,11 +11,25 @@
                 <div class="card-body">
                   <div class="input-group">
                     <input type="text" #userkey [(ngModel)]="UserKey" name="UserKey" class="form-control" placeholder="API_Key#123458dejfief..Ergorjgoer,ger,velkrnv....." readonly>
-                  <div class="input-group-btn">
+                    <div  *ngIf="UserKey != '' ; else warningkey" >
+                    <div class="input-group-btn">
                       <button class="btn btn-outline-info" type="submit" (click)="copyInputMessage(userkey)" >
                         <i class="mdi mdi-content-copy"></i>
                       </button>
                     </div>
+                    </div>
+                    <ng-template #warningkey>
+                      <div class="input-group-btn">
+                        <button class="btn btn-outline-info" type="submit" (click)="warningNotification()" >
+                          <i class="mdi mdi-content-copy"></i>
+                        </button>
+                      </div>
+                    </ng-template>
+                    <!-- <div class="input-group-btn">
+                      <button class="btn btn-outline-info" type="submit" (click)="warningNotification()" >
+                        <i class="mdi mdi-content-copy"></i>
+                      </button>
+                    </div> -->
                   </div>
                     <button type="button" class="btn btn-outline-info mt-4" (click)="GenerateKey()">Generate Key</button> 
                 </div>
