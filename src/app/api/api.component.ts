@@ -14,9 +14,10 @@ export class ApiComponent implements OnInit {
   UserKey : any ='';
   id_client : any ='';
   nom_client : any ='';
+  methode:any ='PUT';
   URL1 : any = 'http://127.0.0.1:3000/api/getresponse/context';
-  URL2 : any = 'http://localhost:3000/textmodel2';
-  URL3 : any = 'http://localhost:3000/textmodel3';
+  URL2 : any = 'http://127.0.0.1:3000/api/getresponse/wiki';
+  URL3 : any = 'http://127.0.0.1:3000/api/getresponse/gpt3';
 
   messageinput1 ={
     "key":"ton API KEY",
@@ -26,16 +27,28 @@ export class ApiComponent implements OnInit {
 
   messageoutput1 ={"message_text":"ton question ","response":"la réponse"}
 
+  //for wikipedia
+  messageinput2 ={
+    "key":"ton klé API",
+    "question":"ton question",
+    "lang":"en"
+  };
+
+  messageoutput2 ={
+    "message": "ton question",
+    "response": "la répense "
+  };
 
   messageinput3 ={
-    "key":"ton API KEY",
-    "question": " ton question "
-};
+    "key":"ton klé API",
+    "question":"ton question",
+    "lang":"en"
+  };
 
   messageoutput3 ={
-    "message" : "ton question",
-    "response" : "response du GPT3"
-  }
+    "message": "ton question",
+    "response": "la répense "
+  };
 
   input1: any;
   output1: any;
@@ -72,6 +85,8 @@ export class ApiComponent implements OnInit {
     //console.log(JSON.stringify(this.messageurl1));
     this.input1 = (JSON.stringify(this.messageinput1));
     this.output1 = (JSON.stringify(this.messageoutput1));
+    this.input2 = (JSON.stringify(this.messageinput2));
+    this.output2 = (JSON.stringify(this.messageoutput2));
     this.input3 = (JSON.stringify(this.messageinput3));
     this.output3 = (JSON.stringify(this.messageoutput3));
   }
