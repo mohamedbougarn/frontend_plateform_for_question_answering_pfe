@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
@@ -17,7 +18,8 @@ export class ProfileComponent implements OnInit {
 
 
   constructor(public clientservice : ClientService,
-    public route : ActivatedRoute) { }
+    public route : ActivatedRoute,
+    private _location: Location) { }
 
   ngOnInit(): void 
   {
@@ -34,6 +36,11 @@ export class ProfileComponent implements OnInit {
      // this.nom_client=data.
 
     })
+  }
+
+
+  back() {
+    this._location.back();
   }
 
 }
