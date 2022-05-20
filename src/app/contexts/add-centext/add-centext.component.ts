@@ -124,8 +124,8 @@ file: any = null; // Variable to store file
 
   ngOnInit(): void {
     
-    this.currentLanuage=sessionStorage.getItem('language');
-    console.log('currentLanuage' + this.currentLanuage)
+    this.currentLanguage=sessionStorage.getItem('language');
+    console.log('currentLanuage' + this.currentLanguage)
    
 
 
@@ -142,7 +142,7 @@ file: any = null; // Variable to store file
     this.getQr_by_ID_context();
     this.Getallcontext_conversation();
 
-
+    console.log(this.currentLanguage)
     /*** speech add ngoninit */
 
     const webSpeechReady = this.speechRecognizer.initialize(this.currentLanguage);
