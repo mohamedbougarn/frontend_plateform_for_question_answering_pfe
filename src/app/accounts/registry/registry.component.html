@@ -48,6 +48,7 @@
                           <input type="mobile" formControlName="mobile" id="form3Example3c" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }"/>
                           <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
                             <div *ngIf="f.mobile.errors.required">mobile number is required</div>
+                            <div *ngIf="f.mobile.errors.pattern">Mobile must be with a valid format</div>
                         </div>
                           <label class="form-label" for="form3Example3c">Your Mobile</label>
                         </div>
