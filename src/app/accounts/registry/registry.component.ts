@@ -28,7 +28,7 @@ export class RegistryComponent implements OnInit
         firstname: ['', Validators.required],
         lastname:['',Validators.required],
         email:['',[Validators.required,Validators.email]],
-        mobile:['',Validators.required],
+        mobile:['',[Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
         password:['',[Validators.required,Validators.minLength(6)]],
         password_confirm:['',Validators.required]
       },{
