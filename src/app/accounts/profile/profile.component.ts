@@ -13,6 +13,11 @@ export class ProfileComponent implements OnInit {
   nom_client:any;
   prenom_client:any;
   email_client:any;
+  mobile_client :any;
+  password : any;
+
+
+  dataclient : any;
 
 
 
@@ -26,13 +31,19 @@ export class ProfileComponent implements OnInit {
     //this.getprofile();
     this.id_client = this.route.snapshot.paramMap.get('id_client');
     console.log(this.id_client);
+    this.getprofile()
   }
 
 
   getprofile()
   {
-    this.clientservice.GetClient(this.id_client.toString).subscribe(data =>{
+    this.clientservice.GetClient(this.id_client).subscribe(data =>{
       console.log(data);
+      this.nom_client=data[0].nom_client;
+      this.prenom_client=data[0].prenom_clinet;
+      this.email_client=data[0].email_client;  
+      this.mobile_client = data[0].mobile_client ;
+       
      // this.nom_client=data.
 
     })
