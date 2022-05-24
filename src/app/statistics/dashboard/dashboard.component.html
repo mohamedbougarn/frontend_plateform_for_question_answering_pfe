@@ -44,11 +44,11 @@
                     <div class="card  shadow h-100"  >
                         <div class="card-body">
                             <div class="row row-cols-1 row-cols-md-2 g-4">
-                                <div class="col text-center"  ><i class="mdi mdi-table-of-contents text-primary  fa-3x"></i> </div>
+                                <div class="col text-center"  ><i class="mdi mdi-chart-areaspline text-danger  fa-3x"></i> </div>
 
                                 <div class="col "  >
-                                  <h5 >Total Confirmed </h5>
-                                  <h5 class="text-danger text-center">123456</h5>
+                                  <h5 >Api Used in extren</h5>
+                                  <h5 class="text-danger text-center">{{totalapi}}</h5>
                                 </div>
 
                             </div>
@@ -98,14 +98,18 @@
                             <p>carte 2 test </p>
                             <!-- test 2 cart -->
                                 <div>
-                                <canvas
+                                <!-- <canvas
                                 [chartType]="'line'"
                                     [legend]="false"
                                     [datasets]="chartData2"
                                     [options]="chartOptions2"
                                     [labels]="chartLabels2"
                                     baseChart>
-                                </canvas> 
+                                </canvas>  -->
+                                <!-- <div class="chart-wrapper"> -->
+                                    <canvas id="canvas">{{radarchart}}
+                                  </canvas>
+                                <!-- </div> -->
                                 </div>
 
                         </div>
@@ -204,8 +208,12 @@
                                 [plugins]="barChartPlugins"
                                 [legend]="barChartLegend"
                                 [chartType]="barChartType"
-                                >
+                                > 
                             </canvas>
+
+                                <!-- <canvas id="canvasbar">{{barchart}}
+                                </canvas> -->
+                            
                             </div>
 
                             
