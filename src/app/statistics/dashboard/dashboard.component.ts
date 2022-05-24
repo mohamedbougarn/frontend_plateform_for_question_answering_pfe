@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart, RadialChartOptions } from 'chart.js';
 import { SingleDataSet,BaseChartDirective } from 'ng2-charts';
 // import * as chartData from './data.json';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
@@ -118,22 +118,7 @@ chartOptions1 = {
   ];
 
 
-  /****************************** */
-  // public barChartData:  any[] = [
-    
-  // ];
-  // public barChartOptions: any = {
-  //   scaleShowVerticalLines: false,
-  //   responsive: true,
-  //   scales: {
-  //           xAxes: [{
-  //               stacked: true
-  //           }],
-  //           yAxes: [{
-  //               stacked: true
-  //           }]
-  //       }
-  // };
+ 
 
   
   public barChartLabels: Label[]=[];
@@ -174,6 +159,16 @@ chartOptions1 = {
 
 
 
+
+
+
+
+
+
+
+    /************************************************************** */
+
+
   countcontext : any;
   id_client :any;
   top : any = 3;
@@ -184,6 +179,10 @@ chartOptions1 = {
   clients : any;
   idclient : any;
   datatopmsgpertitle: any;
+  totalapi : any = 0;
+  radarchart : any=[];
+  barchart : any=[]
+
 
 
   Data : any[] = [];
@@ -201,6 +200,7 @@ chartOptions1 = {
     this.gettopmsgperannee();
     //this.GetContext();
 
+    this.getcountapi()
     // this.dashboardservice.GetTop_Msg_Annee(this.id_client,2).subscribe(result =>{
 
     //  // this.barChartLabels.push
@@ -243,6 +243,9 @@ chartOptions1 = {
     // });;
  
   /*********************************************** */
+
+
+
 
 
 
@@ -424,7 +427,8 @@ getcountcontext()
       // for(var i in result)
       // {
 
-         this.barChartLabels.push(result[1].annee);
+         this.barChartLabels.push(result[0].annee);
+         //this.barChartLabels.push(result[1].annee);
         
       //   this.dataCount.push(result[i].count_message); 
 
@@ -450,8 +454,120 @@ getcountcontext()
       
       //this.barChartData.push(JSON.parse(JSON.stringify(this.Data)));
 
+
+    this.barchart = new Chart("canvasbar", {
+      type: "bar",
+      data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [
+          {
+            label: "# of Votes",
+            data: [12],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)"
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)"
+            ],
+            borderWidth: 1
+          }
+          ,{
+            label: "# of Votes",
+            data: [3],
+            backgroundColor: [
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)"
+            ],
+            borderColor: [
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)"
+            ],
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
+        }
+      }
+    });
+
+
+
+
     })
   }
+
+getcountapi()
+{
+  this.dashboardservice.GetApi_count(this.id_client).subscribe(result =>{
+    console.log(result)
+    console.log(result.length)
+  for(let i=0;i<result.length;i++)
+  {
+    console.log(result[i].api)
+    this.totalapi += Number(result[i].api);
+  }
+  let data : any ;
+  let labels :any;
+  data = result.map((cs : any)=> Number(cs.api))
+  labels=result.map((cs : any)=> cs.model)
+  //this.totalapi = result['api'];
+  console.log(data)
+console.log(labels)
+  this.radarchart = new Chart('canvas',{
+
+    type: 'radar',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'API model IA utilisée externe',
+      data: data,
+      fill: true,
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgb(255, 99, 132)',
+      pointBackgroundColor: 'rgb(255, 99, 132)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(255, 99, 132)'
+    }]
+  },
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    }
+  },
+
+  })
+
+  })
+
+}
 
 
 }
