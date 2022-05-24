@@ -126,4 +126,17 @@ GetTop_CountMsg_month(id_client :any ,month : any, top : any){
 }
 
 
+/**
+ * for get stat of count(api)/ model
+*/
+GetApi_count(id_client :any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .put<any>(this.url+'api/count',{id_client})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+
+
 }
