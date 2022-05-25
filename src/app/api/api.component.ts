@@ -22,7 +22,8 @@ export class ApiComponent implements OnInit {
   messageinput1 ={
     "key":"ton API KEY",
     "id_context" : "Id_context",
-    "question": " ton question "
+    "question": "ton question",
+    "lang":"fr"
 };
 
   messageoutput1 ={"message_text":"ton question ","response":"la réponse"}
@@ -42,7 +43,7 @@ export class ApiComponent implements OnInit {
   messageinput3 ={
     "key":"ton klé API",
     "question":"ton question",
-    "lang":"en"
+    "lang":"fr"
   };
 
   messageoutput3 ={
