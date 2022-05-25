@@ -537,7 +537,7 @@ getcountapi()
   labels=result.map((cs : any)=> cs.model)
   //this.totalapi = result['api'];
   console.log(data)
-console.log(labels)
+  console.log(labels)
   this.radarchart = new Chart('canvas',{
 
     type: 'radar',
