@@ -75,8 +75,138 @@
 
 
 
+        <div class="card  shadow h-100"  >
+          <div class="card-header">
+              Context
+          </div>
+         <div class="card-body">
 
-         <div class="card  shadow h-100"  >
+           <div class="container-fluid h-50">
+             <div class="row justify-content-center h-100">
+               
+               <div class="chat">
+                   <div class="card-header msg_head">
+                     <div class="d-flex bd-highlight">
+                       <div class="img_cont">
+                         <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img">
+                         <span class="online_icon"></span>
+                       </div>
+                       <div class="user_info">
+                         <span>Chat with jassa</span>
+                         <p>1767 Messages</p>
+                       </div>
+                       <div class="video_cam">
+                         <span><i class="fas fa-video"></i></span>
+                         <span><i class="fas fa-phone"></i></span>
+                       </div>
+                     </div>
+                     <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                     <div class="action_menu">
+                       <ul>
+                         <li><i class="fas fa-user-circle"></i> View profile</li>
+                         <li><i class="fas fa-users"></i> Add to close friends</li>
+                         <li><i class="fas fa-plus"></i> Add to group</li>
+                         <li><i class="fas fa-ban"></i> Block</li>
+                       </ul>
+                     </div>
+                   </div>
+                   <div class="card-body msg_card_body" >
+                     
+<!-- 
+                     <input type="file" ng2FileSelect [uploader]="uploader">
+                     <button (click)="uploader.uploadAll()">Upload </button> -->
+
+                 <!-------------------------------------------------------------------->
+                 <div *ngFor="let msg of visiteur_convertationlist">
+                   <div ng-If="msg.photo==null"><!--debut ng if photo is valid-->
+                     <div class="d-flex justify-content-end mb-4">
+                       <div class="msg_cotainer_send">
+                         {{msg.question}}
+                         
+                         <img ng-if="msg.photo!=null" src="{{msg.photo}}" alt="{{msg.photo}}" width="200"/> 
+                         <span class="msg_time_send" style="color:rgb(20, 20, 32)">{{msg.entry_date}}</span>
+                       </div>
+                       <div class="img_cont_msg">
+                     <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                       </div>
+                     </div>
+                     <div class="d-flex justify-content-start mb-4">
+                       <div class="img_cont_msg">
+                         <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                       </div>
+                       <div class="msg_cotainer">
+                          {{msg.response}}
+                         <span class="msg_time_send" style="color:rgb(20, 20, 32)">{{msg.entry_date}}</span>
+                       </div>
+                     </div>
+                     </div><!--fin ng if-->
+
+                    
+                   </div>
+    <!-------------------------------------------------------------------->
+
+
+
+
+
+                   </div>
+                   <div class="card-footer">
+                     <div class="input-group">
+                       <!-- <div class="input-group-append"> -->
+                         <span class="input-group-text attach_btn" *ngIf="listening$ | async; else mic" (click)="stop()" ><i class="mdi mdi-microphone" style="color:rgb(243, 42, 59)"></i></span><!--*ngIf="listening$ | async; else mic" (click)="stop()" -->
+                         
+                         <ng-template #mic>
+                           <span class="input-group-text attach_btn" (click)="start()" ><i class="mdi mdi-microphone" style="color:rgb(72, 90, 255)" ></i></span><!--(click)="start()"-->
+                         </ng-template>
+
+                         <!--test upload-->
+                         
+                         
+                           <!-- <label class="input-group-text image_btn" for="upload_file"  >
+                            
+
+                               <i  class="mdi mdi-camera" for="upload_file"  style="cursor: pointer;"></i> 
+                             
+                           <input type="file" name="image" id="upload_file" (change)="onChargeimage($event)"  style="display :none;visibility:none;" accept="image/x-png,image/gif,image/jpeg">            
+
+                           
+                           </label>   -->
+                           
+                         <!--end test upload-->
+                         
+
+
+                         <!-- <span class="input-group-text image_btn">
+                           
+                             <label for="file-input">
+                               <i class="mdi mdi-camera"  (click)="uploader.uploadAll()"></i>
+                             </label>
+                         
+                             <input type="file" id="file-input" ng2FileSelect [uploader]="uploader" style="display :none;visibility:none;" >
+                           </span>
+                          -->
+                          
+                         <!-- </div> -->
+
+
+                         
+                    
+
+                       <input type="text" class="form-control type_msg" name="question"  [(ngModel)]="question"  placeholder="Type your message..."  value="{{transcript$ | async}}" > <!--name="msg" [(ngModel)]="msg"   (keydown.enter)="GetMsgResponseApi()"   value="{{transcript$ | async}}"-->
+                       <!-- <div class="input-group-append"> -->
+                         <span class="input-group-text send_btn" (click)="sendmsg()" ><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"   (click)="GetMsgResponseApi()"-->
+                       <!-- </div> -->
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+
+
+         <!-- <div class="card  shadow h-100"  >
              <div class="card-header">
                  Context
              </div>
@@ -87,13 +217,13 @@
               <div class="container-fluid h-50">
                 <div class="row justify-content-center h-100">
                   <div class=" chat">
-                    <!-- <div class="card"> -->
+                  
                       <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
                           <div class="img_cont">
                             <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img">
                             <span class="online_icon"></span>
-                            <!-- <span cless="offline_icon"></span> -->
+                            
                           </div>
                           <div class="user_info">
                             <span>Chat with jassa</span>
@@ -115,29 +245,9 @@
                         </div>
                       </div>
                       <div class="card-body msg_card_body">
-                        <!-- <div *ngfor="let message of visiteur_convertationlist">
-
-                        <div class="d-flex justify-content-start mb-4">
-                          <div class="img_cont_msg">
-                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
-                          </div>
-                          <div class="msg_cotainer">
-                            {{message.question}}
-                            <span class="msg_time">8:40 AM, Today</span>
-                          </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                          <div class="msg_cotainer_send">
-                            {{message.response}}
-                            <span class="msg_time_send">8:55 AM, Today</span>
-                          </div>
-                          <div class="img_cont_msg">
-                        <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
-                          </div>
-                        </div>
-                      </div> -->
+                        
                       <div *ngFor="let msg of visiteur_convertationlist">
-                        <div ng-If="msg.photo==null"><!--debut ng if photo is valid-->
+                        <div ng-If="msg.photo==null">
                           <div class="d-flex justify-content-end mb-4">
                             <div class="msg_cotainer_send">
                               {{msg.question}}
@@ -158,7 +268,7 @@
                               <span class="msg_time_send" style="color:rgb(20, 20, 32)">{{msg.entry_date}}</span>
                             </div>
                           </div>
-                          </div><!--fin ng if-->
+                          </div>
   
                          
                         </div>
@@ -178,9 +288,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
          </div>
-        <!-- </div> -->
+       
 
         <div class="col"  >
             <div class="card  shadow h-100"  >
