@@ -6,6 +6,12 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { ContextConversationService } from 'src/app/services/context-conversation.service';
 import { VisiteurService } from 'src/app/services/visiteur.service';
+import { SpeechRecognizerService } from 'src/app/services/web-apis/speech-recognizer.service';
+import { merge, Observable, of, Subject } from 'rxjs';
+import { SpeechEvent } from 'src/app/test/model/speech-event';
+import { SpeechError } from 'src/app/test/model/speech-error';
+import { SpeechNotification } from 'src/app/test/model/speech-notification';
+import { map, tap } from 'rxjs/operators';
 
 
 @Component({
@@ -67,12 +73,22 @@ p : any = 1;
 p1: any = 1;
 modalShowQeuestAnse!: BsModalRef;
 
+currentLanguage: any ;//string = defaultLanguage;
+totalTranscript?: string;
+
+transcript$?: Observable<string>;
+listening$?: Observable<boolean>;
+errorMessage$?: Observable<string>;
+defaultError$ = new Subject<string | undefined>();
+
+
 
   constructor(public router : Router,
     private dashboardservice:DashboardService,
     private bsModalService: BsModalService,
     public contextconversationService : ContextConversationService,
-    public visiteurservice : VisiteurService) {
+    public visiteurservice : VisiteurService,
+    private speechRecognizer: SpeechRecognizerService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
    }
@@ -87,7 +103,109 @@ modalShowQeuestAnse!: BsModalRef;
     this.getstat()
     this.gettopmsgperdate();
 
+    this.currentLanguage = 'fr-FR';
+    console.log(this.currentLanguage)
+
+
+
+
+    const webSpeechReady = this.speechRecognizer.initialize(this.currentLanguage);
+    if (webSpeechReady) {
+      this.initRecognition();
+    }else {
+      this.errorMessage$ = of('Your Browser is not supported. Please try Google Chrome.');
+    }
+
   }
+
+
+
+
+
+  /*********************@start @speech ************************ */
+
+  start(): void {
+    if (this.speechRecognizer.isListening) {
+      this.stop();
+      return;
+    }
+
+    this.defaultError$.next(undefined);
+    this.speechRecognizer.start();
+  }
+
+  stop(): void {
+    this.speechRecognizer.stop();
+  }
+
+  selectLanguage(): void {
+    if (this.speechRecognizer.isListening) {
+      this.stop();
+    }
+   // this.currentLanguage = language;
+    this.speechRecognizer.setLanguage(this.currentLanguage);
+
+    console.log('language =',this.currentLanguage)
+  }
+
+  private initRecognition(): void {
+    this.transcript$ = this.speechRecognizer.onResult().pipe(
+      tap((notification) => {
+        this.processNotification(notification);
+      }),
+      map((notification) => notification.content || '')
+    );
+
+    this.listening$ = merge(
+      this.speechRecognizer.onStart(),
+      this.speechRecognizer.onEnd()
+    ).pipe(map((notification) => notification.event === SpeechEvent.Start));
+
+    this.errorMessage$ = merge(
+      this.speechRecognizer.onError(),
+      this.defaultError$
+    ).pipe(
+      map((data) => {
+        if (data === undefined) {
+          return '';
+        }
+        if (typeof data === 'string') {
+          return data;
+        }
+        let message;
+        switch (data.error) {
+          case SpeechError.NotAllowed:
+            message = `Cannot run the demo.
+            Your browser is not authorized to access your microphone.
+            Verify that your browser has access to your microphone and try again.`;
+            break;
+          case SpeechError.NoSpeech:
+            message = `No speech has been detected. Please try again.`;
+            break;
+          case SpeechError.AudioCapture:
+            message = `Microphone is not available. Plese verify the connection of your microphone and try again.`;
+            break;
+          default:
+            message = '';
+            break;
+        }
+        return message;
+      })
+    );
+  }
+
+  private processNotification(notification: SpeechNotification<string>): void {
+    if (notification.event === SpeechEvent.FinalContent) {
+      const message = notification.content?.trim() || '';
+      //this.actionContext.processMessage(message, this.currentLanguage);
+      // this.actionContext.runAction(message, this.currentLanguage);
+      this.totalTranscript = this.totalTranscript
+        ? `${this.totalTranscript}\n${message}`
+        : notification.content;
+    }
+  }
+  /*********************end @speech ************************* */
+
 
 
   getMessage()
