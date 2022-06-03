@@ -75,6 +75,7 @@ modalShowQeuestAnse!: BsModalRef;
 reponse:any;
 id : any = 1;
 historygpt3= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. '}];
+history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. '}];
 
 
 
@@ -370,12 +371,12 @@ defaultError$ = new Subject<string | undefined>();
         // //this.messageReceived.add(this.botValue, this.inputValue);
         // this.messageReceived = 
 
-        setTimeout( () => {
-          }
-        ,1000 );
+        // setTimeout( () => {
+        //   }
+        // ,1000 );
 
-        this.historygpt3.push(newMsg);
-        console.log(this.historygpt3);
+        this.history.push(newMsg);
+        console.log(this.history);
         this.question = '';
 
       }
@@ -388,6 +389,69 @@ defaultError$ = new Subject<string | undefined>();
 
   
 
+
+
+   /***
+   * 
+   * methode that for get responce from @wikipedia   
+   * 
+   */
+
+
+    GetMsgResponsewikiApi()
+    {
+      if (this.question.length>0)
+      {
+        let lang='fr';
+        //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
+        this.contextconversationService.GetResponsewikiApi(this.question,lang).subscribe(result =>
+          {
+             console.log('resultat de lappele api flask est methode GPT3 question responce est  =',result['answer'])
+    
+             this.reponse=result['answer'];
+    
+             if(this.reponse.length > 0)
+             {
+               this.sendmsgwiki();
+             }
+          })
+          this.question = "";
+      }
+    }
+  
+  
+  
+  
+  
+    sendmsgwiki()//depuis database 
+    { 
+      console.log('test from new message')
+      if (this.question.length>0)
+      {
+          let newMsg = {id: this.id + 1 ,
+              client: 'bot',
+              msgSent: this.question,
+              msg_received: this.reponse}
+  
+          // this.history.push({user: 'user', value: this.msg});
+          // //this.messageReceived.add(this.botValue, this.inputValue);
+          // this.messageReceived = 
+  
+          // setTimeout( () => {
+          //   }
+          // ,1000 );
+  
+          this.history.push(newMsg);
+          console.log(this.history);
+          this.question = '';
+  
+        }
+        else
+         {
+           console.log
+          }
+  
+    }
 
 
 
