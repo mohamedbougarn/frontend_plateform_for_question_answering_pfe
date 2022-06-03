@@ -72,6 +72,11 @@ context_QRlist :any;
 p : any = 1;
 p1: any = 1;
 modalShowQeuestAnse!: BsModalRef;
+reponse:any;
+id : any = 1;
+historygpt3= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. '}];
+
+
 
 currentLanguage: any ;//string = defaultLanguage;
 totalTranscript?: string;
@@ -319,6 +324,74 @@ defaultError$ = new Subject<string | undefined>();
   }
 
   
+  /***
+   * 
+   * methode that for get responce from @GPT3   
+   * 
+   */
+
+
+  GetMsgResponsegpt3Api()
+  {
+    if (this.question.length>0)
+    {
+      let lang='fr';
+      //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
+      this.contextconversationService.GetResponseGPT3Api(this.question,lang).subscribe(result =>
+        {
+           console.log('resultat de lappele api flask est methode GPT3 question responce est  =',result['response'])
+  
+           this.reponse=result['response'];
+  
+           if(this.reponse.length > 0)
+           {
+             this.sendmsggpt3();
+           }
+        })
+        this.question = "";
+      }
+  }
+
+
+
+
+
+  sendmsggpt3()//depuis database 
+  { 
+    console.log('test from new message')
+    if (this.question.length>0)
+    {
+        let newMsg = {id: this.id + 1 ,
+            client: 'bot',
+            msgSent: this.question,
+            msg_received: this.reponse}
+
+        // this.history.push({user: 'user', value: this.msg});
+        // //this.messageReceived.add(this.botValue, this.inputValue);
+        // this.messageReceived = 
+
+        setTimeout( () => {
+          }
+        ,1000 );
+
+        this.historygpt3.push(newMsg);
+        console.log(this.historygpt3);
+        this.question = '';
+
+      }
+      else
+       {
+         console.log
+        }
+
+  }
+
+  
+
+
+
+
+
   
   sendmsg()//depuis database 
   { 
