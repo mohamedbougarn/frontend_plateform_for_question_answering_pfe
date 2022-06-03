@@ -90,6 +90,10 @@ export class ApiComponent implements OnInit {
     this.output2 = (JSON.stringify(this.messageoutput2));
     this.input3 = (JSON.stringify(this.messageinput3));
     this.output3 = (JSON.stringify(this.messageoutput3));
+    
+
+    console.log(new Date())
+  
   }
 
   Get_key_database()
