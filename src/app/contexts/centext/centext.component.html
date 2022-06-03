@@ -92,23 +92,35 @@
                          <span class="online_icon"></span>
                        </div>
                        <div class="user_info">
-                         <span>Chat with jassa</span>
+                         <span>Chat with {{currentmodel}}</span>
                          <p>1767 Messages</p>
                        </div>
                        <div class="video_cam">
-                         <span><i class="fas fa-video"></i></span>
-                         <span><i class="fas fa-phone"></i></span>
+                         <!-- <span><i class="fas fa-video"></i></span>
+                         <span><i class="fas fa-phone"></i></span> -->
+                         <span>
+                          <form class="d-flex">
+                            <select class="form-select me-2" [(ngModel)]="currentmodel" name="currentmodel" (change)="selectModel($event)">
+                              <option  value="bert" selected>
+                                Bert
+                              </option>
+                              <option  value="GPT3">
+                                GPT3
+                              </option>
+                              <option  value="wikipedia">
+                                wikipedia
+                              </option>
+                            </select>
+                          </form>
+                        </span>
                        </div>
                      </div>
-                     <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                     
+                     <span id="action_menu_btn"><i class="fas fa-ellipsis-v" id="dropdownMenu"></i></span>
                      <div class="action_menu">
-                       <ul>
-                         <li><i class="fas fa-user-circle"></i> View profile</li>
-                         <li><i class="fas fa-users"></i> Add to close friends</li>
-                         <li><i class="fas fa-plus"></i> Add to group</li>
-                         <li><i class="fas fa-ban"></i> Block</li>
-                       </ul>
+                       
                      </div>
+                   
                    </div>
                    <div class="card-body msg_card_body" >
                      
@@ -192,9 +204,9 @@
                          
                     
 
-                       <input type="text" class="form-control type_msg" name="question"  [(ngModel)]="question"  placeholder="Type your message..."  value="{{transcript$ | async}}" > <!--name="msg" [(ngModel)]="msg"   (keydown.enter)="GetMsgResponseApi()"   value="{{transcript$ | async}}"-->
+                       <input type="text" class="form-control type_msg" name="question"  [(ngModel)]="question" (keydown.enter)="GetMsgResponseAPI()"  placeholder="Type your message..."  value="{{transcript$ | async}}" > <!--name="msg" [(ngModel)]="msg"   (keydown.enter)="GetMsgResponseApi()"   value="{{transcript$ | async}}"-->
                        <!-- <div class="input-group-append"> -->
-                         <span class="input-group-text send_btn" (click)="GetMsgResponsegpt3Api()" ><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"   (click)="GetMsgResponseApi()"-->
+                         <span class="input-group-text send_btn" (click)="GetMsgResponseAPI()" ><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"   (click)="GetMsgResponseApi()"-->
                        <!-- </div> -->
                      </div>
                    </div>
