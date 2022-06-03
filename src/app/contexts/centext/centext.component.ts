@@ -12,6 +12,7 @@ import { SpeechEvent } from 'src/app/test/model/speech-event';
 import { SpeechError } from 'src/app/test/model/speech-error';
 import { SpeechNotification } from 'src/app/test/model/speech-notification';
 import { map, tap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -76,6 +77,7 @@ reponse:any;
 id : any = 1;
 historygpt3= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. '}];
 history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. '}];
+currentmodel:any="";
 
 
 
@@ -312,6 +314,19 @@ defaultError$ = new Subject<string | undefined>();
 
   
 
+  /**
+   * select @Model for question answer
+   */
+
+   selectModel(event: any): void
+   {
+     this.currentmodel=event.target.value;
+     console.log(this.currentmodel)
+
+   }
+   
+
+
   //get all de table context_conversation et affiche dans la conversation html
   Getvisteur_conversation()
   {
@@ -324,6 +339,39 @@ defaultError$ = new Subject<string | undefined>();
      
   }
 
+/**
+ *  for use model in conversation
+ */
+
+  GetMsgResponseAPI()
+  {
+    if(this.currentmodel=='bert' || this.currentmodel.length>0) 
+    {
+      this.Getvisteur_conversation()
+      console.log("1111")
+    }
+    else if(this.currentmodel=='wikipedia')
+    {
+      this.GetMsgResponsewikiApi()
+      console.log("22222")
+    }
+    else if(this.currentmodel=='GPT3')
+    {
+      this.GetMsgResponsegpt3Api()
+      console.log("33333")
+    }
+    else if(this.currentmodel=="")
+    {
+      
+        Swal.fire({
+          position: 'top',
+          title:'Hi',
+          titleText: 'shose your model first !!',
+          icon: 'warning'})
+      
+    }
+  }
+  
   
   /***
    * 
@@ -400,7 +448,7 @@ defaultError$ = new Subject<string | undefined>();
 
     GetMsgResponsewikiApi()
     {
-      if (this.question.length>0)
+      if(this.question.length>0)
       {
         let lang='fr';
         //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
