@@ -53,8 +53,28 @@ GetResponseApi(context:any,question:any){
   })); 
 }
 
+GetResponsewikiApi(question:any,lang:any)
+{
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .post<any>(this.url+'treatment/wiki',{question,lang})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+GetResponseGPT3Api(question:any,lang:any){
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .post<any>(this.url+'treatment/gpt3',{question,lang})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
 
-AddphotoContext_conversation(id_context:any,photo:any){
+
+
+AddphotoContext_conversation(id_context:any,photo:any)
+{
   this.headers.append('Content-Type', 'application/json');
       return this.http
         .put<any>(this.url+'context_conversation/upload',{id_context,photo})
