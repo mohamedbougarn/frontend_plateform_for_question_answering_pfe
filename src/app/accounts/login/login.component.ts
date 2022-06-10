@@ -53,9 +53,7 @@ export class LoginComponent implements OnInit {
               {
                 console.log('client ');
                 console.log(result);
-
                 // set info in local storage 
-
                 console.log("inside localstorage");
                 console.log("nom client" ,result[0].nom_client );
                 localStorage.setItem('nomuser', result[0].nom_client);
