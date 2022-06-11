@@ -60,7 +60,7 @@ message : any;
 id_client : any = '';
 top :any = 3; 
 id_context : any ;
-question : any ;
+question : any="" ;
 response : any;
 visiteur_convertation : any ;
 visiteur_convertationlist : any ;
@@ -345,7 +345,7 @@ defaultError$ = new Subject<string | undefined>();
 
   GetMsgResponseAPI()
   {
-    if(this.currentmodel=='bert' || this.currentmodel.length>0) 
+    if(this.currentmodel=='bert' && this.currentmodel.length>0) 
     {
       this.Getvisteur_conversation()
       console.log("1111")
@@ -382,7 +382,7 @@ defaultError$ = new Subject<string | undefined>();
 
   GetMsgResponsegpt3Api()
   {
-    if (this.question.length>0)
+    if (this.question.length>1)
     {
       let lang='fr';
       //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
@@ -398,6 +398,14 @@ defaultError$ = new Subject<string | undefined>();
            }
         })
         this.question = "";
+      }
+      else if(this.question.length < 1)
+      {
+        Swal.fire({
+          position: 'top',
+          title:'Hi',
+          titleText: ' your input is Null !!',
+          icon: 'warning'})
       }
   }
 
@@ -432,6 +440,8 @@ defaultError$ = new Subject<string | undefined>();
        {
          console.log
         }
+      this.question = "";
+      this.reponse = "";
 
   }
 
@@ -448,7 +458,7 @@ defaultError$ = new Subject<string | undefined>();
 
     GetMsgResponsewikiApi()
     {
-      if(this.question.length>0)
+      if(this.question.length>1)
       {
         let lang='fr';
         //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
@@ -463,8 +473,17 @@ defaultError$ = new Subject<string | undefined>();
                this.sendmsgwiki();
              }
           })
-          this.question = "";
+         
       }
+      else if(this.question.length < 1)
+      {
+        Swal.fire({
+          position: 'top',
+          title:'Hi',
+          titleText: ' your input is Null !!',
+          icon: 'warning'})
+      }
+        this.question = "";
     }
   
   
@@ -498,6 +517,9 @@ defaultError$ = new Subject<string | undefined>();
          {
            console.log
           }
+
+          this.question = "";
+          this.reponse = "";
   
     }
 
