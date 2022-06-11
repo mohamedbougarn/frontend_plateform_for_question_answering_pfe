@@ -10,7 +10,7 @@ import { ContextService } from 'src/app/services/context.service';
   styleUrls: ['./context.component.css']
 })
 export class ContextComponent implements OnInit {
-contextIdToUpdate : any = 0;
+  contextIdToUpdate : any = 0;
   type : any = 1 ;
   id_context : any = '';  
   context : any = '';
