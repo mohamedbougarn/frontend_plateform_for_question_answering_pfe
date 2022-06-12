@@ -397,7 +397,7 @@ defaultError$ = new Subject<string | undefined>();
              this.sendmsggpt3();
            }
         })
-        this.question = "";
+        //this.question = "";
       }
       else if(this.question.length < 1)
       {
@@ -464,7 +464,7 @@ defaultError$ = new Subject<string | undefined>();
         //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
         this.contextconversationService.GetResponsewikiApi(this.question,lang).subscribe(result =>
           {
-             console.log('resultat de lappele api flask est methode GPT3 question responce est  =',result['answer'])
+             console.log('resultat de lappele api flask est methode wikipedia question responce est  =',result['answer'])
     
              this.reponse=result['answer'];
     
@@ -483,14 +483,14 @@ defaultError$ = new Subject<string | undefined>();
           titleText: ' your input is Null !!',
           icon: 'warning'})
       }
-        this.question = "";
+        //this.question = "";
     }
   
   
   
   
   
-    sendmsgwiki()//depuis database 
+    sendmsgwiki()
     { 
       console.log('test from new message')
       if (this.question.length>0)
