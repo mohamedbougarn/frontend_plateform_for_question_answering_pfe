@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -35,7 +36,7 @@ export class ProfileComponent implements OnInit
     console.log(this.id_client);
     this.getprofile()
    
-    console.log(this.email_client)
+    //console.log(this.email_client)
     this.prenom_client1=this.prenom_client
     this.email_client1 = this.email_client
   }
@@ -49,6 +50,7 @@ export class ProfileComponent implements OnInit
       this.prenom_client=data[0].prenom_clinet;
       this.email_client=data[0].email_client;  
       this.mobile_client = data[0].mobile_client ;
+      this.password= data[0].password_client ;
        
      // this.nom_client=data.
       this.prenom_client1=this.prenom_client
@@ -57,7 +59,29 @@ export class ProfileComponent implements OnInit
     })
     
   }
+ 
+  updatecleint()
+  {
+    this.clientservice.UpdateClient(this.id_client,
+      this.nom_client,
+      this.prenom_client,
+      this.mobile_client,
+      this.email_client,
+      this.password).subscribe(data =>{
+      console.log(data);
+  
+    })
 
+    Swal.fire({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      icon:'success',
+      timer: 3000,
+      title: 'Profile updated in successfully'
+    })
+    this.isUpdateProfile =false;
+  }
 
   back() 
   {
