@@ -31,15 +31,15 @@
                         <label class="labels">Email ID</label>
                         <input type="text" class="form-control" (ngModelChange)="log($event)" placeholder="enter email id" value="" name="email_client" [(ngModel)]="email_client" >
                     </div>
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <label class="labels">Education</label>
                         <input type="text" class="form-control" (ngModelChange)="log($event)" placeholder="education" value="">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
-                        <label class="labels">Country</label>
-                        <input type="text" class="form-control" placeholder="country" value="">
+                        <label class="labels">Password</label>
+                        <input type="text" class="form-control" (ngModelChange)="log($event)"  placeholder="country" value="" name="password" [(ngModel)]="password">
                     </div>
                     <div class="col-md-6">
                         <label class="labels">State/Region</label>
@@ -47,8 +47,8 @@
                     </div>
                 </div>
                 <div class="mt-5 text-center">
-                    <button *ngIf="!isUpdateProfile" class="btn btn-secondary " type="button" disabled>Update Profile</button>
-                    <button *ngIf="isUpdateProfile" class="btn btn-primary" type="button">Update Profile</button>
+                    <button *ngIf="!isUpdateProfile" class="btn btn-secondary " type="button" disabled>show Profile</button>
+                    <button *ngIf="isUpdateProfile" class="btn btn-primary" (click)="updatecleint()"  type="button">Update Profile</button>
                 </div>
             </div>
         </div>
