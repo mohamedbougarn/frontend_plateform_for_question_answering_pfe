@@ -1,1 +1,166 @@
-<p>conversation works!</p>
+<!-- <p>conversation works!</p> -->
+<app-header></app-header>
+<div class="container rounded bg-white mt-5 mb-5">
+    <app-sidebar></app-sidebar>
+    <div class="row">
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Conversation pages </h4>
+                    
+                
+
+                </div>
+
+
+
+
+
+                <div class="chat">
+                    <div class="card-header msg_head">
+                      <div class="d-flex bd-highlight">
+                        <div class="img_cont">
+                          <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img">
+                          <span class="online_icon"></span>
+                        </div>
+                        <div class="user_info">
+                          <span>Chat with </span><!--{{currentmodel}}-->
+                          <p>1767 Messages</p>
+                        </div>
+                        <div class="video_cam">
+                          <!-- <span><i class="fas fa-video"></i></span>
+                          <span><i class="fas fa-phone"></i></span> -->
+                          <span>
+                           <form class="d-flex">
+                             <select class="form-select me-2" ><!--[(ngModel)]="currentmodel" name="currentmodel" (change)="selectModel($event)"-->
+                               <option  value="bert" selected>
+                                 Bert
+                               </option>
+                               <option  value="GPT3">
+                                 GPT3
+                               </option>
+                               <option  value="wikipedia">
+                                 wikipedia
+                               </option>
+                             </select>
+                           </form>
+                         </span>
+                        </div>
+                      </div>
+                      
+                      <span id="action_menu_btn"><i class="fas fa-ellipsis-v" id="dropdownMenu"></i></span>
+                      <div class="action_menu">
+                        
+                      </div>
+                    
+                    </div>
+                    <div class="card-body msg_card_body" >
+
+
+
+                                    <!-------------------------------------------------------------------->
+                <div ><!--*ngFor="let msg of history"-->
+                    <div ><!--ng-If="msg.photo==null"-->
+                    <div class="d-flex justify-content-end mb-4">
+                        <div class="msg_cotainer_send">
+                        <!--{{msg.msgSent}}-->
+                        hello there 
+                        <!--<img ng-if="msg.photo!=null" src="{{msg.photo}}" alt="{{msg.photo}}" width="200"/> -->
+                        <span class="msg_time_send" style="color:rgb(20, 20, 32)"></span><!--{{msg.entry_date}}-->
+                        </div>
+                        <div class="img_cont_msg">
+                    <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                        <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer">
+                        hi !! <!---->
+                        <span class="msg_time_send" style="color:rgb(20, 20, 32)"></span> <!--{{msg.entry_date}}   -->
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <!--fin ng if-->
+
+                    
+                    </div>
+
+
+                    
+
+                   </div>
+                   <div class="card-footer">
+                     <div class="input-group">
+                       <!-- <div class="input-group-append"> -->
+                         <span class="input-group-text attach_btn"  ><i class="mdi mdi-microphone" style="color:rgb(243, 42, 59)"></i></span><!--*ngIf="listening$ | async; else mic" (click)="stop()"   *ngIf="listening$ | async; else mic" (click)="stop()" -->
+                         
+                         <ng-template #mic>
+                           <span class="input-group-text attach_btn"  ><i class="mdi mdi-microphone" style="color:rgb(72, 90, 255)" ></i></span><!--(click)="start()"   (click)="start()"-->
+                         </ng-template>
+
+                         <!--test upload-->
+                         
+                         
+                           <!-- <label class="input-group-text image_btn" for="upload_file"  >
+                            
+
+                               <i  class="mdi mdi-camera" for="upload_file"  style="cursor: pointer;"></i> 
+                             
+                           <input type="file" name="image" id="upload_file" (change)="onChargeimage($event)"  style="display :none;visibility:none;" accept="image/x-png,image/gif,image/jpeg">            
+
+                           
+                           </label>   -->
+                           
+                         <!--end test upload-->
+                         
+
+
+                         <!-- <span class="input-group-text image_btn">
+                           
+                             <label for="file-input">
+                               <i class="mdi mdi-camera"  (click)="uploader.uploadAll()"></i>
+                             </label>
+                         
+                             <input type="file" id="file-input" ng2FileSelect [uploader]="uploader" style="display :none;visibility:none;" >
+                           </span>
+                          -->
+                          
+                         <!-- </div> -->
+
+
+                         
+                    
+
+                       <input type="text" class="form-control type_msg" name="question"   > <!--name="msg" [(ngModel)]="msg"   (keydown.enter)="GetMsgResponseApi()"   value="{{transcript$ | async}}"   [(ngModel)]="question" (keydown.enter)="GetMsgResponseAPI()"  placeholder="Type your message..."  value="{{transcript$ | async}}"-->
+                       <!-- <div class="input-group-append"> -->
+                         <span class="input-group-text send_btn"  ><i class="mdi mdi-send"  ></i></span> <!--click()="sendmsg()"   (click)="GetMsgResponseApi()"   (click)="GetMsgResponseAPI()"-->
+                       <!-- </div> -->
+                     </div>
+                   </div>
+                 </div>
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+    
+
+        <!-- <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
+                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
+                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+            </div>
+        </div> -->
+    </div>
+</div>
