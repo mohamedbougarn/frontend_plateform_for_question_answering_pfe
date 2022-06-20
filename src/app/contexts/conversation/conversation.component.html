@@ -32,7 +32,7 @@
                           <span><i class="fas fa-phone"></i></span> -->
                           <span>
                            <form class="d-flex">
-                             <select class="form-select me-2" ><!--[(ngModel)]="currentmodel" name="currentmodel" (change)="selectModel($event)"-->
+                             <select class="form-select me-2" [(ngModel)]="currentmodel" name="currentmodel" (change)="selectModel($event)"><!--[(ngModel)]="currentmodel" name="currentmodel" (change)="selectModel($event)"-->
                                <!-- <option  value="bert" selected>
                                  Bert
                                </option> -->
@@ -59,12 +59,11 @@
 
 
                                     <!-------------------------------------------------------------------->
-                <div ><!--*ngFor="let msg of history"-->
-                    <div ><!--ng-If="msg.photo==null"-->
+                <div *ngFor="let msg of history" ><!--*ngFor="let msg of history"-->
+                    <div ng-If="msg.photo==null"><!--ng-If="msg.photo==null"-->
                     <div class="d-flex justify-content-end mb-4">
                         <div class="msg_cotainer_send">
-                        <!--{{msg.msgSent}}-->
-                        hello there 
+                        {{msg.msgSent}} 
                         <!--<img ng-if="msg.photo!=null" src="{{msg.photo}}" alt="{{msg.photo}}" width="200"/> -->
                         <span class="msg_time_send" style="color:rgb(20, 20, 32)"></span><!--{{msg.entry_date}}-->
                         </div>
@@ -77,38 +76,12 @@
                         <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
                         </div>
                         <div class="msg_cotainer">
-                        hi !! <!---->
+                          {{msg.msg_received}}
+                         <!--hi !!-->
                         <span class="msg_time_send" style="color:rgb(20, 20, 32)"></span> <!--{{msg.entry_date}}   -->
                         </div>
                     </div>
                     </div>
-
-
-
-
-
-                    <div ><!--ng-If="msg.photo==null"-->
-                      <div class="d-flex justify-content-end mb-4">
-                          <div class="msg_cotainer_send">
-                          <!--{{msg.msgSent}}-->
-                          hello my name us aymen hou are yiu 
-                          <!--<img ng-if="msg.photo!=null" src="{{msg.photo}}" alt="{{msg.photo}}" width="200"/> -->
-                          <span class="msg_time_send" style="color:rgb(20, 20, 32)"></span><!--{{msg.entry_date}}-->
-                          </div>
-                          <div class="img_cont_msg">
-                      <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
-                          </div>
-                      </div>
-                      <div class="d-flex justify-content-start mb-4">
-                          <div class="img_cont_msg">
-                          <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
-                          </div>
-                          <div class="msg_cotainer">
-                          hi there Hello!! <!---->
-                          <span class="msg_time_send" style="color:rgb(20, 20, 32)"></span> <!--{{msg.entry_date}}   -->
-                          </div>
-                      </div>
-                      </div>
 
 
                     
