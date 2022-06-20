@@ -26,9 +26,11 @@ export class HeaderComponent extends SuperComponent {
   {
     // Read item:
     //let item = JSON.parse(localStorage.getItem(dataSource));
-    
+   
     this.Getlangue();
-
+    
+    //for current language in console controle
+    this.selectLanguage(event);
     this.nom = localStorage.getItem('nomuser');
     this.prenom = localStorage.getItem('prenomuser')
     this.id= localStorage.getItem('id');
@@ -62,7 +64,7 @@ export class HeaderComponent extends SuperComponent {
     
     this.speechRecognizer.setLanguage(this.currentLanguage);
 
-    
+    console.log(this.currentLanguage)
 
 
   }
