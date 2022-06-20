@@ -360,6 +360,20 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
  
  
 
+     /**
+      * 
+      * select the model for question ansewer 
+      * 
+      */
+
+     selectModel(event:any):void
+     {
+       this.currentmodel=event.target.value;
+       console.log(this.currentmodel); 
+
+
+     }
+
 
 
 
