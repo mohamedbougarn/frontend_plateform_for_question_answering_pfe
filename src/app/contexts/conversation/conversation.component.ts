@@ -58,6 +58,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
   ngOnInit(): void
   {
+    
     this.currentLanguage=sessionStorage.getItem('language');
     console.log('currentLanuage' + this.currentLanguage)
 
