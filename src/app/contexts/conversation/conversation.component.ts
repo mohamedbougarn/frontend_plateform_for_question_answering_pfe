@@ -58,7 +58,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
   ngOnInit(): void
   {
-    
+
     this.currentLanguage=sessionStorage.getItem('language');
     console.log('currentLanuage' + this.currentLanguage)
 
@@ -152,17 +152,28 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
     );
   }
 
+
+  //recherche sur le  totalTranscript pour lintegration avec le message de liste a une string 
+  //searche in the totalTranscript for integration with messahe nModel in fom liste to string 
   private processNotification(notification: SpeechNotification<string>): void {
     if (notification.event === SpeechEvent.FinalContent) {
       const message = notification.content?.trim() || '';
       //this.actionContext.processMessage(message, this.currentLanguage);
       // this.actionContext.runAction(message, this.currentLanguage);
       this.totalTranscript = this.totalTranscript
-        ? `${this.totalTranscript}\n${message}`
+        ? `${this.totalTranscript}\n${message}`//this part deleted in futur
         : notification.content;
+
+        console.log(this.totalTranscript)
+        console.log(message)
+       // this.question = message;
+
     }
   }
   /*********************end @speech ************************* */
+
+
+
 
 
 
