@@ -7,6 +7,7 @@ import { SpeechError } from 'src/app/test/model/speech-error';
 import { SpeechEvent } from 'src/app/test/model/speech-event';
 import { SpeechNotification } from 'src/app/test/model/speech-notification';
 import Swal from 'sweetalert2';
+import { SpeechSynthesizerService } from 'src/app/services/web-apis/speech-synthesizer.service';
 
 @Component({
   selector: 'app-conversation',
@@ -54,6 +55,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
 
   constructor(private speechRecognizer: SpeechRecognizerService,
+    private speechSynthesizer: SpeechSynthesizerService,
     public contextconversationService : ContextConversationService) { }
 
   ngOnInit(): void
@@ -62,7 +64,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
     this.currentLanguage=sessionStorage.getItem('language');
     console.log('currentLanuage' + this.currentLanguage)
 
-
+    this.speack();
 
 
 
@@ -168,10 +170,27 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
         console.log(message)
        // this.question = message;
 
+       this.currentLanguage=sessionStorage.getItem('language');
+       this.speechSynthesizer.initSynthesis();
+       this.speechSynthesizer.speak(message,this.currentLanguage)
+
     }
   }
   /*********************end @speech ************************* */
+/**
+ * @speack Text to speech  
+ * 
+ */
+ speack(): void 
+ {
+   this.speechSynthesizer.initSynthesis();
+   let message ="je me tire me demande pas pourquoi "
+    this.speechSynthesizer.speak(message,this.currentLanguage)
+ }
 
+
+
+/******************* end @speack Text to speech  ****** */
 
 
 
