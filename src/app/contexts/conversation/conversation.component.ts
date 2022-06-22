@@ -17,6 +17,10 @@ import { SpeechSynthesizerService } from 'src/app/services/web-apis/speech-synth
 export class ConversationComponent implements OnInit {
 
 id : any = 1 ;
+
+//for sxitch button 
+selected = false;
+
 // liste of conversation 
 history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. '}];
 
@@ -64,7 +68,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
     this.currentLanguage=sessionStorage.getItem('language');
     console.log('currentLanuage' + this.currentLanguage)
 
-    this.speack();
+    //this.speack();
 
 
 
@@ -181,11 +185,11 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
  * @speack Text to speech  
  * 
  */
- speack(): void 
+ speack(msaage: any , lang : any) 
  {
    this.speechSynthesizer.initSynthesis();
-   let message ="je me tire me demande pas pourquoi "
-    this.speechSynthesizer.speak(message,this.currentLanguage)
+   //let message ="je me tire me demande pas pourquoi "
+    this.speechSynthesizer.speak(msaage,lang)
  }
 
 
@@ -320,13 +324,11 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
     * methode that for get responce from @wikipedia   
     * 
     */
- 
- 
      GetMsgResponsewikiApi()
      {
        if(this.question.length>1)
        {
-         let lang='fr';
+         let lang='en';
          //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
          this.contextconversationService.GetResponsewikiApi(this.question,lang).subscribe(result =>
            {
@@ -336,7 +338,9 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
      
               if(this.reponse.length > 0)
               {
+               // this.speack(this.reponse,lang)//for speaking result message 
                 this.sendmsgwiki();
+               // this.speack(this.reponse,lang)
               }
            })
           
@@ -382,7 +386,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
          else
           {
             console.log
-           }
+          }
  
            this.question = "";
            this.reponse = "";
@@ -407,6 +411,12 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
 
 
+
+     clickButton(event:any):void
+      {
+      this.selected = !this.selected;
+      console.log(this.selected)
+    }
 
 
 }
