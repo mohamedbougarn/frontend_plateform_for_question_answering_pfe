@@ -18,6 +18,7 @@ public isUserSpeaking: boolean = false;
     this.speechSynthesizer.volume = 1;
     this.speechSynthesizer.rate = 1;
     this.speechSynthesizer.pitch = 0.2;
+    
   }
 
   speak(message: string, language: string): void {
