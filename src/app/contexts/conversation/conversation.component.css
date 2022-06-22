@@ -1,0 +1,37 @@
+/* Inspired by : https://proto.io/freebies/onoff/ */
+.switch-button {
+    position: relative; width: 45px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+}
+.switch-button-checkbox {
+    display: none;
+}
+.switch-button-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 25px; padding: 0;
+    line-height: 25px;
+    border: 2px solid #E3E3E3;
+    border-radius: 36px;
+    background-color: #E3E3E3;
+    transition: background-color 0.3s ease-in;
+}
+.switch-button-label:before {
+    content: "";
+    display: block; width: 25px; margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 16px;
+    border: 2px solid #E3E3E3; border-radius: 36px;
+    transition: all 0.3s cubic-bezier(.52,0,.58,1.45) 0s; 
+}
+.switch-button-checkbox:checked + .switch-button-label {
+    background-color: #86d993;
+}
+.switch-button-checkbox:checked + .switch-button-label, .switch-button-checkbox:checked + .switch-button-label:before {
+   border-color: #86d993;
+}
+.switch-button-checkbox:checked + .switch-button-label:before {
+    right: 0px; 
+}
