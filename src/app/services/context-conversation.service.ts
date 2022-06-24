@@ -95,4 +95,15 @@ GetContext_conversation(id_context:any){
 }
 
 
+
+GetResponsewikiApiconversation(question:any,lang:any)
+{
+  this.headers.append('Content-Type', 'application/json');
+      return this.http
+        .post<any>(this.url+'treatment/wiki/translate',{question,lang})
+        .pipe(map(res => {  
+        return res ;                    
+  })); 
+}
+
 }
