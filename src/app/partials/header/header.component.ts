@@ -30,7 +30,8 @@ export class HeaderComponent extends SuperComponent {
     this.Getlangue();
     
     //for current language in console controle
-    this.selectLanguage(event);
+    //this.selectLanguage(event);
+
     this.nom = localStorage.getItem('nomuser');
     this.prenom = localStorage.getItem('prenomuser')
     this.id= localStorage.getItem('id');
