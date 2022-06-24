@@ -19,7 +19,7 @@ export class ConversationComponent implements OnInit {
 id : any = 1 ;
 
 //for sxitch button 
-selected = false;
+selectedspeack = false;
 
 // liste of conversation 
 history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. '}];
@@ -70,7 +70,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
     //this.speack();
 
-
+    
 
 
     /***
@@ -172,7 +172,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
         console.log(this.totalTranscript)
         console.log(message)
-       // this.question = message;
+        this.question = message +'';
 
        this.currentLanguage=sessionStorage.getItem('language');
        this.speechSynthesizer.initSynthesis();
@@ -254,7 +254,10 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
    {
      if (this.question.length>1)
      {
-       let lang='fr';
+      this.currentLanguage=sessionStorage.getItem('language');
+      let lang=this.currentLanguage.substring(0,2);
+      console.log(lang);
+      //  let lang='fr';
        //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
        this.contextconversationService.GetResponseGPT3Api(this.question,lang).subscribe(result =>
          {
@@ -264,6 +267,11 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
    
             if(this.reponse.length > 0)
             {
+              if(this.selectedspeack)
+                {
+                  this.currentLanguage=sessionStorage.getItem('language');
+                  this.speack(this.reponse,this.currentLanguage)
+                }
               this.sendmsggpt3();
             }
          })
@@ -276,7 +284,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
            title:'Hi',
            titleText: ' your input is Null !!',
            icon: 'warning'})
-       }
+       }  
    }
  
  
@@ -328,9 +336,11 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
      {
        if(this.question.length>1)
        {
-         let lang='en';
+        this.currentLanguage=sessionStorage.getItem('language');
+         let lang=this.currentLanguage.substring(0,2);
+         console.log(lang);
          //add the service GetResponseApi that service send request in core to other request to flask before get ther responce 
-         this.contextconversationService.GetResponsewikiApi(this.question,lang).subscribe(result =>
+         this.contextconversationService.GetResponsewikiApiconversation(this.question,lang).subscribe(result =>
            {
               console.log('resultat de lappele api flask est methode wikipedia question responce est  =',result['answer'])
      
@@ -338,8 +348,14 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
      
               if(this.reponse.length > 0)
               {
+                if(this.selectedspeack)
+                {
+                  this.currentLanguage=sessionStorage.getItem('language');
+                  this.speack(this.reponse,this.currentLanguage)
+                }
                // this.speack(this.reponse,lang)//for speaking result message 
                 this.sendmsgwiki();
+                
                // this.speack(this.reponse,lang)
               }
            })
@@ -414,8 +430,21 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
      clickButton(event:any):void
       {
-      this.selected = !this.selected;
-      console.log(this.selected)
+      this.selectedspeack = !this.selectedspeack;
+      console.log(this.selectedspeack)
+      
+      this.currentLanguage=sessionStorage.getItem('language');
+      if(this.selectedspeack == true && this.currentLanguage == 'en-US' )
+      {
+        this.speechSynthesizer.initSynthesis();
+        this.speechSynthesizer.speak('Speack is on',this.currentLanguage)
+      }
+      else if(this.selectedspeack == true && this.currentLanguage == 'fr-FR' )
+      {
+        this.speechSynthesizer.initSynthesis();
+        this.speechSynthesizer.speak('Parler est activé',this.currentLanguage)
+      }
+
     }
 
 
