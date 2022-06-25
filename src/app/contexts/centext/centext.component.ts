@@ -554,10 +554,8 @@ defaultError$ = new Subject<string | undefined>();
   }
 
 
-  selectLimit(event: any): void {
-
-
-    
+  selectLimit(event: any): void 
+  {
     this.top = event.target.value;
     //sessionStorage.setItem('language',this.currentLanguage);
     console.log('change change')
