@@ -98,7 +98,6 @@ export class ApiComponent implements OnInit {
 
   Get_key_database()
   {
-   
     console.log('le id  client ===== ' , this.id_client)
     this.apiService.GetApi(this.id_client).subscribe(data => 
       {   
