@@ -68,9 +68,11 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
     this.currentLanguage=sessionStorage.getItem('language');
     console.log('currentLanuage' + this.currentLanguage)
 
-    //this.speack();
+    this.speechSynthesizer.initSynthesis();
+    //this.speack('bonjour je mappele mohamed' , 'fr');
 
-    
+    // this.speechSynthesizer.initSynthesis();
+    //     this.speechSynthesizer.speak('Speack is on',this.currentLanguage)
 
 
     /***
@@ -170,13 +172,13 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
         ? `${this.totalTranscript}\n${message}`//this part deleted in futur
         : notification.content;
 
-        console.log(this.totalTranscript)
+        //console.log(this.totalTranscript)
         console.log(message)
         this.question = message +'';
 
        this.currentLanguage=sessionStorage.getItem('language');
-       this.speechSynthesizer.initSynthesis();
-       this.speechSynthesizer.speak(message,this.currentLanguage)
+      //  this.speechSynthesizer.initSynthesis();
+      //  this.speechSynthesizer.speak(message,this.currentLanguage)
 
     }
   }
@@ -187,7 +189,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
  */
  speack(msaage: any , lang : any) 
  {
-   this.speechSynthesizer.initSynthesis();
+   //this.speechSynthesizer.initSynthesis();
    //let message ="je me tire me demande pas pourquoi "
     this.speechSynthesizer.speak(msaage,lang)
  }
@@ -209,18 +211,20 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
    */
 
 
-  /**
- *  for use model in conversation
+/***
+ * 
+ * test wich model chosing in chat
+ * 
  */
 
    GetMsgResponseAPI()
    {
-     if(this.currentmodel=='bert' && this.currentmodel.length>0) 
-     {
-      //  this.Getvisteur_conversation()
-      //  console.log("1111")
-     }
-     else if(this.currentmodel=='wikipedia')
+    //  if(this.currentmodel=='bert' && this.currentmodel.length>0) 
+    //  {
+    //   //  this.Getvisteur_conversation()
+    //   //  console.log("1111")
+    //  }
+     if(this.currentmodel=='wikipedia')
      {
        this.GetMsgResponsewikiApi()
        console.log("22222")
@@ -358,6 +362,11 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
                 
                // this.speack(this.reponse,lang)
               }
+              // else
+              // {
+              //   this.reponse= "non réponse ?"
+              //   this.sendmsgwiki();
+              // }
            })
           
        }
@@ -413,7 +422,7 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
      /**
       * 
-      * select the model for question ansewer 
+      * select the model for @question @ansewer 
       * 
       */
 
@@ -427,23 +436,33 @@ history= [{id: this.id , client: 'bot', msgSent: 'Salut',msg_received:'salut .. 
 
 
 
-
+/***
+ * 
+ * for activate or desactivated @suitch_speack_button 
+ * 
+ */
      clickButton(event:any):void
       {
       this.selectedspeack = !this.selectedspeack;
       console.log(this.selectedspeack)
       
-      this.currentLanguage=sessionStorage.getItem('language');
+        this.currentLanguage=sessionStorage.getItem('language');
       if(this.selectedspeack == true && this.currentLanguage == 'en-US' )
       {
-        this.speechSynthesizer.initSynthesis();
-        this.speechSynthesizer.speak('Speack is on',this.currentLanguage)
+        this.speack('Speack is on', this.currentLanguage) 
+        // //this.speechSynthesizer.initSynthesis();
       }
       else if(this.selectedspeack == true && this.currentLanguage == 'fr-FR' )
       {
-        this.speechSynthesizer.initSynthesis();
-        this.speechSynthesizer.speak('Parler est activé',this.currentLanguage)
+        this.speack('Parler est activé', this.currentLanguage) 
+        //this.speechSynthesizer.initSynthesis();      
       }
+      else if(this.selectedspeack == true && this.currentLanguage == 'ar-AR' )
+      {
+        this.speack('تفعيل الصوت', this.currentLanguage) 
+        //this.speechSynthesizer.initSynthesis();      
+      }
+      
 
     }
 
