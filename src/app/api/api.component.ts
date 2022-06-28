@@ -11,6 +11,47 @@ import { ApiService } from '../services/api.service';
 })
 export class ApiComponent implements OnInit {
 
+
+end_date : any;
+/**para for time */
+currentDate: any;
+targetDate: any;
+cDateMillisecs: any;
+tDateMillisecs: any;
+difference: any;
+seconds: any;
+minutes: any;
+hours: any;
+days: any;
+year: number = 0;
+month: number =0;
+months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'April',
+  'May',
+  'June',
+  'July',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+day: number = 0;
+
+
+
+
+
+
+
+
+
+
+
+
   UserKey : any ='';
   id_client : any ='';
   nom_client : any ='';
@@ -76,10 +117,42 @@ export class ApiComponent implements OnInit {
     //alert('Your content is copied.\n Paste in text editor to see copied content(ctrl + V, cmd+ V)');
   }
 
-
-  ngOnInit(): void 
+  ngOnInit():void 
   {
     this.id_client=localStorage.getItem('id');
+
+
+    this.apiService.GetApi(this.id_client).subscribe(data => 
+      {   
+        console.log(data);
+        //localStorage.setItem('end-date',data[0].end_date);
+        this.end_date=data[0].end_date;
+        this.UserKey= data[0].key;
+
+
+        this.year=this.end_date.substring(0,4);
+        console.log(this.year);
+        this.month=this.end_date.substring(5,7)-1;
+        console.log(this.month);
+        this.day=this.end_date.substring(8,10);
+        console.log(this.day);
+      })
+      
+    // this.end_date=localStorage.getItem('end-date');
+    // console.log(this.end_date)
+
+    // this.year=this.end_date.substring(0,4);
+    // console.log(this.year);
+    // this.month=this.end_date.substring(5,7)-1;
+    // console.log(this.month);
+    // this.day=this.end_date.substring(8,10);
+    // console.log(this.day);
+
+   // console.log(this.end_date)
+
+
+
+
     this.nom_client=localStorage.getItem('nomuser');
     console.log(this.nom_client)
     this.Get_key_database()
@@ -91,23 +164,101 @@ export class ApiComponent implements OnInit {
     this.input3 = (JSON.stringify(this.messageinput3));
     this.output3 = (JSON.stringify(this.messageoutput3));
     
+    //this.myTimer();
+    
+  } 
 
-    console.log(new Date())
-  
-  }
+  // ngAfterViewInit()//: void 
+  // {
+  //   //
+  //   console.log(this.end_date)
+
+  //   // this.year=Number(this.end_date.substring(0,4));
+  //   // console.log(this.year);
+  //   // this.month=Number(this.end_date.substring(5,7));
+  //   // console.log(this.month);
+  //   // this.day=Number(this.end_date.substring(8,10));
+  //   // console.log(this.day);
+  //   //this.Get_key_database()
+  //   //console.log(this.year)
+  //  // this.myTimer();
+        
+  // }
 
   Get_key_database()
   {
     console.log('le id  client ===== ' , this.id_client)
     this.apiService.GetApi(this.id_client).subscribe(data => 
       {   
-        console.log(data);
+        // console.log(data);
+        // this.end_date=data[0].end_date;
+        // this.year=Number(this.end_date.substring(0,4));
+        // console.log(this.year);
+        // this.month=Number(this.end_date.substring(5,7));
+        // console.log(this.month);
+        // this.day=Number(this.end_date.substring(8,10));
+        // console.log(this.day);
+        // console.log(this.end_date)
         this.UserKey= data[0].key;
       })
 
 
 
   }
+
+
+  /***
+   * for calculate time of end date key API
+   * 
+   */
+
+  x = setInterval(()=>{
+    this.currentDate = new Date();
+    this.targetDate = new Date(this.year,this.month,this.day);
+    this.cDateMillisecs = this.currentDate.getTime();
+    this.tDateMillisecs = this.targetDate.getTime();
+    this.difference = this.tDateMillisecs - this.cDateMillisecs;
+    //console.log(this.difference)
+    this.seconds = Math.floor(this.difference / 1000);
+    this.minutes = Math.floor(this.seconds / 60);
+    this.hours = Math.floor(this.minutes / 60);
+    this.days = Math.floor(this.hours / 24);
+
+    this.hours %= 24;
+    this.minutes %= 60;
+    this.seconds %= 60;
+    this.hours = this.hours < 10 ? '0' + this.hours : this.hours;
+    this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
+    this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
+   
+    
+  }, 1000);
+
+
+   myTimer() {
+    this.currentDate = new Date();
+    this.targetDate = new Date(this.year,this.month-1,this.day);
+    this.cDateMillisecs = this.currentDate.getTime();
+    this.tDateMillisecs = this.targetDate.getTime();
+    this.difference = this.tDateMillisecs - this.cDateMillisecs;
+    //console.log(this.difference)
+    this.seconds = Math.floor(this.difference / 1000);
+    this.minutes = Math.floor(this.seconds / 60);
+    this.hours = Math.floor(this.minutes / 60);
+    this.days = Math.floor(this.hours / 24);
+
+    this.hours %= 24;
+    this.minutes %= 60;
+    this.seconds %= 60;
+    this.hours = this.hours < 10 ? '0' + this.hours : this.hours;
+    this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
+    this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
+   
+    
+  }
+
+
+
 
   GenerateKey()
     {
