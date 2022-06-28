@@ -1,0 +1,21 @@
+
+.wrapper {
+    max-width: 300px;
+    margin: 0 auto;
+    font: normal 17px sans-serif;
+  }
+  .wrapper .targe-date {
+    text-align: left;
+  }
+  .wrapper .description, .wrapper .times {
+    display: flex;
+  }
+  .wrapper .description > p, .wrapper .times > p {
+    width: 25%;
+    margin: 10px 0 0 0;
+    text-align: left;
+  }
+  .wrapper .times {
+    font-size: 22px;
+  }
+  
