@@ -240,6 +240,7 @@ file: any = null; // Variable to store file
         this.totalTranscript = this.totalTranscript
           ? `${this.totalTranscript}\n${message}`
           : notification.content;
+          this.msg = message +'';
       }
     }
     /*********************end @speech ************************* */
