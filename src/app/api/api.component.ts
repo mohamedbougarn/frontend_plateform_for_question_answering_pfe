@@ -235,27 +235,28 @@ day: number = 0;
   }, 1000);
 
 
-   myTimer() {
-    this.currentDate = new Date();
-    this.targetDate = new Date(this.year,this.month-1,this.day);
-    this.cDateMillisecs = this.currentDate.getTime();
-    this.tDateMillisecs = this.targetDate.getTime();
-    this.difference = this.tDateMillisecs - this.cDateMillisecs;
-    //console.log(this.difference)
-    this.seconds = Math.floor(this.difference / 1000);
-    this.minutes = Math.floor(this.seconds / 60);
-    this.hours = Math.floor(this.minutes / 60);
-    this.days = Math.floor(this.hours / 24);
+  //  myTimer() {
+  //   this.currentDate = new Date();
+  //   this.targetDate = new Date(this.year,this.month-1,this.day);
+  //   this.cDateMillisecs = this.currentDate.getTime();
+  //   this.tDateMillisecs = this.targetDate.getTime();
+  //   this.difference = this.tDateMillisecs - this.cDateMillisecs;
+  //   //console.log(this.difference)
+  //   this.seconds = Math.floor(this.difference / 1000);
+  //   this.minutes = Math.floor(this.seconds / 60);
+  //   this.hours = Math.floor(this.minutes / 60);
+  //   this.days = Math.floor(this.hours / 24);
 
-    this.hours %= 24;
-    this.minutes %= 60;
-    this.seconds %= 60;
-    this.hours = this.hours < 10 ? '0' + this.hours : this.hours;
-    this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
-    this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
+  //   this.hours %= 24;
+  //   this.minutes %= 60;
+  //   this.seconds %= 60;
+  //   this.hours = this.hours < 10 ? '0' + this.hours : this.hours;
+  //   this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
+  //   this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
    
+  //   //
     
-  }
+  // }
 
 
 
