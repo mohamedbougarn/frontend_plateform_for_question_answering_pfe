@@ -6,13 +6,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Technology Which I Used
 
  ***Frontend***
- - 
- - 
- - 
+   - 
+   - 
+   - 
  
-   ***Backend***
- - Nodejs => https://github.com/mohamedbougarn/backend_core_API_for_question_answer_platform_pfe 
- - python => https://github.com/mohamedbougarn/backend_IA_for_question_answering_wikipedia
+  ***Backend***
+   - Nodejs => https://github.com/mohamedbougarn/backend_core_API_for_question_answer_platform_pfe 
+   - python => https://github.com/mohamedbougarn/backend_IA_for_question_answering_wikipedia
 
 ## Development server
 
