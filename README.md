@@ -3,6 +3,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
 
+## Technology Which I Used
+
+ ***Frontend***
+ - 
+ - 
+ - 
+ 
+   ***Backend***
+ - Nodejs => https://github.com/mohamedbougarn/backend_core_API_for_question_answer_platform_pfe 
+ - python => https://github.com/mohamedbougarn/backend_IA_for_question_answering_wikipedia
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
