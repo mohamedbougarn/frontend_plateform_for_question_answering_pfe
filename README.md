@@ -1,4 +1,5 @@
 <img src="angular.png" width=200 height=200 align="right">
+
 # Intelligence
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
@@ -9,7 +10,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
    - 
    - 
    - 
- 
  ***Backend***
    - Nodejs => https://github.com/mohamedbougarn/backend_core_API_for_question_answer_platform_pfe 
    - python => https://github.com/mohamedbougarn/backend_IA_for_question_answering_wikipedia
