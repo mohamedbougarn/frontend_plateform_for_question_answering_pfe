@@ -46,6 +46,7 @@ export class SpeechRecognizerService {
     this.recognition.lang = language;
   }
 
+  
   start(): void {
     if (!this.recognition) {
       return;
@@ -54,7 +55,7 @@ export class SpeechRecognizerService {
     this.recognition.start();
     this.isListening = true;
   }
-
+//for runing the speech to texter service
   onStart(): Observable<SpeechNotification<never>> {
     if (!this.recognition) {
       this.initialize(this.language);
