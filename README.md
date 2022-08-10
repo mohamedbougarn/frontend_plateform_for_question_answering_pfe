@@ -8,7 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
  ***Frontend***
    - angular => https://github.com/mohamedbougarn/frontend_plateform_for_question_answering_pfe
-   - technology used => https://github.com/mohamedbougarn/frontend_plateform_for_question_answering_pfe/blob/main/package.json
+   - dependencies used => https://github.com/mohamedbougarn/frontend_plateform_for_question_answering_pfe/blob/main/package.json
    - 
  ***Backend***
    - Nodejs => https://github.com/mohamedbougarn/backend_core_API_for_question_answer_platform_pfe 
