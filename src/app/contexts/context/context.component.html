@@ -30,13 +30,11 @@
                         <td>
                             <span *ngIf="context.status == '1'" class="badge bg-success">Valide</span>
                             <span *ngIf="context.status == '0'" class="badge bg-danger">Deleted</span> 
-  
                         </td>
                         <td>
                           <span *ngIf="context.type == '1'"  class="badge bg-success"><i class="mdi mdi-earth"  ></i></span>
                           <span *ngIf="context.type == '0'"  class="badge bg-danger"><i class="mdi mdi-earth-off"></i></span> 
                         </td>
-
                         <td>
                           <select *ngIf="context.type == '1'" class="form-select" (change)="SelectType($event,context.id_context)" >
                               <option value="1" selected >  <i class="mdi mdi-earth" aria-hidden='true'></i> Public  </option>
@@ -46,9 +44,6 @@
                             <option value="1" > <i class="mdi mdi-earth"></i> Public  </option>
                             <option value="0" selected>  <i class="mdi mdi-earth-off"></i> Private</option>
                         </select>
-
-                          
-
                         </td>
                         <td>
                           <span ><a type="button"  href="Q_R/add/{{context.id_context}}"><i class="mdi mdi-plus-thick" ></i> </a></span> 
