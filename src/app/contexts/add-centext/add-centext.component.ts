@@ -395,8 +395,7 @@ file: any = null; // Variable to store file
          // this.contextId = 0;
          this.closeDialog();
          this.getQr_by_ID_context();
-        })  
-        
+        })       
   }
 
 
