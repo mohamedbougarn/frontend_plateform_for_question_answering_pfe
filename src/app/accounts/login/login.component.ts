@@ -63,13 +63,7 @@ export class LoginComponent implements OnInit {
                 //localStorage.setItem('datauser',result[0]);
 
                 console.log('les data 1 est',localStorage.getItem('datauser'));
-                
-
-
-
-
                 //
-
                 this.router.navigate(['/dashboard/'+this.clientId]);
               })
           }
